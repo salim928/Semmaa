@@ -1,0 +1,24 @@
+{
+  "documents": [
+    {
+      "id": "doc_1",
+      "title": "Maize Planting Guide",
+      "content": "Maize planting in Ghana: Major season is March-April...",
+      "tags": [
+        "maize",
+        "planting",
+        "seasons"
+      ]
+    },
+    {
+      "id": "doc_2",
+      "title": "Cocoa Disease Management",
+      "content": "Black pod disease control: Use copper fungicides...",
+      "tags": [
+        "cocoa",
+        "disease",
+        "fungicide"
+      ]
+    }
+  ]
+}

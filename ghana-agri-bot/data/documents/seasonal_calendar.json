@@ -1,0 +1,98 @@
+{
+  "calendar": {
+    "Southern Ghana": {
+      "January": [
+        "Land preparation",
+        "Nursery preparation for vegetables"
+      ],
+      "February": [
+        "Continue land preparation",
+        "Plant vegetables"
+      ],
+      "March": [
+        "Plant maize, cassava, yam (major season)",
+        "Apply pre-emergence herbicides"
+      ],
+      "April": [
+        "Plant rice, groundnuts",
+        "First weeding",
+        "Plant cocoa seedlings"
+      ],
+      "May": [
+        "Fertilizer application",
+        "Pest scouting"
+      ],
+      "June": [
+        "Second weeding",
+        "Apply pesticides if needed"
+      ],
+      "July": [
+        "Harvest early maize",
+        "Plant minor season vegetables"
+      ],
+      "August": [
+        "Land preparation for minor season"
+      ],
+      "September": [
+        "Plant maize, vegetables (minor season)"
+      ],
+      "October": [
+        "Weed control",
+        "Harvest major season crops"
+      ],
+      "November": [
+        "Harvest rice",
+        "Start cocoa harvest"
+      ],
+      "December": [
+        "Continue harvest",
+        "Storage preparation"
+      ]
+    },
+    "Northern Ghana": {
+      "January": [
+        "Land preparation",
+        "Repair storage facilities"
+      ],
+      "February": [
+        "Continue land preparation"
+      ],
+      "March": [
+        "Wait for rains"
+      ],
+      "April": [
+        "Watch for rain onset"
+      ],
+      "May": [
+        "Plant with first rains - maize, groundnuts, sorghum"
+      ],
+      "June": [
+        "Complete planting",
+        "First weeding"
+      ],
+      "July": [
+        "Fertilizer application",
+        "Second weeding"
+      ],
+      "August": [
+        "Pest management",
+        "Third weeding"
+      ],
+      "September": [
+        "Monitor crops",
+        "Harvest early varieties"
+      ],
+      "October": [
+        "Main harvest period"
+      ],
+      "November": [
+        "Complete harvest",
+        "Storage"
+      ],
+      "December": [
+        "Marketing",
+        "Land preparation for dry season"
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+
+INTEGRATED PEST AND DISEASE MANAGEMENT FOR GHANA
+
+FALL ARMYWORM (Spodoptera frugiperda)
+======================================
+Crops Affected: Maize, rice, sorghum
+Identification: 
+- Windowing of leaves
+- Large ragged holes
+- Row of dark spots on larvae
+- Inverted Y on head capsule
+Monitoring: Scout twice weekly, check 20 plants per acre
+Economic Threshold: 20% plants infested
+Control Methods:
+1. Cultural:
+   - Early planting
+   - Intercropping with repellent plants
+   - Remove crop residues
+2. Biological:
+   - Neem extract @ 50ml/15L water
+   - Bt (Bacillus thuringiensis) sprays
+3. Chemical:
+   - Emamectin benzoate 5% @ 10ml/15L water
+   - Spinetoram @ 6ml/15L water
+   - Chlorantraniliprole @ 5ml/15L water
+Application: Evening spraying when larvae are active
+
+LARGER GRAIN BORER
+===================
+Crops: Stored maize and cassava
+Identification: 
+- Circular holes in grains
+- Abundant grain dust
+- Sweet smell in storage
+Prevention:
+- Clean stores before use
+- Use hermetic bags
+- Solar drying to 12% moisture
+Control:
+- Diatomaceous earth
+- Actellic Super dust @ 50g/100kg grain
+- Phostoxin tablets for fumigation
+
+BLACK POD DISEASE (Phytophthora spp.)
+=======================================
+Crop: Cocoa
+Symptoms:
+- Brown/black spots on pods
+- Spreads to cover entire pod
+- White spores in humid conditions
+Conditions: High humidity, rainfall
+Management:
+1. Cultural:
+   - Remove infected pods weekly
+   - Prune for aeration
+   - Harvest regularly
+2. Chemical:
+   - Ridomil Plus 72WP @ 50g/15L water
+   - Nordox 75WP @ 50g/15L water
+   - Funguran OH @ 50g/15L water
+   - Champion WP @ 60g/15L water
+Spray Schedule: Every 3 weeks in rainy season
+
+CASSAVA MOSAIC DISEASE
+=======================
+Symptoms:
+- Mosaic patterns on leaves
+- Leaf distortion and reduction
+- Stunted growth
+- Reduced root yield
+Management:
+- Use resistant varieties (IFAD, Bankye hemaa)
+- Use clean planting material
+- Remove infected plants
+- Control whitefly vectors
+
+TOMATO BACTERIAL WILT
+======================
+Pathogen: Ralstonia solanacearum
+Symptoms:
+- Wilting without yellowing
+- Brown discoloration in stems
+- Plant death in 2-3 days
+Management:
+- Crop rotation (3-4 years)
+- Raised beds with good drainage
+- Grafting on resistant rootstock
+- Soil solarization
+
+STRIGA (Witchweed)
+==================
+Crops: Maize, sorghum, millet
+Identification: Purple/pink flowers, parasitic
+Control:
+- Hand pulling before flowering
+- Trap crops (cotton, sunflower)
+- Resistant varieties
+- Imazapyr-coated seeds
+- Improve soil fertility
+
+PEST CALENDAR FOR MAJOR CROPS
+==============================
+MAIZE:
+- Planting-2 weeks: Cutworms
+- 2-6 weeks: Fall armyworm  
+- 6-10 weeks: Stem borers
+- Tasseling: Aphids
+- Storage: Weevils, LGB
+
+TOMATO:
+- Nursery: Damping off
+- 2-4 weeks: Whitefly, aphids
+- Flowering: Fruit worm
+- Fruiting: Tuta absoluta
+
+SAFE PESTICIDE USE
+==================
+1. Read label instructions
+2. Wear protective clothing
+3. Spray early morning or evening
+4. Don't spray during flowering
+5. Observe pre-harvest intervals:
+   - Vegetables: 7-14 days
+   - Cereals: 14-21 days
+   - Fruits: 14-30 days
+6. Triple rinse containers
+7. Store away from children

@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+agri/
+env/
+venv/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VSCode settings
+.vscode/
+
+# Environment variables and secrets
+.env
+.env.*
+google-credentials.json
+
+# Data, logs, and model artifacts
+data/feedback/
+data/logs/
+data/processed/
+data/chromadb_export.json
+
+# ChromaDB and vector DB files
+data/processed/chroma_db/
+*.chroma.db
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test outputs
+*.log
+*.tmp
+
+# Ignore model weights and large files (if any)
+*.pt
+*.pth
+*.onnx
+
+# Ignore any files you want to keep local only
+runbook.txt

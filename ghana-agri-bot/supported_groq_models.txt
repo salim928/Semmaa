@@ -1,0 +1,7 @@
+# Supported Groq Models (as of September 2025)
+# Please verify at https://console.groq.com/docs/deprecations for the latest list.
+llama3-8b-8192 (deprecated)
+llama3-70b-8192 (deprecated)
+mixtral-8x7b-32768
+gemma-7b-it
+# Add more as Groq updates their offerings.
