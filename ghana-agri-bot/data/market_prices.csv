@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "https://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html lang="en" dir="ltr">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="shortcut icon" href="https://data.gov.gh/sites/default/files/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search | Ghana Open Data Initiative</title>
+  <link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_kShW4RPmRstZ3SpIC-ZvVGNFVAi0WEMuCnI0ZkYIaFw.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_5Rn1Nv11EbzRqTBGph2R1ujO37nLI7zTRSDUPnsTv1o.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_s3Fx7rZc_BXN3vBL-X50niq5bmpMyLKY7rDPVE83qmc.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_EIOVDb9XDc7B5ymELZzZk6pPkvkmHWuxUEHCxbGTDH0.css" media="all" />
+<link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans::400,300,700" media="all" />
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+li.menu-link-agriculture a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e935';margin-right:6px;vertical-align:middle;}li.menu-link-business a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e966';margin-right:6px;vertical-align:middle;}li.menu-link-city-data a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e92c';margin-right:6px;vertical-align:middle;}li.menu-link-education a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e97b';margin-right:6px;vertical-align:middle;}li.menu-link-elections a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e92a';margin-right:6px;vertical-align:middle;}li.menu-link-energy a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e94a';margin-right:6px;vertical-align:middle;}li.menu-link-environment a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e932';margin-right:6px;vertical-align:middle;}li.menu-link-extractive a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e949';margin-right:6px;vertical-align:middle;}li.menu-link-finance a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e923';margin-right:6px;vertical-align:middle;}li.menu-link-health a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e97a';margin-right:6px;vertical-align:middle;}li.menu-link-local-government a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e939';margin-right:6px;vertical-align:middle;}li.menu-link-statistics a:before{font-size:1.25em;font-family:'dkan-topics';content:'\e91e';margin-right:6px;vertical-align:middle;}
+
+/*]]>*/-->
+</style>
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_fPxo8FLKfixJVIQX1WJRl4fYhgkqeVleL1naab0Wdgk.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_uQWRWUrmFJl2srVNyjNxRhb-Gjh1cXBbZL1D76N1kts.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_E5LxTHvotstXfBsPxcRlLKjEwjXPfi49JcaYB4zerlY.css" media="print" />
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/colorizer/godi-a11e3517.css" media="all" />
+
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_afrXmziPY13Y9oUhiVMbLllpNaAnF9oeeqCoWSAcphU.css" media="all" />
+<![endif]-->
+
+<!--[if IE 9]>
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_qpzT6Nla_9qnBw9yFCNlaMSx-mR1C2PUztgmhLWV6Xc.css" media="all" />
+<![endif]-->
+
+<!--[if IE 8]>
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_6MXbSPvPzngfaB4wf1zxLcF9h_IysER946hly6FKaI4.css" media="all" />
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="https://data.gov.gh/sites/default/files/css/css_PxsPpITToy8ZnO0bJDA1TEC6bbFpGTfSWr2ZP8LuFYo.css" media="all" />
+  <!-- HTML5 element support for IE6-8 -->
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link href="/css/ie.css" media="screen" rel="stylesheet" type="text/css" />
+  <![endif]-->
+  <script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_fgeCjwejUhOmFi2Dvjeac1tLw64L9bnn4vZqk5_7Xtc.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.jQuery || document.write("<script src='/profiles/dkan/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js'>\x3C/script>")
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_dWhBODswdXXk1M5Z5nyqNfGljmqwxUwAK9i6D0YSDNs.js"></script>
+<script type="text/javascript" src="https://data.gov.gh/profiles/dkan/themes/nuboot_radix/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.jQuery.ui || document.write("<script src='/profiles/dkan/modules/contrib/jquery_update/replace/ui/ui/minified/jquery-ui.min.js'>\x3C/script>")
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_yEv7Gmhd9xDxEy-vpkTFdRiHgIGkxIw_0t26IFwOI_Q.js"></script>
+<script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_gyeyE4VPAfRPLGpAfv3sU4l5Mhlsid8vrPzHKLrIIqU.js"></script>
+<script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_EyX0qF5yhIag2690l4DoWWmQEYo5JjclLsO9qxzGT-w.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-123515365-1", {"cookieDomain":"auto"});ga("require", "linkid", "linkid.js");ga("set", "anonymizeIp", true);ga("set", "page", location.pathname + location.search + location.hash);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_2hd6gNpSRvn9o02PVhkkd632qOb5tpPq3yB_EqftMsY.js"></script>
+<script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js__eIr9R2ni67serHSTjKVVSieSeg-6kpkcDVEXU-0X9I.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"godi","theme_token":"E3OP1UK7lPtnSNna-ZcDkJ-owIybVHbpa81okDN3r8E","js":{"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets.js":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets-spotlight.js":1,"public:\/\/google_tag\/google_tag.script.js":1,"\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.7.2\/jquery.min.js":1,"0":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"https:\/\/data.gov.gh\/profiles\/dkan\/themes\/nuboot_radix\/assets\/js\/bootstrap.min.js":1,"\/\/ajax.googleapis.com\/ajax\/libs\/jqueryui\/1.10.2\/jquery-ui.min.js":1,"1":1,"profiles\/dkan\/libraries\/chosen\/chosen.jquery.min.js":1,"profiles\/dkan\/modules\/contrib\/panopoly_images\/panopoly-images.js":1,"profiles\/dkan\/modules\/dkan\/dkan_plugins\/js\/colorPicker.behavior.js":1,"profiles\/dkan\/modules\/contrib\/recline\/js\/jsondataview.js":1,"profiles\/dkan\/modules\/contrib\/recline\/js\/restdataview.js":1,"profiles\/dkan\/libraries\/jquery.imagesloaded\/jquery.imagesloaded.min.js":1,"profiles\/dkan\/modules\/contrib\/facetapi\/facetapi.js":1,"profiles\/dkan\/modules\/contrib\/ctools\/js\/collapsible-div.js":1,"sites\/all\/modules\/contrib\/google_analytics\/googleanalytics.js":1,"2":1,"profiles\/dkan\/modules\/contrib\/chosen\/chosen.js":1,"profiles\/dkan\/themes\/contrib\/radix\/assets\/js\/radix.script.js":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/js\/nuboot_radix.script.js":1,"sites\/all\/themes\/custom\/godi\/assets\/js\/godi.script.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"profiles\/dkan\/libraries\/chosen\/chosen.css":1,"profiles\/dkan\/modules\/contrib\/chosen\/css\/chosen-drupal.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.tabs.css":1,"modules\/comment\/comment.css":1,"profiles\/dkan\/modules\/contrib\/date\/date_api\/date.css":1,"profiles\/dkan\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"profiles\/dkan\/modules\/dkan\/dkan_data_story\/css\/dkan_data_story.css":1,"profiles\/dkan\/modules\/dkan\/dkan_harvest\/modules\/dkan_harvest_dashboard\/css\/dkan_harvest_dashboard.css":1,"modules\/field\/theme\/field.css":1,"profiles\/dkan\/modules\/contrib\/field_hidden\/field_hidden.css":1,"modules\/node\/node.css":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets.css":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets-spotlight.css":1,"profiles\/dkan\/modules\/contrib\/radix_layouts\/radix_layouts.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"profiles\/dkan\/modules\/dkan\/dkan_workflow\/modules\/views_dkan_workflow_tree\/views_dkan_workflow_tree.css":1,"profiles\/dkan\/modules\/contrib\/views\/css\/views.css":1,"profiles\/dkan\/modules\/contrib\/ctools\/css\/ctools.css":1,"profiles\/dkan\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/all\/modules\/contrib\/rate\/rate.css":1,"profiles\/dkan\/modules\/contrib\/ctools\/css\/collapsible-div.css":1,"sites\/all\/modules\/contrib\/dkan_feedback\/templates\/feedback\/feedback.css":1,"profiles\/dkan\/modules\/dkan\/dkan_topics\/theme\/dkan_topics.css":1,"\/\/fonts.googleapis.com\/css?family=Open+Sans::400,300,700":1,"0":1,"public:\/\/font-icon-select-general-generated-1.css":1,"profiles\/dkan\/modules\/dkan\/dkan_dataset\/css\/dkan_dataset.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/nuboot_radix.style.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/dkan-flaticon.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/dkan-topics.css":1,"sites\/all\/themes\/custom\/godi\/assets\/css\/godi.style.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/print.css":1,"https:\/\/data.gov.gh\/sites\/default\/files\/colorizer\/godi-a11e3517.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/ie.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/ie9.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/ie8.css":1,"profiles\/dkan\/modules\/contrib\/panopoly_images\/panopoly-images.css":1}},"chosen":{"selector":".page-node select:not([class*=\u0022delta-order\u0022], [name*=\u0022workbench_moderation\u0022], [class*=\u0022filter-list\u0022], [id*=\u0022delimiter\u0022],[name*=\u0022sort_by\u0022],[name*=\u0022sort_order\u0022], [id*=\u0022lines-terminated-by\u0022], [id*=\u0022lang-dropdown-select-language\u0022])","minimum_single":0,"minimum_multiple":0,"minimum_width":0,"options":{"allow_single_deselect":false,"disable_search":false,"disable_search_threshold":0,"search_contains":false,"placeholder_text_multiple":"Choose some options","placeholder_text_single":"Choose an option","no_results_text":"No results match","inherit_select_classes":true}},"urlIsAjaxTrusted":{"\/search\/type\/dataset":true},"better_exposed_filters":{"views":{"dkan_datasets":{"displays":{"panel_pane_1":{"filters":{"query":{"required":false}}}}}}},"facetapi":{"facets":[{"limit":"20","id":"facetapi-facet-search-apidatasets-block-type","searcher":"search_api@datasets","realmName":"block","facetName":"type","queryType":null,"widget":"content_types","showMoreText":"Show more","showFewerText":"Show fewer"},{"limit":20,"id":"facetapi-facet-search-apidatasets-block-field-tags","searcher":"search_api@datasets","realmName":"block","facetName":"field_tags","queryType":null,"widget":"facetapi_links","showMoreText":"Show more","showFewerText":"Show fewer"},{"limit":20,"id":"facetapi-facet-search-apidatasets-block-field-resourcesfield-format","searcher":"search_api@datasets","realmName":"block","facetName":"field_resources:field_format","queryType":null,"widget":"facetapi_links","showMoreText":"Show more","showFewerText":"Show fewer"},{"limit":"20","id":"facetapi-facet-search-apidatasets-block-field-topic","searcher":"search_api@datasets","realmName":"block","facetName":"field_topic","queryType":null,"widget":"terms","showMoreText":"Show more","showFewerText":"Show fewer"},{"limit":20,"id":"facetapi-facet-search-apidatasets-block-og-group-ref","searcher":"search_api@datasets","realmName":"block","facetName":"og_group_ref","queryType":null,"widget":"facetapi_links","showMoreText":"Show more","showFewerText":"Show fewer"},{"limit":20,"id":"facetapi-facet-search-apidatasets-block-field-license","searcher":"search_api@datasets","realmName":"block","facetName":"field_license","queryType":null,"widget":"facetapi_links","showMoreText":"Show more","showFewerText":"Show fewer"},{"limit":20,"id":"facetapi-facet-search-apidatasets-block-author","searcher":"search_api@datasets","realmName":"block","facetName":"author","queryType":null,"widget":"facetapi_links","showMoreText":"Show more","showFewerText":"Show fewer"}]},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackUrlFragments":1}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-search page-search-type page-search-type-dataset panel-layout-radix_bryant panel-region-contentmain panel-region-sidebar" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N36X86N" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager">Google Tag Manager</iframe></noscript>  </div>
+  <header id="header" class="header">
+  <div class="branding container">
+          <a class="logo navbar-btn pull-left" href="/" title="Home">
+        <img src="https://data.gov.gh/sites/default/files/logo.png" alt="Home" />
+      </a>
+    
+    
+    <!-- views exposed search -->
+    <section id="block-dkan-sitewide-dkan-sitewide-search-bar" class="block block-dkan-sitewide block-- clearfix">
+
+        <div class="content">
+    <form action="/search/type/dataset" method="post" id="dkan-sitewide-dataset-search-form" accept-charset="UTF-8" role="form"><div><div class="form-item form-type-textfield form-item-search form-group">
+  <label for="edit-search">Search </label>
+ <input placeholder="search" class="form-control form-text" type="text" id="edit-search" name="search" value="" size="30" maxlength="128" />
+</div>
+<input type="submit" id="edit-submit" name="op" value="" class="form-submit btn btn-default btn-primary" /><input type="hidden" name="form_build_id" value="form-q0v_Zw9JwPseJf9UXZAiTx-8uKKDGq2FDSUUVPSflEQ" />
+<input type="hidden" name="form_id" value="dkan_sitewide_dataset_search_form" />
+</div></form>  </div>
+
+</section>
+
+    <div class="logo coatofarms pull-right" href="/">
+      <img src="/sites/all/themes/custom/godi/assets/images/coat_of_arms_of_ghana.svg" alt="Coat of arms of Ghana" />
+    </div>
+  </div>
+  <div class="navigation-wrapper">
+    <div class="container">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div> <!-- /.navbar-header -->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+                      <ul id="main-menu" class="menu nav navbar-nav">
+              <li class="first leaf menu-link-home"><a href="/welcome">Home</a></li>
+<li class="leaf active menu-link-datasets"><a href="/search/type/dataset" title="" class="active">Datasets</a></li>
+<li class="expanded dropdown menu-link-topics-"><a href="/topics" class="dropdown-toggle" data-toggle="dropdown" data-target="#">Topics <span class="fa fa-caret-down"></span></a><ul class="dropdown-menu"><li class="first leaf menu-link-agriculture"><a href="/taxonomy/term/3" title="Agriculture">Agriculture</a></li>
+<li class="leaf menu-link-business"><a href="/taxonomy/term/51" title="Business">Business</a></li>
+<li class="leaf menu-link-city-data"><a href="/taxonomy/term/48" title="City Data">City Data</a></li>
+<li class="leaf menu-link-education"><a href="/taxonomy/term/2" title="Education">Education</a></li>
+<li class="leaf menu-link-elections"><a href="/taxonomy/term/52" title="Elections">Elections</a></li>
+<li class="leaf menu-link-energy"><a href="/taxonomy/term/5" title="Energy">Energy</a></li>
+<li class="leaf menu-link-environment"><a href="/taxonomy/term/6" title="Environment">Environment</a></li>
+<li class="leaf menu-link-extractive"><a href="/taxonomy/term/49" title="Extractive">Extractive</a></li>
+<li class="leaf menu-link-finance"><a href="/taxonomy/term/1" title="Finance">Finance</a></li>
+<li class="leaf menu-link-health"><a href="/taxonomy/term/4" title="Health">Health</a></li>
+<li class="leaf menu-link-local-government"><a href="/taxonomy/term/47" title="Local Government">Local Government</a></li>
+<li class="last leaf menu-link-statistics"><a href="/taxonomy/term/50" title="Statistics">Statistics</a></li>
+</ul></li>
+<li class="leaf menu-link-data-sites"><a href="https://data.gov.gh/" title="">Data Sites</a></li>
+<li class="leaf menu-link-od-community"><a href="http://goda.org.gh/" title="">OD Community</a></li>
+<li class="leaf menu-link-feedback"><a href="/feedback">Feedback</a></li>
+<li class="last leaf menu-link-about"><a href="/about">About</a></li>
+            </ul>
+          
+          <!-- user menu -->
+          <section id="block-dkan-sitewide-dkan-sitewide-user-menu" class="block block-dkan-sitewide block-- clearfix">
+
+        <div class="content">
+    <span class="links"><a href="/user/login">Log in</a></span>  </div>
+
+</section>
+        </div><!-- /.navbar-collapse -->
+      </nav><!-- /.navbar -->
+    </div><!-- /.container -->
+  </div> <!-- /.navigation -->
+</header>
+
+<div id="main-wrapper">
+  <div id="main" class="main container">
+
+    <ul class="breadcrumb"><li class="home-link"><a href="/"><i class="fa fa fa-home"></i><span> Home</span></a></li><li><a href="/">Home</a></li><li>Dataset</li><li class="active-trail">Search</li></ul>        
+
+    <div class="main-row">
+
+      <section>
+        <a id="main-content"></a>
+                                                  <div class="region region-content">
+    
+<div class="panel-display bryant clearfix radix-bryant" >
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 radix-layouts-sidebar panel-panel">
+        <div class="panel-panel-inner">
+          <div class="ctools-collapsible-container pane-facetapi pane-block"><h2 class="pane-title ctools-collapsible-handle">Content Types</h2><div class="ctools-collapsible-content"><div class="item-list"><ul class="facetapi-content-types facetapi-facet-type" id="facetapi-facet-search-apidatasets-block-type"><li class="leaf first last"><a href="/search?sort_by=changed" rel="nofollow" class="facetapi-active" id="facetapi-link"><span class="icon-dkan facet-icon icon-dkan-dataset" ></span>Dataset<span class="element-invisible"> Remove &lt;span class=&quot;icon-dkan facet-icon icon-dkan-dataset&quot; &gt;&lt;/span&gt;Dataset filter </span></a></li>
+</ul></div></div></div><div class="ctools-collapsible-container pane-facetapi pane-block"><h2 class="pane-title ctools-collapsible-handle">Topics</h2><div class="ctools-collapsible-content"><div class="item-list"><ul class="facetapi-terms facetapi-facet-field-topic" id="facetapi-facet-search-apidatasets-block-field-topic"><li class="leaf first"><a href="/search/field_topic/finance-1/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--60"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div>Finance (93)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e923&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Finance filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/statistics-50/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--61"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e91e"></span></div></div></div>Statistics (79)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e91e&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Statistics filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/energy-5/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--62"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e94a"></span></div></div></div>Energy (37)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e94a&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Energy filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/health-4/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--63"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e97a"></span></div></div></div>Health (37)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e97a&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Health filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/business-51/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--64"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e966"></span></div></div></div>Business (21)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e966&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Business filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/city-data-48/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--65"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e92c"></span></div></div></div>City Data (18)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e92c&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;City Data filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/local-government-47/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--66"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e939"></span></div></div></div>Local Government (12)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e939&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Local Government filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/agriculture-3/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--67"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e935"></span></div></div></div>Agriculture (8)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e935&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Agriculture filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/education-2/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--68"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e97b"></span></div></div></div>Education (7)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e97b&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Education filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/environment-6/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--69"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e932"></span></div></div></div>Environment (4)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e932&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Environment filter </span></a></li>
+<li class="leaf"><a href="/search/field_topic/elections-52/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--70"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e92a"></span></div></div></div>Elections (3)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e92a&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Elections filter </span></a></li>
+<li class="leaf last"><a href="/search/field_topic/extractive-49/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--71"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e949"></span></div></div></div>Extractive (1)<span class="element-invisible"> Apply &lt;div class=&quot;field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;font-icon-select-1 font-icon-select-1-e949&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;Extractive filter </span></a></li>
+</ul></div></div></div><div class="ctools-collapsible-container ctools-collapsed pane-facetapi pane-block"><h2 class="pane-title ctools-collapsible-handle">Tags</h2><div class="ctools-collapsible-content"><div class="item-list"><ul class="facetapi-facetapi-links facetapi-facet-field-tags" id="facetapi-facet-search-apidatasets-block-field-tags"><li class="leaf first"><a href="/search/field_tags/budget-497/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--2">budget (70)<span class="element-invisible"> Apply budget filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/road-accidents-208/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--3">Road Accidents (42)<span class="element-invisible"> Apply Road Accidents filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/casualties-209/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--4">Casualties (34)<span class="element-invisible"> Apply Casualties filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/accidents-379/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--5">accidents (33)<span class="element-invisible"> Apply accidents filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/road-safety-475/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--6">road safety (32)<span class="element-invisible"> Apply road safety filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/energy-74/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--7">Energy (30)<span class="element-invisible"> Apply Energy filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/fatalities-383/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--8">fatalities (30)<span class="element-invisible"> Apply fatalities filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/population-254/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--9">Population (24)<span class="element-invisible"> Apply Population filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/energy-supply-298/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--10">Energy Supply (18)<span class="element-invisible"> Apply Energy Supply filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/2010-498/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--11">2010 (13)<span class="element-invisible"> Apply 2010 filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/agriculture-33/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--12">Agriculture (12)<span class="element-invisible"> Apply Agriculture filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/economy-12/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--13">economy (10)<span class="element-invisible"> Apply economy filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/health-38/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--14">Health (10)<span class="element-invisible"> Apply Health filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/district-population-344/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--15">District Population (9)<span class="element-invisible"> Apply District Population filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/female-population-284/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--16">Female population (9)<span class="element-invisible"> Apply Female population filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/business-names-133/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--17">BUSINESS NAMES (8)<span class="element-invisible"> Apply BUSINESS NAMES filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/electricity-generation-61/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--18">Electricity Generation (8)<span class="element-invisible"> Apply Electricity Generation filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/male-population-294/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--19">Male population (8)<span class="element-invisible"> Apply Male population filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/petroleum-75/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--20">Petroleum (8)<span class="element-invisible"> Apply Petroleum filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/electricity-367/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--21">electricity (7)<span class="element-invisible"> Apply electricity filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/external-companies-136/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--22">EXTERNAL COMPANIES (7)<span class="element-invisible"> Apply EXTERNAL COMPANIES filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/ghana-86/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--23">Ghana (7)<span class="element-invisible"> Apply Ghana filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/petroleum-products-76/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--24">Petroleum Products (7)<span class="element-invisible"> Apply Petroleum Products filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/roads-377/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--25">Roads (7)<span class="element-invisible"> Apply Roads filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/2014-105/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--26">2014 (6)<span class="element-invisible"> Apply 2014 filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/company-limited-shares-328/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--27">COMPANY LIMITED BY SHARES (6)<span class="element-invisible"> Apply COMPANY LIMITED BY SHARES filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/districts-233/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--28">Districts (6)<span class="element-invisible"> Apply Districts filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/education-242/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--29">Education (6)<span class="element-invisible"> Apply Education filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/finance-388/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--30">Finance (6)<span class="element-invisible"> Apply Finance filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/import-146/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--31">Import (6)<span class="element-invisible"> Apply Import filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/road-users-210/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--32">Road Users (6)<span class="element-invisible"> Apply Road Users filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/subsidiary-business-names-190/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--33">SUBSIDIARY BUSINESS NAMES (6)<span class="element-invisible"> Apply SUBSIDIARY BUSINESS NAMES filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/budget-appendix-387/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--34">Budget Appendix (5)<span class="element-invisible"> Apply Budget Appendix filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/business-registration-ghana-128/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--35">BUSINESS REGISTRATION IN GHANA (5)<span class="element-invisible"> Apply BUSINESS REGISTRATION IN GHANA filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/census-36/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--36">Census (5)<span class="element-invisible"> Apply Census filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/company-gaurantee-354/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--37">COMPANY BY GAURANTEE (5)<span class="element-invisible"> Apply COMPANY BY GAURANTEE filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/export-145/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--38">Export (5)<span class="element-invisible"> Apply Export filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/gdp-385/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--39">GDP (5)<span class="element-invisible"> Apply GDP filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/open-tender-171/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--40">Open Tender (5)<span class="element-invisible"> Apply Open Tender filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/partnership-registrartion-355/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--41">PARTNERSHIP REGISTRARTION (5)<span class="element-invisible"> Apply PARTNERSHIP REGISTRARTION filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/road-traffic-222/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--42">road traffic (5)<span class="element-invisible"> Apply road traffic filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/basic-school-259/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--43">Basic School (4)<span class="element-invisible"> Apply Basic School filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/budget-series-400/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--44">BUDGET SERIES (4)<span class="element-invisible"> Apply BUDGET SERIES filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/household-population-region-292/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--45">Household population by region (4)<span class="element-invisible"> Apply Household population by region filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/natural-gas-230/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--46">Natural Gas (4)<span class="element-invisible"> Apply Natural Gas filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/presidential-election-480/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--47">Presidential Election (4)<span class="element-invisible"> Apply Presidential Election filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/prices-164/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--48">prices (4)<span class="element-invisible"> Apply prices filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/registrar-generals-department-ghana-318/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--49">REGISTRAR GENERAL&#039;S DEPARTMENT GHANA (4)<span class="element-invisible"> Apply REGISTRAR GENERAL&#039;S DEPARTMENT GHANA filter </span></a></li>
+<li class="leaf"><a href="/search/field_tags/services-businesses-337/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--50">SERVICES BUSINESSES (4)<span class="element-invisible"> Apply SERVICES BUSINESSES filter </span></a></li>
+<li class="leaf last"><a href="/search/field_tags/tourist-239/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--51">Tourist (4)<span class="element-invisible"> Apply Tourist filter </span></a></li>
+</ul></div></div></div><div class="ctools-collapsible-container ctools-collapsed pane-facetapi pane-block"><h2 class="pane-title ctools-collapsible-handle">Format</h2><div class="ctools-collapsible-content"><div class="item-list"><ul class="facetapi-facetapi-links facetapi-facet-field-resourcesfield-format" id="facetapi-facet-search-apidatasets-block-field-resourcesfield-format"><li class="leaf first"><a href="/search/field_resources%253Afield_format/csv-7/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--52">csv (263)<span class="element-invisible"> Apply csv filter </span></a></li>
+<li class="leaf"><a href="/search/field_resources%253Afield_format/excel-29/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--53">excel (19)<span class="element-invisible"> Apply excel filter </span></a></li>
+<li class="leaf"><a href="/search/field_resources%253Afield_format/arcgis-28/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--54">arcgis (10)<span class="element-invisible"> Apply arcgis filter </span></a></li>
+<li class="leaf"><a href="/search/field_resources%253Afield_format/pdf-71/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--55">pdf (7)<span class="element-invisible"> Apply pdf filter </span></a></li>
+<li class="leaf"><a href="/search/field_resources%253Afield_format/xlsx-104/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--56">xlsx (4)<span class="element-invisible"> Apply xlsx filter </span></a></li>
+<li class="leaf"><a href="/search/field_resources%253Afield_format/argis-369/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--57">argis (1)<span class="element-invisible"> Apply argis filter </span></a></li>
+<li class="leaf"><a href="/search/field_resources%253Afield_format/xlb-473/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--58">xlb (1)<span class="element-invisible"> Apply xlb filter </span></a></li>
+<li class="leaf last"><a href="/search/field_resources%253Afield_format/zip-8/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--59">zip (1)<span class="element-invisible"> Apply zip filter </span></a></li>
+</ul></div></div></div><div class="ctools-collapsible-container ctools-collapsed pane-facetapi pane-block"><h2 class="pane-title ctools-collapsible-handle">Publisher</h2><div class="ctools-collapsible-content"><div class="item-list"><ul class="facetapi-facetapi-links facetapi-facet-og-group-ref" id="facetapi-facet-search-apidatasets-block-og-group-ref"><li class="leaf first"><a href="/search/og_group_ref/240/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--72">Financial Sector (86)<span class="element-invisible"> Apply Financial Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/67/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--73">Ghana Statistical (48)<span class="element-invisible"> Apply Ghana Statistical filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/123/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--74">Health Sector (46)<span class="element-invisible"> Apply Health Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/382/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--75">Roads Sector (45)<span class="element-invisible"> Apply Roads Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/228/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--76">Energy Sector (37)<span class="element-invisible"> Apply Energy Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/637/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--77">Transport Sector (32)<span class="element-invisible"> Apply Transport Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/274/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--78">Register General (13)<span class="element-invisible"> Apply Register General filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/48/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--79">Agriculture Sector (12)<span class="element-invisible"> Apply Agriculture Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/119/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--80">data.gov.gh (8)<span class="element-invisible"> Apply data.gov.gh filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/293/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--81">Public Procurement (8)<span class="element-invisible"> Apply Public Procurement filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/239/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--82">Education Sector (6)<span class="element-invisible"> Apply Education Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/229/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--83">National Development (4)<span class="element-invisible"> Apply National Development filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/275/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--84">Ghana Investment (3)<span class="element-invisible"> Apply Ghana Investment filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/273/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--85">Ghana Revenue (3)<span class="element-invisible"> Apply Ghana Revenue filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/232/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--86">Local Government (3)<span class="element-invisible"> Apply Local Government filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/230/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--87">Postal Sector (3)<span class="element-invisible"> Apply Postal Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/386/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--88">Tourism Sector (3)<span class="element-invisible"> Apply Tourism Sector filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/271/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--89">Fisheries &amp; Aquaculture (2)<span class="element-invisible"> Apply Fisheries &amp; Aquaculture filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/272/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--90">Monitoring &amp; Evaluation  (2)<span class="element-invisible"> Apply Monitoring &amp; Evaluation  filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/144/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--91">Ghana Immigration (1)<span class="element-invisible"> Apply Ghana Immigration filter </span></a></li>
+<li class="leaf"><a href="/search/og_group_ref/231/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--92">Lands Sector (1)<span class="element-invisible"> Apply Lands Sector filter </span></a></li>
+<li class="leaf last"><a href="/search/og_group_ref/754/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--93">Telecom Sector (1)<span class="element-invisible"> Apply Telecom Sector filter </span></a></li>
+</ul></div></div></div><div class="ctools-collapsible-container ctools-collapsed pane-facetapi pane-block"><h2 class="pane-title ctools-collapsible-handle">License</h2><div class="ctools-collapsible-content"><div class="item-list"><ul class="facetapi-facetapi-links facetapi-facet-field-license" id="facetapi-facet-search-apidatasets-block-field-license"><li class="leaf first"><a href="/search/field_license/cc-by/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--94">Creative Commons Attribution (208)<span class="element-invisible"> Apply Creative Commons Attribution filter </span></a></li>
+<li class="leaf"><a href="/search/field_license/odc-odbl/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--95">Open Data Commons Open Database License (ODbL) (64)<span class="element-invisible"> Apply Open Data Commons Open Database License (ODbL) filter </span></a></li>
+<li class="leaf"><a href="/search/field_license/odc-by/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--96">Open Data Commons Attribution License (7)<span class="element-invisible"> Apply Open Data Commons Attribution License filter </span></a></li>
+<li class="leaf last"><a href="/search/field_license/cc-nc/type/dataset?sort_by=changed" rel="nofollow" class="facetapi-inactive" id="facetapi-link--97">Creative Commons Non-Commercial (2.5) (1)<span class="element-invisible"> Apply Creative Commons Non-Commercial (2.5) filter </span></a></li>
+</ul></div></div></div>        </div>
+      </div>
+      <div class="col-md-9 radix-layouts-content panel-panel">
+        <div class="panel-panel-inner">
+          <div class="panel-pane pane-views-panes pane-dkan-datasets-panel-pane-1"  >
+  
+        <h2 class="pane-title">
+      Datasets    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-dkan-datasets view-id-dkan_datasets view-display-id-panel_pane_1 view-dom-id-847128535559962fd35987f9d85b2c8b">
+            <div class="view-header">
+      315 results    </div>
+  
+      <div class="view-filters">
+      <form action="/search/type/dataset" method="get" id="views-exposed-form-dkan-datasets-panel-pane-1" accept-charset="UTF-8" role="form"><div><div class="views-exposed-form">
+  <div class="views-exposed-widgets clearfix">
+          <div id="edit-query-wrapper" class="views-exposed-widget views-widget-filter-search_api_views_fulltext">
+                        <div class="views-widget">
+          <div class="form-item form-type-textfield form-item-query form-group">
+  <label for="edit-query">Search </label>
+ <input placeholder="Search" class="form-control form-text" type="text" id="edit-query" name="query" value="" size="60" maxlength="128" />
+</div>
+        </div>
+              </div>
+              <div class="views-exposed-widget views-widget-sort-by">
+        <div class="form-item form-type-select form-item-sort-by form-group">
+  <label for="edit-sort-by">Sort by </label>
+ <select class="form-control form-select" id="edit-sort-by" name="sort_by"><option value="changed" selected="selected">Date changed</option><option value="created">Date created</option><option value="title">Title</option></select>
+</div>
+      </div>
+      <div class="views-exposed-widget views-widget-sort-order">
+        <div class="form-item form-type-select form-item-sort-order form-group">
+  <label for="edit-sort-order">Order </label>
+ <select class="form-control form-select" id="edit-sort-order" name="sort_order"><option value="ASC">Ascending</option><option value="DESC" selected="selected">Descending</option></select>
+</div>
+      </div>
+                <div class="views-exposed-widget views-submit-button">
+      <input type="submit" id="edit-submit-dkan-datasets" name="" value="Apply" class="form-submit btn btn-default btn-primary" />    </div>
+          <div class="views-exposed-widget views-reset-button">
+        <input type="submit" id="edit-reset" name="op" value="Reset" class="form-submit btn btn-default" />      </div>
+      </div>
+</div>
+</div></form>    </div>
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/economic-classification-central-govt-revenue-2010-2011-0" title="ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T REVENUE - 2010 -2011">ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T REVENUE - 2010 -2011</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>ECONOMIC CLASSIFICATION OF CENTRAL GOV'T REVENUE - 2010 -2011
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-2 views-row-even">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/2011-poverty-reduction-expenditure-sub-sector-gh-cedis-gog-only-0" title="2011 POVERTY REDUCTION EXPENDITURE BY SUB-SECTOR IN GH CEDIS (GOG ONLY)">2011 POVERTY REDUCTION EXPENDITURE BY SUB-SECTOR IN GH CEDIS (GOG ONLY)</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>2011 POVERTY REDUCTION EXPENDITURE BY SUB-SECTOR IN GH CEDIS (GOG ONLY)
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/2011-poverty-reduction-expenditure-sub-sector-gh-cedis-gog-only-0" class="label" title="Resources: 2011 POVERTY REDUCTION EXPENDITURE BY SUB-SECTOR IN GH CEDIS (GOG ONLY)" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-3 views-row-odd">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/economic-classification-central-govt-revenue-2010-2011-1" title="ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T REVENUE - 2010 -2011">ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T REVENUE - 2010 -2011</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>ECONOMIC CLASSIFICATION OF CENTRAL GOV'T REVENUE - 2010 -2011
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/economic-classification-central-govt-revenue-2010-2011-1" class="label" title="Resources: ECONOMIC CLASSIFICATION OF CENTRAL GOV&amp;#039;T REVENUE - 2010 -2011" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-4 views-row-even">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/economic-classification-central-govt-revenue-2012-2014-0" title="ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T REVENUE - 2012 -2014">ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T REVENUE - 2012 -2014</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>ECONOMIC CLASSIFICATION OF CENTRAL GOV'T REVENUE - 2012 -2014
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/economic-classification-central-govt-revenue-2012-2014-0" class="label" title="Resources: ECONOMIC CLASSIFICATION OF CENTRAL GOV&amp;#039;T REVENUE - 2012 -2014" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-5 views-row-odd">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/ghana-status-wamz-primary-convergence-2001-2011-0" title="Ghana - Status of WAMZ Primary Convergence , 2001 to 2011">Ghana - Status of WAMZ Primary Convergence , 2001 to 2011</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>Ghana - Status of WAMZ Primary Convergence , 2001 to 2011
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/ghana-status-wamz-primary-convergence-2001-2011-0" class="label" title="Resources: Ghana - Status of WAMZ Primary Convergence , 2001 to 2011" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-6 views-row-even">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/mda-expenditure-allocations-2012" title="MDA Expenditure Allocations (2012)">MDA Expenditure Allocations (2012)</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>MDA Expenditure Allocations (2012)
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/mda-expenditure-allocations-2012" class="label" title="Resources: MDA Expenditure Allocations (2012)" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-7 views-row-odd">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/2012-non-tax-revenue-projections-mdas-gh%C2%A2000-0" title="2012 Non-Tax Revenue Projections by MDAs (GH¢&#039;000)">2012 Non-Tax Revenue Projections by MDAs (GH¢&#039;000)</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>2012 Non-Tax Revenue Projections by MDAs (GH¢'000)
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/2012-non-tax-revenue-projections-mdas-gh%C2%A2000-0" class="label" title="Resources: 2012 Non-Tax Revenue Projections by MDAs (GH¢&amp;#039;000)" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-8 views-row-even">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/multi-donor-budgetary-support-actual-and-expected-inflow-2011-and-2012-0" title="Multi-Donor Budgetary Support, Actual and Expected Inflow for 2011 and 2012">Multi-Donor Budgetary Support, Actual and Expected Inflow for 2011 and 2012</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>Multi-Donor Budgetary Support, Actual and Expected Inflow for 2011 and 2012
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/multi-donor-budgetary-support-actual-and-expected-inflow-2011-and-2012-0" class="label" title="Resources: Multi-Donor Budgetary Support, Actual and Expected Inflow for 2011 and 2012" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-9 views-row-odd">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/balance-payments-0" title="Balance of Payments">Balance of Payments</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>Balance of Payments
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/balance-payments-0" class="label" title="Resources: Balance of Payments" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+  <div class="views-row views-row-10 views-row-even views-row-last">
+    <article class="node-search-result row" xmlns="https://www.w3.org/1999/html">
+  <div class="col-md-2 col-lg-1 col-xs-2 icon-container">
+    <span class="icon-dkan facet-icon icon-dkan-dataset" ></span>  </div>
+  <div class="col-md-10 col-lg-11 col-xs-10 search-result search-result-dataset">
+    <h2 class="node-title"><a href="/dataset/economic-classification-central-govt-expenditure-2012-2014-0" title="ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T EXPENDITURE  - 2012 -2014">ECONOMIC CLASSIFICATION OF CENTRAL GOV&#039;T EXPENDITURE  - 2012 -2014</a></h2>
+          <div class="group-membership">Financial Sector</div>
+        <div class="field field-name-field-topic field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><div class="field field-name-field-topic-icon field-type-font-icon-select-icon field-label-above"><div class="field-items"><div class="field-item even"><span class="font-icon-select-1 font-icon-select-1-e923"></span></div></div></div><a class="name" href="https://data.gov.gh/search/field_topic/finance-1">Finance</a></div></div></div>    <ul class="dataset-list"></ul>
+          <div class="node-description"> <p>ECONOMIC CLASSIFICATION OF CENTRAL GOV'T EXPENDITURE  - 2012 -2014
+ </p></div>
+        <div class="data-and-resources"><div class="form-item form-type-item form-group">
+  <div class="item-list"><ul class="resource-list clearfix"><li class="first last"><a href="/dataset/economic-classification-central-govt-expenditure-2012-2014-0" class="label" title="Resources: ECONOMIC CLASSIFICATION OF CENTRAL GOV&amp;#039;T EXPENDITURE  - 2012 -2014" data-format="csv">csv</a></li>
+</ul></div>
+</div>
+</div>      </div>
+</article>
+  </div>
+    </div>
+  
+      <div class="text-center"><div class="item-list"><ul class="pagination pager"><li class="pager-current active first"><span>1</span></li>
+<li class="pager-item"><a title="Go to page 2" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C1">2</a></li>
+<li class="pager-item"><a title="Go to page 3" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C2">3</a></li>
+<li class="pager-item"><a title="Go to page 4" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C3">4</a></li>
+<li class="pager-item"><a title="Go to page 5" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C4">5</a></li>
+<li class="pager-item"><a title="Go to page 6" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C5">6</a></li>
+<li class="pager-item"><a title="Go to page 7" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C6">7</a></li>
+<li class="pager-item"><a title="Go to page 8" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C7">8</a></li>
+<li class="pager-item"><a title="Go to page 9" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C8">9</a></li>
+<li class="pager-ellipsis">…</li>
+<li class="pager-next"><a title="Go to next page" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C1">next ›</a></li>
+<li class="pager-last last"><a title="Go to last page" href="/search/type/dataset?q=search/type/dataset&amp;sort_by=changed&amp;page=0%2C31">last »</a></li>
+</ul></div></div>  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div><!-- /.bryant -->  </div>
+      </section>
+
+    </div>
+
+  </div> <!-- /#main -->
+</div> <!-- /#main-wrapper -->
+
+<footer id="footer" class="footer">
+  <div class="container">
+          <small class="copyright pull-left"><p>©2020 National Information Technology Agency (NITA), Government of Ghana All rights reserved except published datasets/resources and metadata.</p>
+<p> <a href="/about">About</a> 	                                                                                           <a href="/aid">Aid Data Sites</a>   	                      	                                  <a href="https://data.gov.gh/sites/default/files/Ghana%20National%20Data%20Sharing%20Policy%20Draft%203.0.pdf">Data Policy</a>      	                    	            </p>
+<p><a href="/faq">Frequently Asked Questions</a>           <a href="http://www.goda.org.gh/">Ghana Open Data Alliance</a>       <a href="/privacy">Privacy  Policy</a>               </p>
+<p> <a href="/contact">Contact Us</a>     	                                                                                      <a href="/help">Help</a>    	                                                   	                           <a href="/terms-use">Terms of Use</a>       </p>
+</small>
+        <small class="pull-right"></small>
+  </div>
+</footer>
+  <script type="text/javascript" src="https://data.gov.gh/sites/default/files/js/js_29qYXJz8NLGg8Aomg-RZPjJcj9yEdEst1BMZ9gZbs-4.js"></script>
+</body>
+</html>

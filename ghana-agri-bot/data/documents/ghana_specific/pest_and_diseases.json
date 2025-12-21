@@ -1,0 +1,32 @@
+{
+  "Maize": {
+    "Fall Armyworm": {
+      "local_name": "Army worm",
+      "symptoms": "Holes in leaves, frass in whorl",
+      "control": {
+        "biological": "Neem extract, Bt spray",
+        "cultural": "Early planting, resistant varieties",
+        "chemical": "Emamectin benzoate when severe"
+      }
+    },
+    "Maize Streak Virus": {
+      "symptoms": "Yellow streaks on leaves",
+      "control": {
+        "cultural": "Plant resistant varieties, control leafhoppers",
+        "prevention": "Use certified seeds"
+      }
+    }
+  },
+  "Cassava": {
+    "Cassava Mosaic Disease": {
+      "symptoms": "Yellow mosaic patterns on leaves",
+      "control": {
+        "cultural": "Use healthy planting material, remove infected plants",
+        "resistant_varieties": [
+          "Tek-Bankye",
+          "Ampong"
+        ]
+      }
+    }
+  }
+}

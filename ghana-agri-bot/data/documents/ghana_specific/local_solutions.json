@@ -1,0 +1,24 @@
+{
+  "organic_pesticides": {
+    "Neem spray": {
+      "ingredients": "Neem leaves/seeds, soap, water",
+      "preparation": "Grind neem, soak 24hrs, strain, add soap",
+      "uses": "Most insects and fungal diseases"
+    },
+    "Pepper spray": {
+      "ingredients": "Hot pepper, garlic, onion, soap, water",
+      "preparation": "Blend ingredients, strain, dilute",
+      "uses": "Caterpillars, aphids"
+    }
+  },
+  "local_fertilizers": {
+    "Compost": {
+      "materials": "Crop residues, animal manure, kitchen waste",
+      "method": "Layer materials, turn regularly, ready in 3-4 months"
+    },
+    "Poultry manure": {
+      "application": "2-3 tons per hectare",
+      "timing": "Apply 2 weeks before planting"
+    }
+  }
+}

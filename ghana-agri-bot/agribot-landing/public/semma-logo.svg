@@ -1,0 +1,32 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#gradient1)" stroke="#4B7F52" stroke-width="3"/>
+  
+  <!-- Leaf/Plant Shape -->
+  <path d="M100 30C100 30 140 60 140 100C140 140 100 170 100 170C100 170 60 140 60 100C60 60 100 30 100 30Z" fill="#3CB371"/>
+  <path d="M100 50C100 50 125 70 125 100C125 130 100 150 100 150C100 150 75 130 75 100C75 70 100 50 100 50Z" fill="#90EE90"/>
+  
+  <!-- Stem -->
+  <rect x="96" y="100" width="8" height="70" rx="4" fill="#228B22"/>
+  
+  <!-- Small leaves -->
+  <ellipse cx="85" cy="130" rx="15" ry="8" fill="#32CD32" transform="rotate(-30 85 130)"/>
+  <ellipse cx="115" cy="140" rx="15" ry="8" fill="#32CD32" transform="rotate(30 115 140)"/>
+  
+  <!-- AI/Tech element - circuit dots -->
+  <circle cx="100" cy="90" r="8" fill="#FFD700"/>
+  <circle cx="80" cy="105" r="4" fill="#FFD700"/>
+  <circle cx="120" cy="105" r="4" fill="#FFD700"/>
+  <line x1="92" y1="90" x2="84" y2="105" stroke="#FFD700" stroke-width="2"/>
+  <line x1="108" y1="90" x2="116" y2="105" stroke="#FFD700" stroke-width="2"/>
+  
+  <!-- Text -->
+  <text x="100" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2E7D32">SEMMA-AI</text>
+  
+  <defs>
+    <linearGradient id="gradient1" x1="0" y1="0" x2="200" y2="200">
+      <stop offset="0%" stop-color="#F0FFF0"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+  </defs>
+</svg>

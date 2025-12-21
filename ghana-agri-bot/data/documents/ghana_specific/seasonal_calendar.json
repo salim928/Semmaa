@@ -1,0 +1,152 @@
+{
+  "January": {
+    "activities": [
+      "Land preparation",
+      "Bush burning",
+      "Cocoa harvesting"
+    ],
+    "plantable_crops": [
+      "Vegetables (tomato, pepper)",
+      "Rice (irrigated)"
+    ],
+    "weather": "Dry, harmattan winds",
+    "advice": "Good time for land clearing and equipment maintenance"
+  },
+  "February": {
+    "activities": [
+      "Continued land preparation",
+      "Seedbed preparation"
+    ],
+    "plantable_crops": [
+      "Rice (irrigated)",
+      "Vegetables"
+    ],
+    "weather": "Hot and dry",
+    "advice": "Prepare for planting season, check seed quality"
+  },
+  "March": {
+    "activities": [
+      "Early planting preparation",
+      "Seed procurement"
+    ],
+    "plantable_crops": [
+      "Early maize",
+      "Yam",
+      "Vegetables"
+    ],
+    "weather": "Hot, occasional early rains",
+    "advice": "Time to plant yam and prepare for major season"
+  },
+  "April": {
+    "activities": [
+      "Major season planting begins"
+    ],
+    "plantable_crops": [
+      "Maize",
+      "Rice",
+      "Cowpea",
+      "Groundnut",
+      "Vegetables"
+    ],
+    "weather": "Rains begin",
+    "advice": "Plant immediately after first reliable rains"
+  },
+  "May": {
+    "activities": [
+      "Peak planting season",
+      "Weeding"
+    ],
+    "plantable_crops": [
+      "Maize",
+      "Rice",
+      "Cassava",
+      "Plantain"
+    ],
+    "weather": "Heavy rains",
+    "advice": "Ensure good drainage, watch for pests"
+  },
+  "June": {
+    "activities": [
+      "Weeding",
+      "Fertilizer application",
+      "Pest control"
+    ],
+    "plantable_crops": [
+      "Late season maize",
+      "Vegetables"
+    ],
+    "weather": "Peak rains",
+    "advice": "Critical time for crop care and pest management"
+  },
+  "July": {
+    "activities": [
+      "Weeding",
+      "Disease management"
+    ],
+    "plantable_crops": [
+      "Minor season preparation"
+    ],
+    "weather": "Heavy rains continue",
+    "advice": "Monitor for fungal diseases, ensure proper drainage"
+  },
+  "August": {
+    "activities": [
+      "Harvesting early crops",
+      "Storage preparation"
+    ],
+    "plantable_crops": [
+      "Minor season crops"
+    ],
+    "weather": "Rains begin to reduce",
+    "advice": "Harvest and store crops properly to avoid post-harvest losses"
+  },
+  "September": {
+    "activities": [
+      "Minor season planting",
+      "Harvesting"
+    ],
+    "plantable_crops": [
+      "Maize",
+      "Cowpea",
+      "Vegetables"
+    ],
+    "weather": "Moderate rains",
+    "advice": "Good time for second season planting in forest zone"
+  },
+  "October": {
+    "activities": [
+      "Harvesting",
+      "Field clearing for next season"
+    ],
+    "plantable_crops": [
+      "Vegetables",
+      "Rice (in some areas)"
+    ],
+    "weather": "Rains ending",
+    "advice": "Focus on harvesting and post-harvest handling"
+  },
+  "November": {
+    "activities": [
+      "Major harvesting season",
+      "Storage"
+    ],
+    "plantable_crops": [
+      "Dry season vegetables"
+    ],
+    "weather": "Dry season begins",
+    "advice": "Ensure proper drying and storage of grains"
+  },
+  "December": {
+    "activities": [
+      "Storage",
+      "Marketing",
+      "Land preparation"
+    ],
+    "plantable_crops": [
+      "Irrigated crops",
+      "Vegetables"
+    ],
+    "weather": "Cool and dry",
+    "advice": "Good time for equipment maintenance and planning"
+  }
+}

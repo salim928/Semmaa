@@ -1,537 +1,521 @@
-# Main Telegram bot logic
+# bot.py - Fixed Version with Better Error Handling
 """
-Main Telegram Bot Implementation
+Main Telegram Bot Implementation - Fixed
 Purpose: Handle all Telegram interactions, commands, and message routing
 """
-
+import asyncio
 import logging
-import time
+import re
+import csv
 import json
-from datetime import datetime
-from typing import Optional, Dict
-from pathlib import Path
-from src.orchestrator import MultiAgentOrchestrator
-
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+import time
+from typing import List, Dict, Optional
+import urllib
+import urllib.request
+import urllib.parse
+from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.constants import ChatAction
 from telegram.ext import (
-    Application, CommandHandler, MessageHandler, 
-    filters, ContextTypes, CallbackQueryHandler
+    ApplicationBuilder, CommandHandler, CallbackQueryHandler,
+    MessageHandler, ContextTypes, filters
 )
+from telegram.error import BadRequest
 
-from config.settings import TELEGRAM_BOT_TOKEN, RESPONSE_TIMEOUT
-from config.prompts import GREETING_MESSAGE, GUIDELINE_MESSAGE, HELP_MESSAGE, ERROR_MESSAGES
-from src.llm_handler import LLMHandler
-from src.knowledge_base import KnowledgeBase
-from src.data_collector import DataCollector
-from src.utils import detect_location, extract_crop_info, format_response
-from scripts.farmer_onboarding import onboard_farmer
+from src.bot_ui import (
+    main_menu, back_menu, settings_keyboard, tips_keyboard, language_keyboard,
+    crops_keyboard, rating_keyboard, onboarding_keyboard, main_menu_button,
+    quick_actions_keyboard, photo_progress_keyboard, feedback_poll_keyboard,
+    retry_keyboard, history_keyboard
+)
+from src.project_paths import data_dir
+from src.metrics import log_event, log_consent
+from src.weather_integration import get_weather
+from src.satellite_integration import ndvi_text_for_coords
+from src.market_agent import MarketAgent
 
 logger = logging.getLogger(__name__)
 
+# Import orchestrator with fallback
+try:
+    from src.orchestrator import MultiAgentOrchestrator
+    ORCHESTRATOR_AVAILABLE = True
+    logger.info("✅ MultiAgentOrchestrator imported successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to import MultiAgentOrchestrator: {e}")
+    try:
+        from src.orchestrator import Orchestrator as MultiAgentOrchestrator
+        ORCHESTRATOR_AVAILABLE = True
+        logger.info("✅ Fallback Orchestrator imported")
+    except Exception as e2:
+        logger.error(f"❌ No orchestrator available: {e2}")
+        ORCHESTRATOR_AVAILABLE = False
+        MultiAgentOrchestrator = None
+
+# Sanitize outgoing text (remove markdown and any Sources: section)
+def _sanitize_outgoing(text: str) -> str:
+    if text is None:
+        return ""
+    s = str(text).replace("\r\n", "\n").strip()
+    s = re.sub(r'(?is)\n+sources\s*:.*$', '', s)          # drop 'Sources:' block
+    s = re.sub(r'```+', '', s)                            # fenced markers
+    s = re.sub(r'`([^`]+)`', r'\1', s)                    # inline code
+    s = re.sub(r'\*\*([^*]+)\*\*', r'\1', s)              # **bold**
+    s = re.sub(r'(?<!\*)\*([^*]+)\*', r'\1', s)           # *italic*
+    s = re.sub(r'__([^_]+)__', r'\1', s)                  # __bold__
+    s = re.sub(r'_([^_]+)_', r'\1', s)                    # _italic_
+    s = s.replace('\\*', '').replace('*', '• ')
+    s = re.sub(r'\n{3,}', '\n\n', s).strip()
+    return s
+
+# Ghana-focused quick tips (default EN)
+TIPS: List[str] = [
+    "Mulch around crops to conserve soil moisture and reduce weeds.",
+    "Plant at the start of rains for better germination in rainfed fields.",
+    "Use certified seeds from trusted suppliers to improve yields.",
+    "Top-dress nitrogen after weeding when soils are moist, not before heavy rain.",
+    "Rotate cereals with legumes (e.g., maize-soybean) to improve soil fertility.",
+    "Scout weekly for Fall Armyworm; control early at small larval stages.",
+    "Avoid over-irrigation: water early morning or evening to reduce stress.",
+    "Dry grains to safe moisture levels before storage to prevent mould.",
+    "Calibrate sprayers to apply the correct rate and minimize waste.",
+    "Use compost/manure where possible to build organic matter.",
+    "Plant resistant/tolerant varieties suitable for your region.",
+    "Keep field records: planting dates, inputs, rainfall, and yields.",
+]
+
+LANGUAGE_NAMES = {
+    "en": "English",
+    "tw": "Twi",
+    "ga": "Ga",
+    "ee": "Ewe",
+}
+
+# Minimal translations for core bot strings
+TRANSLATIONS: Dict[str, Dict[str, str]] = {
+    "welcome": {
+        "en": "🌾 Welcome to SemmaAI, {user.first_name}!\nChoose an option below or ask a farming question.",
+        "tw": "🌾 Akwaaba, {user.first_name}! Fa bot no mmoa wo. Bisa asɛmmisa afa ɔkoɔ ɛfie anaa paw akodeɛ ase.",
+        "ga": "🌾 Wɔjogbaa, {user.first_name}! Tsɔ ni yaakɛɛ hewalɔ lɛ kɛ bisa shikpon mli hewalɔ.",
+        "ee": "🌾 Woezɔ, {user.first_name}! Kpɔe be nàbia ɖe agble mɔmɔ me alo bia wo nuŋɔŋlɔwo.",
+    },
+    "share_location": {
+        "en": "Share your location for localized advice.",
+        "tw": "Fa wo bea no to mu na menya atie a ɛfata wo.",
+        "ga": "Fa wo hewalɔ gblɔ na mɛmaa amɛkɛ hewalɔ.",
+        "ee": "Dzia wo afisia be metsɔ aɖe aɖo go na wò.",
+    },
+    "help": {
+        "en": "Use buttons for Weather, Market, Tips, Profile, and Feedback.\nAsk farming questions in plain language.",
+        "tw": "Fa akɔtɔsoɔ no di dwuma: Nsusɔre (Weather), Market, Tips, Profile ne Feedback.\nBisa wo asɛmmisa wɔ kasa pa mu.",
+        "ga": "Fa buttons lɛ yɛɛ: Nɔɔni, Makɛt, Tips, Profile kɛ Feedback.\nBisa agble shikpon mli asɛmmɔ.",
+        "ee": "Ƒo buttons na: Atmosphere, Market, Tips, Profile kple Feedback.\nBia agble ase nya kple nuŋɔŋlɔ nyuie.",
+    },
+    "stopped": {
+        "en": "🛑 Stopped. Send /start to resume.",
+        "tw": "🛑 Esi. Fa /start san hyɛ ase.",
+        "ga": "🛑 Eba. Fa /start be san yɛ.",
+        "ee": "🛑 Katã. Dɔ /start be nàxɔe ɖo.",
+    },
+    "menu": {
+        "en": "Main menu:",
+        "tw": "Titiriw menu:",
+        "ga": "Menu gbã:",
+        "ee": "Menu titina:",
+    },
+    "ask_prompt": {
+        "en": "💬 Send your farming question.",
+        "tw": "💬 Tɔ wo agri asɛmmisa.",
+        "ga": "💬 Fa w'agble asɛmmɔ mli.",
+        "ee": "💬 Gblɔ wò agble bia.",
+    },
+}
+
+def t(context: ContextTypes.DEFAULT_TYPE, key: str, **kwargs) -> str:
+    lang = (context.user_data.get("language") if context and context.user_data else "en") or "en"
+    entry = TRANSLATIONS.get(key, {})
+    text = entry.get(lang) or entry.get("en") or key
+    try:
+        return text.format(**kwargs)
+    except Exception:
+        return text
+
+def _maybe_small_talk(text: str, lang: str) -> Optional[str]:
+    tnorm = (text or "").strip().lower()
+    greetings = ("hi", "hello", "hey", "good morning", "good afternoon", "good evening", "akwaaba", "oyo", "woezɔ")
+    thanks = ("thanks", "thank you", "medaase", "yedaase", "akpe", "akpe na wo", "oyi waladon")
+    how = ("how are you", "how's it going", "how are u", "ɛte sɛn", "wo ho te sɛn", "ɛfɛ?", "ɛfɛ na wo?")
+    
+    if any(tnorm == g or tnorm.startswith(g + " ") for g in greetings):
+        return TRANSLATIONS["welcome"].get(lang, "👋 Hi! I'm here to help with Ghana farming advice.")
+    if any(k in tnorm for k in how):
+        return "I'm doing well, thanks! How can I support your farming today?"
+    if any(k in tnorm for k in thanks):
+        return "You're welcome! What farming question can I help you with?"
+    if tnorm in ("ok", "okay", "fine", "cool", "great", "yoo", "eeh"):
+        return "👌 What crop or question would you like help with?"
+    return None
+
+APP_VERSION = "2025-09-24"
+
 class GhanaAgriBot:
-    def __init__(self):
-        """Initialize the bot with all components"""
-        self.llm_handler = LLMHandler()
-        self.knowledge_base = KnowledgeBase()
-        self.data_collector = DataCollector()
-        
+    def __init__(self, token: str):
+        logger.info("🤖 Initializing SemmaAI...")
+        self.app = ApplicationBuilder().token(token).build()
+
+        # Initialize orchestrator with error handling
         try:
-            self.orchestrator = MultiAgentOrchestrator()
-            self.orchestrator_available = True
-            logger.info("Multi-agent orchestrator initialized")
+            if ORCHESTRATOR_AVAILABLE:
+                self.orchestrator = MultiAgentOrchestrator()
+                logger.info("✅ Orchestrator initialized successfully")
+            else:
+                self.orchestrator = None
+                logger.warning("❌ No orchestrator available - using fallback")
         except Exception as e:
-            logger.warning(f"Orchestrator not available: {e}")
-            self.orchestrator_available = False
+            logger.error(f"❌ Orchestrator initialization failed: {e}")
+            self.orchestrator = None
+
+        # Initialize other components
+        try:
+            self.market_csv = data_dir() / "market_prices.csv"
+            self.market_agent = MarketAgent(self.market_csv)
+            logger.info("✅ Market agent initialized")
+        except Exception as e:
+            logger.error(f"❌ Market agent failed: {e}")
+            self.market_agent = None
+
+        # Rate limiting storage
+        self.user_rates = {}
+
+        # Add handlers with explicit logging
+        logger.info("📝 Setting up message handlers...")
         
-        # Store user contexts for follow-up questions
-        self.user_contexts = {}
-        self.pending_consent = set()  # Track users awaiting consent
+        # Commands
+        self.app.add_handler(CommandHandler("start", self.start))
+        self.app.add_handler(CommandHandler("help", self.help))
+        self.app.add_handler(CommandHandler("stop", self.stop))
+        self.app.add_handler(CommandHandler("profile", self.profile))
         
-        # Initialize the bot application
-        self.application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
-        self._setup_handlers()
-    
-    def _setup_handlers(self):
-        """Set up all command and message handlers"""
-        # Command handlers
-        self.application.add_handler(CommandHandler("start", self.start_command))
-        self.application.add_handler(CommandHandler("help", self.help_command))
-        self.application.add_handler(CommandHandler("feedback", self.feedback_command))
-        self.application.add_handler(CommandHandler("weather", self.weather_command))
-        self.application.add_handler(CommandHandler("metrics", self.metrics_command))
-        self.application.add_handler(CommandHandler("satellite", self.satellite_command))
-        self.application.add_handler(CommandHandler("stop", self.stop_command))
-        self.application.add_handler(CommandHandler("location", self.location_command))
-        self.application.add_handler(CommandHandler("guideline", self.guideline_command))
-
-        # Message handler for farming questions
-        self.application.add_handler(MessageHandler(
-            filters.TEXT & ~filters.COMMAND, self.handle_message))
-
-        # Callback handler for inline buttons
-        self.application.add_handler(CallbackQueryHandler(self.handle_callback))
-
+        # Text messages - this is critical!
+        self.app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.on_text))
+        logger.info("✅ Text message handler added")
+        
+        # Other handlers
+        self.app.add_handler(MessageHandler(filters.LOCATION, self.on_location))
+        self.app.add_handler(CallbackQueryHandler(self.on_button))
+        
         # Error handler
-        self.application.add_error_handler(self.error_handler)
-    
-    
-    async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /start command"""
-        user = update.effective_user
+        self.app.add_error_handler(self._on_error)
+        
+        logger.info("✅ All handlers registered")
 
-        # Check if already onboarded
-        if self._is_user_onboarded(user.id):
-            await update.message.reply_text("✅ You are already onboarded. Welcome back!")
-            return
+    def run(self) -> None:
+        logger.info("🚀 Starting Telegram bot polling...")
+        self.app.run_polling(drop_pending_updates=True)
 
-        # Prompt for consent (simple version)
-        consent_message = (
-            "📋 *Consent Required*\n\n"
-            "To use this service, you must agree to our data policy. "
-            "We store your Telegram ID (masked), location, and crop info to improve advice. "
-            "Your data is never shared without permission.\n\n"
-            "Please reply with 'I AGREE' to continue."
-        )
-        await update.message.reply_text(consent_message, parse_mode='Markdown')
-        self.pending_consent.add(user.id)
-
-    async def help_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /help command"""
-        await update.message.reply_text(
-            HELP_MESSAGE,
-            parse_mode=None
-        )
-    
-    async def handle_message(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle farming questions from users"""
-        user = update.effective_user
-        message_text = update.message.text
-
-        # Check for pending consent
-        if user.id in self.pending_consent:
-            text = message_text.strip().upper()
-            if text == "I AGREE":
-                onboarding_result = onboard_farmer(
-                    user_id=user.id,
-                    phone_number=str(user.id),
-                    consent_given=True,
-                    location=None,
-                    crop_type=None
+    # ---------- Error Handler ----------
+    async def _on_error(self, update: Optional[Update], context: ContextTypes.DEFAULT_TYPE):
+        logger.error("❌ Unhandled bot error", exc_info=context.error)
+        try:
+            if update and update.effective_message:
+                await update.effective_message.reply_text(
+                    "⚠️ Technical error occurred. Please try again or contact support.", 
+                    reply_markup=main_menu_button()
                 )
-                self.pending_consent.remove(user.id)
-                if "error" in onboarding_result:
-                    await update.message.reply_text(
-                        onboarding_result["error"],
-                        parse_mode=None
+        except Exception as send_error:
+            logger.error(f"Failed to send error message: {send_error}")
+
+    async def _send_typing(self, message_or_query_message):
+        try:
+            chat_id = message_or_query_message.chat.id
+            await self.app.bot.send_chat_action(chat_id=chat_id, action=ChatAction.TYPING)
+        except Exception as e:
+            logger.debug(f"Typing indicator failed: {e}")
+
+    # ---------- Rate Limiting ----------
+    async def _check_rate_limit(self, user_id: int) -> bool:
+        """Rate limiting: max 5 requests per minute"""
+        now = time.time()
+        user_data = self.user_rates.get(user_id, [])
+        user_data = [t for t in user_data if now - t < 60]
+        if len(user_data) >= 5:
+            logger.warning(f"Rate limit exceeded for user {user_id}")
+            return False
+        user_data.append(now)
+        self.user_rates[user_id] = user_data
+        return True
+
+    # ---------- Core Answer Method ----------
+    async def _answer_question(self, update: Update, context: ContextTypes.DEFAULT_TYPE, question: str):
+        """Process and answer a farming question"""
+        user_id = update.effective_user.id
+        username = update.effective_user.username or "unknown"
+        
+        logger.info(f"📝 Processing question from user {user_id} (@{username}): {question[:100]}...")
+        
+        try:
+            await self._send_typing(update.message)
+            
+            # Rate limiting check
+            if not await self._check_rate_limit(user_id):
+                await update.message.reply_text("⏰ Too many requests. Please wait a minute.", reply_markup=main_menu_button())
+                return
+            
+            # Get user context
+            location = context.user_data.get('location', 'Ghana')
+            crop_type = context.user_data.get('crops', 'maize')
+            
+            logger.info(f"🌍 User context - Location: {location}, Crop: {crop_type}")
+            
+            # Try orchestrator first
+            if self.orchestrator:
+                logger.info("🤖 Using orchestrator to process query...")
+                try:
+                    result = await self.orchestrator.process_farmer_query(
+                        query=question,
+                        location=location,
+                        crop_type=crop_type,
+                        user_id=str(user_id)
                     )
+                    
+                    response_text = result.get('response', 'No response generated.')
+                    confidence = result.get('confidence', 0.5)
+                    
+                    logger.info(f"✅ Orchestrator responded - Confidence: {confidence:.2f}")
+                    logger.info(f"📤 Response preview: {response_text[:100]}...")
+                    
+                    response_text = _sanitize_outgoing(response_text)
+                    await update.message.reply_text(response_text)
+                    await update.message.reply_text("How was this response?", reply_markup=feedback_poll_keyboard())
+                    
+                    # Fixed logging - use actual confidence value
+                    try:
+                        log_event(
+                            "question_answered",
+                            user_id,
+                            username,
+                            context.user_data.get("language", "en"),
+                            location,
+                            json.dumps({"question": question[:100], "confidence": confidence, "method": "orchestrator"})
+                        )
+                    except Exception as log_error:
+                        logger.warning(f"Logging failed: {log_error}")
+                    
                     return
-
-                # Log new user
-                self.data_collector.update_user_profile(
-                    user_id=user.id,
-                    username=user.username or user.first_name
+                    
+                except Exception as orch_error:
+                    logger.error(f"❌ Orchestrator failed: {orch_error}")
+                    # Continue to fallback
+            
+            # Fallback to simple LLM
+            logger.info("🔄 Using fallback LLM handler...")
+            try:
+                from src.llm_handler import LLMHandler
+                llm = LLMHandler()
+                
+                simple_response = llm.generate_with_rag(
+                    query=question,
+                    contexts=[{"text": f"Farming advice for {crop_type} in {location}, Ghana."}],
+                    farmer_context={"location": location, "crops": crop_type}
                 )
-
-                await update.message.reply_text(
-                    "✅ Thank you for consenting! You are now onboarded.\n"
-                    "Type /help to see what I can do.",
-                    parse_mode=None
-                )
-
-                logger.info(f"New user onboarded: {user.id} - {user.username}")
+                
+                logger.info(f"✅ Fallback LLM responded: {simple_response[:100]}...")
+                
+                await update.message.reply_text(_sanitize_outgoing(simple_response))
+                await update.message.reply_text("How was this response?", reply_markup=feedback_poll_keyboard())
+                
+                # Log fallback usage
+                try:
+                    log_event(
+                        "question_answered",
+                        user_id,
+                        username,
+                        context.user_data.get("language", "en"),
+                        location,
+                        json.dumps({"question": question[:100], "confidence": 0.6, "method": "fallback"})
+                    )
+                except Exception as log_error:
+                    logger.warning(f"Fallback logging failed: {log_error}")
+                
                 return
-            else:
-                await update.message.reply_text("Please reply with 'I AGREE' to continue.")
-                return
-
-        # Show typing indicator
-        await context.bot.send_chat_action(
-            chat_id=update.effective_chat.id, 
-            action="typing"
+                
+            except Exception as fallback_error:
+                logger.error(f"❌ Fallback LLM also failed: {fallback_error}")
+        
+        except Exception as e:
+            logger.error(f"❌ Complete answer failure: {e}")
+            
+        # Final fallback - simple response
+        await update.message.reply_text(
+            f"I understand you're asking about {question[:50]}{'...' if len(question) > 50 else ''}. "
+            f"I'm having technical difficulties right now. Please try again in a moment, or contact "
+            f"your local agricultural extension office for immediate help.",
+            reply_markup=retry_keyboard()
         )
+
+    # ---------- Command Handlers ----------
+    async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        user = update.effective_user
+        logger.info(f"👋 User {user.id} (@{user.username}) started bot")
+        
+        context.user_data.setdefault("language", "en")
+        
+        try:
+            log_event("user_start", user.id, user.username, context.user_data["language"], 
+                     context.user_data.get("location"), json.dumps({"app_version": APP_VERSION}))
+        except Exception as e:
+            logger.warning(f"Start logging failed: {e}")
+        
+        await update.message.reply_text(
+            t(context, "welcome", name=(user.first_name or "farmer")),
+            reply_markup=main_menu()
+        )
+
+    async def help(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        await update.message.reply_text(
+            "❓ Help\n• Use the menu buttons or ask farming questions directly\n• Share location for better advice\n• Try: 'maize fertilizer in Kumasi'",
+            reply_markup=main_menu_button()
+        )
+
+    async def stop(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        await update.message.reply_text(
+            t(context, "stopped"),
+            reply_markup=main_menu()
+        )
+
+    async def profile(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        ud = context.user_data
+        text = (
+            "👤 Your Profile\n"
+            f"📍 Location: {ud.get('location', 'Not set')}\n"
+            f"🌾 Crops: {ud.get('crops', 'Not set')}\n"
+            f"🌐 Language: {ud.get('language', 'en')}\n"
+        )
+        await update.message.reply_text(text, reply_markup=main_menu_button())
+
+    # ---------- Message Handlers ----------
+    async def on_location(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        try:
+            loc = update.message.location
+            if loc:
+                lat, lon = float(loc.latitude), float(loc.longitude)
+                context.user_data["coords"] = {"lat": lat, "lon": lon}
+                context.user_data["location"] = f"{lat:.4f},{lon:.4f}"
+                
+                await update.message.reply_text(
+                    f"📍 Location received: {lat:.4f},{lon:.4f}",
+                    reply_markup=main_menu_button()
+                )
+        except Exception as e:
+            logger.error(f"Location error: {e}")
+            await update.message.reply_text("📍 Location received.", reply_markup=main_menu_button())
+
+    async def on_button(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        query = update.callback_query
+        data = (query.data or "").strip().lower()
+        
+        logger.info(f"🔘 Button pressed: {data}")
+        
+        try:
+            await query.answer()
+        except Exception:
+            pass
 
         try:
-            start_time = time.time()
-
-            # NEW: Check if we should use orchestrator
-            use_orchestrator = (
-                self.orchestrator_available and 
-                await self.orchestrator.should_use_orchestrator(message_text)
-            )
-
-            if use_orchestrator:
-                # Use multi-agent orchestrator for complex queries
-                logger.info(f"Using orchestrator for: {message_text[:50]}...")
-
-                # Get user context
-                user_location = self.user_contexts.get(user.id, {}).get('location', 'Kumasi')
-                user_crop = self.user_contexts.get(user.id, {}).get('crop', 'maize')
-
-                # Process with orchestrator
-                result = await self.orchestrator.process_farmer_query(
-                    query=message_text,
-                    location=user_location,
-                    crop_type=user_crop,
-                    user_id=str(user.id)
-                )
-
-                response = result['response']
-                confidence = result.get('confidence', 'unknown')
-
-                # Log orchestrator usage
-                logger.info(f"Orchestrator response confidence: {confidence}")
-
+            if data == "menu":
+                await query.edit_message_text("Main menu:", reply_markup=main_menu())
+            elif data == "ask":
+                context.user_data["awaiting_question"] = True
+                await query.edit_message_text(t(context, "ask_prompt"))
+            elif data == "weather":
+                await query.edit_message_text("🌦️ Weather feature coming soon...")
             else:
-                # Use simple LLM for basic queries
-                logger.info(f"Using simple LLM for: {message_text[:50]}...")
+                await query.edit_message_text("Feature coming soon...", reply_markup=main_menu())
+                
+        except Exception as e:
+            logger.error(f"Button handler error: {e}")
+            await query.edit_message_text("Error occurred.", reply_markup=main_menu())
 
-                # Get user context if exists
-                user_context = self.user_contexts.get(user.id, {})
+    async def on_text(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """CRITICAL: Main text message handler"""
+        user_message = (update.message.text or "").strip()
+        user = update.effective_user
+        
+        # LOG EVERY MESSAGE RECEIVED
+        logger.info(f"💬 TEXT MESSAGE from user {user.id} (@{user.username}): '{user_message}'")
+        
+        if not user_message:
+            logger.warning("❌ Empty message received")
+            return
+        
+        # Store in conversation history
+        history = context.user_data.get('history', [])
+        history.append(user_message[:100])
+        if len(history) > 10:
+            history = history[-10:]
+        context.user_data['history'] = history
+        
+        try:
+            # 1. Check for small talk first
+            lang = context.user_data.get("language", "en")
+            small_talk_response = _maybe_small_talk(user_message, lang)
+            if small_talk_response:
+                logger.info(f"🗣️ Responding to small talk: {small_talk_response[:50]}...")
+                await update.message.reply_text(small_talk_response)
+                await update.message.reply_text("Main menu:", reply_markup=main_menu_button())
+                return
 
-                # Extract location from message if mentioned
-                location = detect_location(message_text)
-                if location:
-                    user_context['location'] = location
+            # 2. Check if awaiting question from Ask button
+            if context.user_data.get("awaiting_question", False):
+                logger.info("❓ Processing awaited question...")
+                context.user_data["awaiting_question"] = False
+                await self._answer_question(update, context, user_message)
+                return
 
-                # Get relevant context from knowledge base
-                kb_context = self.knowledge_base.get_context_for_query(message_text)
+            # 3. Check for simple location input
+            if (len(user_message) < 32 and 
+                not any(c in user_message for c in "?!@#$%^&*0123456789") and 
+                user_message.lower() not in ("yes", "no", "agree")):
+                
+                logger.info(f"🌍 Treating as location: {user_message}")
+                context.user_data["location"] = user_message.title()
+                await update.message.reply_text(f"📍 Location set to: {user_message.title()}")
+                await update.message.reply_text("Main menu:", reply_markup=main_menu_button())
+                return
 
-                # Build full context for LLM
-                full_context = {
-                    "location": user_context.get("location"),
-                    "previous_query": user_context.get("last_query"),
-                    "knowledge_base": kb_context
-                }
-
-                # Generate response using LLM
-                response, confidence = self.llm_handler.generate_response(
-                    query=message_text,
-                    context=full_context
-                )
-
-            response_time = time.time() - start_time
-
-            # Format response with markdown
-            formatted_response = format_response(response)
-
-            # Send response with feedback buttons
-            keyboard = InlineKeyboardMarkup([
-                [
-                    InlineKeyboardButton("👍", callback_data=f"feedback_pos_{user.id}"),
-                    InlineKeyboardButton("👎", callback_data=f"feedback_neg_{user.id}")
-                ],
-                [
-                    InlineKeyboardButton("📍 Add Location", callback_data=f"location_{user.id}"),
-                    InlineKeyboardButton("🌾 My Crops", callback_data=f"crops_{user.id}")
-                ]
-            ])
-
-            await update.message.reply_text(
-                formatted_response,
-                parse_mode=None,
-                reply_markup=keyboard
-            )
-
-            # Generate and send follow-up questions
-            followup_questions = self.llm_handler.generate_followup_questions(
-                message_text, response
-            )
-
-            if followup_questions:
-                followup_text = "❓ *You might also want to know:*\n"
-                for i, question in enumerate(followup_questions, 1):
-                    followup_text += f"{i}. {question}\n"
-
-                await update.message.reply_text(
-                    followup_text,
-                    parse_mode=None
-                )
-
-            # Update user context
-            self.user_contexts[user.id] = {
-                "last_query": message_text,
-                "last_response": response,
-                "location": self.user_contexts.get(user.id, {}).get("location"),
-                "timestamp": datetime.now()
-            }
-
-            # Log interaction
-            self.data_collector.log_interaction(
-                user_id=user.id,
-                username=user.username or user.first_name,
-                query=message_text,
-                response=response,
-                confidence=confidence,
-                response_time=response_time
-            )
-
-            logger.info(f"Responded to user {user.id} in {response_time:.2f}s")
+            # 4. Default: Treat as farming question
+            logger.info("🌾 Treating as farming question...")
+            await self._answer_question(update, context, user_message)
 
         except Exception as e:
-            logger.error(f"Error handling message: {e}")
-            await update.message.reply_text(
-                ERROR_MESSAGES.get("api_error", "Sorry, something went wrong."),
-                parse_mode=None
-            )
+            logger.error(f"❌ Critical error in on_text: {e}")
+            import traceback
+            logger.error(f"Full traceback: {traceback.format_exc()}")
+            
+            try:
+                await update.message.reply_text(
+                    "⚠️ I'm having trouble processing your message. Please try again.",
+                    reply_markup=main_menu_button()
+                )
+            except Exception as send_error:
+                logger.error(f"Failed to send error response: {send_error}")
+
+
+# Test function to verify imports
+def test_imports():
+    """Test that all required modules can be imported"""
+    try:
+        from src.llm_handler import LLMHandler
+        print("✅ LLMHandler import OK")
+    except Exception as e:
+        print(f"❌ LLMHandler import failed: {e}")
     
-    async def handle_callback(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle inline button callbacks"""
-        query = update.callback_query
-        await query.answer()
-        
-        callback_data = query.data
-        
-        if callback_data.startswith("feedback_"):
-            await self._handle_feedback(query, callback_data)
-        elif callback_data.startswith("location_"):
-            await self._handle_location(query, callback_data)
-        elif callback_data.startswith("crops_"):
-            await self._handle_crops(query, callback_data)
-    
-    async def _handle_feedback(self, query, callback_data):
-        """Handle feedback buttons"""
-        parts = callback_data.split("_")
-        feedback_type = parts[1]  # pos or neg
-        user_id = int(parts[2])
-        
-        user_context = self.user_contexts.get(user_id, {})
-        
-        # Log feedback
-        self.data_collector.log_feedback(
-            user_id=user_id,
-            query=user_context.get("last_query", ""),
-            response=user_context.get("last_response", ""),
-            rating="positive" if feedback_type == "pos" else "negative"
-        )
-        
-        # Update knowledge base for positive feedback
-        if feedback_type == "pos":
-            self.knowledge_base.update_from_feedback(
-                query=user_context.get("last_query", ""),
-                response=user_context.get("last_response", ""),
-                feedback="positive"
-            )
-            await query.edit_message_text(
-                query.message.text + "\n\n✅ Thanks for your positive feedback!",
-                parse_mode=None
-            )
+    try:
+        if ORCHESTRATOR_AVAILABLE:
+            print("✅ Orchestrator available")
         else:
-            await query.edit_message_text(
-                query.message.text + "\n\n📝 Thanks for your feedback. We'll improve our responses!",
-                parse_mode=None
-            )
-    
-    async def _handle_location(self, query, callback_data):
-        """Handle location button"""
-        await query.message.reply_text(
-            "📍 *Please share your location:*\n\n"
-            "Type your region (e.g., 'Ashanti', 'Greater Accra') "
-            "or nearest city (e.g., 'Kumasi', 'Tamale')",
-            parse_mode=None
-        )
-    
-    async def _handle_crops(self, query, callback_data):
-        """Handle crops button"""
-        keyboard = InlineKeyboardMarkup([
-            [
-                InlineKeyboardButton("🌽 Maize", callback_data="crop_maize"),
-                InlineKeyboardButton("🍫 Cocoa", callback_data="crop_cocoa")
-            ],
-            [
-                InlineKeyboardButton("🥔 Cassava", callback_data="crop_cassava"),
-                InlineKeyboardButton("🍅 Tomato", callback_data="crop_tomato")
-            ],
-            [
-                InlineKeyboardButton("🌾 Rice", callback_data="crop_rice"),
-                InlineKeyboardButton("🥜 Groundnut", callback_data="crop_groundnut")
-            ]
-        ])
-        
-        await query.message.reply_text(
-            "🌾 *Select your main crops:*",
-            parse_mode=None,
-            reply_markup=keyboard
-        )
-    
-    async def feedback_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /feedback command"""
-        await update.message.reply_text(
-            "📝 *How to provide feedback:*\n\n"
-            "After each response, use the 👍 or 👎 buttons.\n\n"
-            "For detailed feedback, message us:\n"
-            "`Please improve the advice about [topic]`\n\n"
-            "Your feedback helps us improve!",
-            parse_mode=None
-        )
-    
-    async def weather_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /weather command - show actual weather"""
-        user = update.effective_user
-        location = self.user_contexts.get(user.id, {}).get('location', 'Kumasi')
-        
-        # Use orchestrator for weather
-        if self.orchestrator_available:
-            result = await self.orchestrator.process_farmer_query(
-                query=f"What is the weather forecast for farming in {location}?",
-                location=location,
-                user_id=str(user.id)
-            )
-            response = result['response']
-        else:
-            # Fallback weather info
-            response = f"""🌤️ **Weather for {location}**
-        
-Temperature: 28°C
-Humidity: 75%
-Forecast: Partly cloudy with chance of rain
-Rain expected: In 3 days
+            print("❌ Orchestrator not available")
+    except Exception as e:
+        print(f"❌ Orchestrator check failed: {e}")
 
-**Farming Advisory:**
-- Good conditions for planting
-- Apply fertilizer before the rain
-- Monitor for fungal diseases due to humidity"""
-        
-        await update.message.reply_text(response, parse_mode='Markdown')
-    
-    async def metrics_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /metrics command - show bot statistics"""
-        metrics = self.data_collector.get_metrics_summary()
-        
-        metrics_text = f"""📊 *Bot Statistics*
-
-👥 Total Users: {metrics['total_users']}
-💬 Total Queries: {metrics['total_queries']}
-⚡ Avg Response Time: {metrics['avg_response_time']}s
-👍 Positive Feedback: {metrics['positive_feedback_rate']}%
-
-Thank you for using Ghana Farming Advisor!"""
-        
-        await update.message.reply_text(metrics_text, parse_mode=None)
-    
-    async def error_handler(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle errors"""
-        logger.error(f"Update {update} caused error: {context.error}")
-        
-        if update and update.effective_message:
-            await update.effective_message.reply_text(
-                ERROR_MESSAGES.get("unknown_error"),
-                parse_mode=None
-            )
-    
-    async def satellite_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /satellite command - show farm analysis"""
-        user = update.effective_user
-        user_id = user.id
-
-        await context.bot.send_chat_action(
-            chat_id=update.effective_chat.id,
-            action="typing"
-        )
-
-        user_location = self.user_contexts.get(user_id, {}).get('location')
-        user_crop = self.user_contexts.get(user_id, {}).get('crop', 'maize')
-
-        if not user_location:
-            # Set pending command
-            if user_id not in self.user_contexts:
-                self.user_contexts[user_id] = {}
-            self.user_contexts[user_id]['pending_command'] = "satellite"
-            await update.message.reply_text(
-                "📍 Please set your location first!\n\nSend: /location Kumasi\nOr just tell me: 'I farm in Kumasi'"
-            )
-            return
-
-        # Force orchestrator for satellite command
-        if self.orchestrator_available:
-            result = await self.orchestrator.process_farmer_query(
-                query=f"Check my {user_crop} farm health using satellite",
-                location=user_location,
-                crop_type=user_crop,
-                user_id=str(user.id)
-            )
-
-            response = f"🛰️ **Satellite Farm Analysis**\n\n{result['response']}"
-        else:
-            response = "Satellite analysis not available. Please try again later."
-
-        await update.message.reply_text(response, parse_mode='Markdown')
-        
-        # Clear pending command if it was set
-        self.user_contexts[user_id].pop('pending_command', None)
-        
-    async def stop_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /stop command - ends conversation"""
-        user = update.effective_user
-        
-        # Clear user context
-        if user.id in self.user_contexts:
-            del self.user_contexts[user.id]
-        
-        await update.message.reply_text(
-            "👋 Thank you for using Ghana Agricultural Bot!\n\n"
-            "Your session has been ended.\n"
-            "Type /start to begin again anytime.\n\n"
-            "🌾 Happy farming!"
-        )
-        
-        logger.info(f"User {user.id} ended their session")
-    
-    async def location_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /location command"""
-        user = update.effective_user
-        user_id = user.id
-
-        # Check if location provided
-        if context.args:
-            location = ' '.join(context.args)
-
-            # Save location
-            if user.id not in self.user_contexts:
-                self.user_contexts[user.id] = {}
-
-            self.user_contexts[user.id]['location'] = location
-
-            await update.message.reply_text(
-                f"✅ Location set to: **{location}**\n\n"
-                f"Now you can:\n"
-                f"• Use /satellite to check your farm\n"
-                f"• Use /weather for local forecast\n"
-                f"• Ask any farming question!",
-                parse_mode='Markdown'
-            )
-
-            # Check for pending command
-            pending = self.user_contexts[user_id].pop('pending_command', None)
-            if pending == "satellite":
-                await self.satellite_command(update, context)
-
-        else:
-            await update.message.reply_text(
-                "Please specify your location:\n"
-                "/location Kumasi\n"
-                "/location Tamale\n"
-                "/location Accra"
-            )
-    
-    async def guideline_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /guideline command"""
-        await update.message.reply_text(GUIDELINE_MESSAGE, parse_mode='Markdown')
-    
-    def run(self):
-        """Run the bot"""
-        logger.info("Starting Ghana Agricultural Bot...")
-        self.application.run_polling(allowed_updates=Update.ALL_TYPES)
-    
-    def _is_user_onboarded(self, user_id):
-        onboarding_file = Path("data/feedback/farmer_onboarding.jsonl")
-        if not onboarding_file.exists():
-            return False
-        with onboarding_file.open("r", encoding="utf-8") as f:
-            for line in f:
-                try:
-                    record = json.loads(line)
-                    if record.get("user_id") == user_id:
-                        return True
-                except Exception:
-                    continue
-        return False
+if __name__ == "__main__":
+    test_imports()

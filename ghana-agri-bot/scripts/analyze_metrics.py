@@ -245,6 +245,18 @@ def export_testimonials():
     else:
         print("No testimonials with positive feedback found yet.")
 
+def analyze_kb():
+    """Analyze knowledge base documents"""
+    with open('data/chromadb_export.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    sources = [doc.get('source', 'unknown') for doc in data]
+    versions = [doc.get('version', '1.0') for doc in data]
+    dates = [doc.get('date_added', 'unknown') for doc in data]
+    print("Source coverage:", Counter(sources))
+    print("Version distribution:", Counter(versions))
+    print("Most recent document:", max(dates))
+    print("Oldest document:", min(dates))
+
 def main():
     """Run all analyses"""
     print("""
@@ -257,6 +269,7 @@ def main():
     analyze_feedback()
     generate_grant_metrics()
     export_testimonials()
+    analyze_kb()
     
     print("\n" + "=" * 50)
     print("✅ Analysis complete! Use these metrics in your grant applications.")

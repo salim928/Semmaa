@@ -1,0 +1,34 @@
+version: 2
+services:
+  - type: web
+    name: agribot-api
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.api_app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: GROQ_API_KEY
+        sync: false
+      - key: WEATHER_API_KEY
+        sync: false
+      - key: GOOGLE_APPLICATION_CREDENTIALS_JSON
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: agribot-db
+          property: connectionString
+    autoDeploy: true
+    disk:
+      name: chromadb-data
+      mountPath: /app/data
+      sizeGB: 10
+
+databases:
+  - name: agribot-db
+    plan: starter
+    databaseName: agribot
+    user: agribot_user

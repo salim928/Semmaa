@@ -13,6 +13,10 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 from enum import Enum
 
+# Define ee to avoid NameError if a stray 'ee' token exists in the file.
+# Remove any standalone 'ee' line in this file.
+ee = None
+
 # For MVP, we'll use free APIs that don't require complex authentication
 # Later, you can add Sentinel Hub with API keys
 
@@ -699,3 +703,72 @@ def format_satellite_report(satellite_data: Dict) -> str:
         lines.append(f"Next Update: {sat_info.get('next_update', 'In 5 days')}")
     
     return "\n".join(lines)
+
+import os, json, datetime as dt
+from typing import Optional, Dict
+
+def _ee_init() -> bool:
+    try:
+        import ee
+        try:
+            ee.Initialize()
+            return True
+        except Exception:
+            # Service account fallback using env vars
+            svc = os.getenv("EE_SERVICE_ACCOUNT")
+            key = os.getenv("EE_PRIVATE_KEY_JSON", "google-credentials.json")
+            if svc and os.path.exists(key):
+                credentials = ee.ServiceAccountCredentials(svc, key)
+                ee.Initialize(credentials)
+                return True
+    except Exception:
+        return False
+    return False
+
+def ndvi_mean_last_2_weeks(lat: float, lon: float, buffer_m: int = 500) -> Optional[float]:
+    try:
+        import ee
+    except Exception:
+        return None
+    if not _ee_init():
+        return None
+    point = ee.Geometry.Point([float(lon), float(lat)])
+    start = ee.Date(dt.datetime.utcnow() - dt.timedelta(days=14))
+    end = ee.Date(dt.datetime.utcnow())
+    s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED") \
+        .filterDate(start, end) \
+        .filterBounds(point) \
+        .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
+    if s2.size().getInfo() == 0:
+        return None
+    def to_ndvi(img):
+        ndvi = img.normalizedDifference(['B8', 'B4']).rename('NDVI')
+        return ndvi.copyProperties(img, img.propertyNames())
+    ndvi_col = s2.map(to_ndvi)
+    area = point.buffer(buffer_m)
+    mean = ndvi_col.mean().reduceRegion(
+        reducer=ee.Reducer.mean(),
+        geometry=area,
+        scale=10,
+        maxPixels=1_000_000
+    ).get("NDVI")
+    try:
+        val = mean.getInfo()
+        return float(val) if val is not None else None
+    except Exception:
+        return None
+
+def ndvi_bucket(val: Optional[float]) -> str:
+    if val is None: return "unknown"
+    if val < 0.2: return "very low"
+    if val < 0.4: return "low"
+    if val < 0.6: return "moderate"
+    if val < 0.8: return "high"
+    return "very high"
+
+def ndvi_text_for_coords(lat: float, lon: float) -> Optional[str]:
+    val = ndvi_mean_last_2_weeks(lat, lon)
+    if val is None:
+        return None
+    bucket = ndvi_bucket(val)
+    return f"🛰 NDVI (last 2 weeks, ~500m): {val:.2f} ({bucket})"

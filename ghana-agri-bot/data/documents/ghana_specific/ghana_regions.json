@@ -1,0 +1,189 @@
+{
+  "Greater Accra": {
+    "climate": "Coastal savanna",
+    "rainfall": "750-1200mm annually",
+    "seasons": {
+      "dry_season": "November to March",
+      "wet_season": "April to October",
+      "peak_rains": "May to July"
+    },
+    "major_crops": [
+      "Maize",
+      "Cassava",
+      "Vegetables",
+      "Coconut"
+    ],
+    "soil_types": [
+      "Sandy loam",
+      "Clay"
+    ],
+    "challenges": [
+      "Urban expansion",
+      "Salt water intrusion",
+      "Land scarcity"
+    ]
+  },
+  "Ashanti": {
+    "climate": "Forest zone",
+    "rainfall": "1200-2100mm annually",
+    "seasons": {
+      "major_season": "April to July",
+      "minor_season": "September to November",
+      "dry_season": "December to March"
+    },
+    "major_crops": [
+      "Cocoa",
+      "Plantain",
+      "Yam",
+      "Cassava",
+      "Maize"
+    ],
+    "soil_types": [
+      "Forest Ochrosols",
+      "Oxysols"
+    ],
+    "challenges": [
+      "Deforestation",
+      "Soil degradation",
+      "Climate variability"
+    ]
+  },
+  "Northern": {
+    "climate": "Sudan savanna",
+    "rainfall": "750-1100mm annually",
+    "seasons": {
+      "rainy_season": "May to October",
+      "dry_season": "November to April",
+      "harmattan": "December to February"
+    },
+    "major_crops": [
+      "Maize",
+      "Millet",
+      "Sorghum",
+      "Yam",
+      "Rice",
+      "Cowpea"
+    ],
+    "soil_types": [
+      "Savanna Ochrosols",
+      "Groundwater laterite"
+    ],
+    "challenges": [
+      "Drought",
+      "Soil erosion",
+      "Short growing season"
+    ]
+  },
+  "Upper East": {
+    "climate": "Sudan savanna",
+    "rainfall": "950-1150mm annually",
+    "seasons": {
+      "rainy_season": "May to September",
+      "dry_season": "October to April"
+    },
+    "major_crops": [
+      "Millet",
+      "Sorghum",
+      "Rice",
+      "Groundnut",
+      "Cowpea"
+    ],
+    "soil_types": [
+      "Savanna Ochrosols",
+      "Lithosols"
+    ],
+    "challenges": [
+      "Erratic rainfall",
+      "Soil fertility decline",
+      "Land degradation"
+    ]
+  },
+  "Upper West": {
+    "climate": "Sudan savanna",
+    "rainfall": "840-1400mm annually",
+    "major_crops": [
+      "Maize",
+      "Millet",
+      "Sorghum",
+      "Yam",
+      "Cowpea"
+    ],
+    "challenges": [
+      "Irregular rainfall",
+      "Soil nutrient depletion"
+    ]
+  },
+  "Western": {
+    "climate": "High forest zone",
+    "rainfall": "1200-2000mm annually",
+    "major_crops": [
+      "Cocoa",
+      "Oil Palm",
+      "Rubber",
+      "Plantain",
+      "Cassava"
+    ],
+    "challenges": [
+      "Deforestation",
+      "Soil acidity"
+    ]
+  },
+  "Central": {
+    "climate": "Forest-savanna transition",
+    "rainfall": "1000-1400mm annually",
+    "major_crops": [
+      "Cassava",
+      "Maize",
+      "Cocoa",
+      "Oil Palm"
+    ],
+    "challenges": [
+      "Coastal erosion",
+      "Saltwater intrusion"
+    ]
+  },
+  "Eastern": {
+    "climate": "Forest zone",
+    "rainfall": "1250-1750mm annually",
+    "major_crops": [
+      "Cocoa",
+      "Oil Palm",
+      "Cassava",
+      "Plantain",
+      "Yam"
+    ],
+    "challenges": [
+      "Deforestation",
+      "Land degradation"
+    ]
+  },
+  "Volta": {
+    "climate": "Forest-savanna transition",
+    "rainfall": "800-1400mm annually",
+    "major_crops": [
+      "Maize",
+      "Cassava",
+      "Yam",
+      "Rice"
+    ],
+    "challenges": [
+      "Irregular rainfall",
+      "Volta Lake flooding"
+    ]
+  },
+  "Brong Ahafo": {
+    "climate": "Forest-savanna transition",
+    "rainfall": "1200-1400mm annually",
+    "major_crops": [
+      "Maize",
+      "Yam",
+      "Cassava",
+      "Cocoa",
+      "Cashew"
+    ],
+    "challenges": [
+      "Deforestation",
+      "Bush fires"
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "Maize": {
+    "local_varieties": {
+      "Abontem": {
+        "maturity": "90 days",
+        "characteristics": "Drought tolerant, yellow kernels",
+        "best_regions": [
+          "Northern",
+          "Upper East",
+          "Upper West"
+        ]
+      },
+      "Mamaba": {
+        "maturity": "85 days",
+        "characteristics": "Early maturing, white kernels",
+        "best_regions": [
+          "All regions"
+        ]
+      },
+      "Obatanpa": {
+        "maturity": "95 days",
+        "characteristics": "High protein, orange kernels",
+        "best_regions": [
+          "Forest and transition zones"
+        ]
+      }
+    },
+    "planting_tips": {
+      "spacing": "75cm x 25cm",
+      "seed_rate": "25kg per hectare",
+      "fertilizer": "NPK 15-15-15 at planting, Urea top-dress at 6 weeks"
+    }
+  },
+  "Cassava": {
+    "local_varieties": {
+      "Ampong": {
+        "maturity": "8-12 months",
+        "characteristics": "High yielding, disease resistant"
+      },
+      "Adira": {
+        "maturity": "10-12 months",
+        "characteristics": "Good for gari production"
+      }
+    },
+    "planting_tips": {
+      "spacing": "1m x 1m",
+      "stake_length": "20-25cm",
+      "fertilizer": "NPK 15-15-15 at 2 months after planting"
+    }
+  }
+}

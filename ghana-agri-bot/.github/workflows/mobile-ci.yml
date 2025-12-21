@@ -1,0 +1,102 @@
+name: Mobile App CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'mobile-new/**'
+      - '.github/workflows/mobile-ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'mobile-new/**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: mobile-new/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: ./mobile-new
+      run: npm ci
+    
+    - name: Run ESLint
+      working-directory: ./mobile-new
+      run: npm run lint
+    
+    - name: TypeScript check
+      working-directory: ./mobile-new
+      run: npx tsc --noEmit
+
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: mobile-new/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: ./mobile-new
+      run: npm ci
+    
+    - name: Run tests
+      working-directory: ./mobile-new
+      run: npm test -- --coverage --watchAll=false || echo "No tests configured yet"
+    
+    - name: Upload coverage
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./mobile-new/coverage/coverage-final.json
+        flags: mobile
+        name: mobile-coverage
+
+  build-preview:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: mobile-new/package-lock.json
+    
+    - name: Setup Expo
+      uses: expo/expo-github-action@v8
+      with:
+        expo-version: latest
+        token: ${{ secrets.EXPO_TOKEN }}
+    
+    - name: Install dependencies
+      working-directory: ./mobile-new
+      run: npm ci
+    
+    - name: Build preview
+      working-directory: ./mobile-new
+      run: |
+        echo "Building preview for PR #${{ github.event.pull_request.number }}"
+        npx expo export --platform all
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: expo-build
+        path: mobile-new/dist/

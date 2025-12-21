@@ -1,14 +1,65 @@
+#config/settings.py
 """
 Configuration settings for Ghana Agricultural Bot
 Purpose: Centralize all configuration and environment variables
 """
 
 import os
+from dataclasses import dataclass
 from pathlib import Path
-from dotenv import load_dotenv
+from typing import List
 
-# Load environment variables
-load_dotenv()
+# Optional .env support
+try:
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env")
+except Exception:
+    pass
+
+
+def _env(name: str, default: str = "") -> str:
+    v = os.getenv(name)
+    return v if v is not None else default
+
+
+def _env_list(name: str, default_csv: str) -> List[str]:
+    val = os.getenv(name, default_csv)
+    return [s.strip() for s in val.split(",") if s.strip()]
+
+
+@dataclass(frozen=True)
+class _Settings:
+    TELEGRAM_BOT_TOKEN: str = _env("TELEGRAM_BOT_TOKEN", "")
+    GROQ_API_KEY: str = _env("GROQ_API_KEY", "")
+    # LLM defaults
+    LLM_MODEL: str = _env("LLM_MODEL", "gemma2-9b-it")
+    MAX_TOKENS: int = int(_env("MAX_TOKENS", "1500"))
+    CONFIDENCE_THRESHOLD: float = float(_env("CONFIDENCE_THRESHOLD", "0.5"))
+    # Weather (optional; OpenWeatherMap style key). Leave blank to use Open-Meteo fallback.
+    WEATHER_API_KEY: str = _env("WEATHER_API_KEY", "")
+    WEATHER_UNITS: str = _env("WEATHER_UNITS", "metric")
+    GHANA_TRUSTED_DOMAINS: List[str] = None  # type: ignore[assignment]
+    SEARCH_MAX_RESULTS: int = int(_env("SEARCH_MAX_RESULTS", "8"))
+
+    def __post_init__(self):
+        object.__setattr__(self, "GHANA_TRUSTED_DOMAINS", _env_list(
+            "GHANA_TRUSTED_DOMAINS",
+            "mofa.gov.gh,csir.org.gh,fao.org,agra.org,agricultureinghana.com,agritradergh.com,ifad.org"
+        ))
+
+
+# Export both an object and module-level aliases for compatibility
+SETTINGS = _Settings()
+
+TELEGRAM_BOT_TOKEN: str = SETTINGS.TELEGRAM_BOT_TOKEN
+GROQ_API_KEY: str = SETTINGS.GROQ_API_KEY
+LLM_MODEL: str = SETTINGS.LLM_MODEL
+MAX_TOKENS: int = SETTINGS.MAX_TOKENS
+CONFIDENCE_THRESHOLD: float = SETTINGS.CONFIDENCE_THRESHOLD
+WEATHER_API_KEY: str = SETTINGS.WEATHER_API_KEY
+WEATHER_UNITS: str = SETTINGS.WEATHER_UNITS
+GHANA_TRUSTED_DOMAINS: List[str] = SETTINGS.GHANA_TRUSTED_DOMAINS
+SEARCH_MAX_RESULTS: int = SETTINGS.SEARCH_MAX_RESULTS
 
 # Base paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,11 +72,6 @@ FEEDBACK_DIR = DATA_DIR / "feedback"
 for dir_path in [DOCUMENTS_DIR, PROCESSED_DIR, FEEDBACK_DIR]:
     dir_path.mkdir(parents=True, exist_ok=True)
 
-# API Keys
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "")
-
 # Google Sheets Configuration
 GOOGLE_SHEETS_KEY_FILE = os.getenv("GOOGLE_SHEETS_KEY_FILE")
 SPREADSHEET_NAME = os.getenv("SPREADSHEET_NAME", "Ghana_Farming_Bot_Data")
@@ -33,11 +79,12 @@ SPREADSHEET_NAME = os.getenv("SPREADSHEET_NAME", "Ghana_Farming_Bot_Data")
 # Bot Configuration
 DEFAULT_LANGUAGE = os.getenv("DEFAULT_LANGUAGE", "en")
 RESPONSE_TIMEOUT = int(os.getenv("RESPONSE_TIMEOUT", "30"))
-MAX_TOKENS = int(os.getenv("MAX_TOKENS", "500"))
-CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.7"))
+MIN_RESPONSE_LENGTH = 100  # Minimum expected response length
+
+# Response quality settings
+ENABLE_RESPONSE_VALIDATION = True
 
 # Model Configuration
-LLM_MODEL = "llama-3.3-70b-versatile"  # Groq's supported model as of Sep 2025
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # Lightweight, CPU-friendly
 
 # ChromaDB Configuration
