@@ -277,8 +277,8 @@ export default function FarmerHome() {
             icon="📅"
             title="Planting Calendar"
             description="Best planting times"
-            enabled={FEATURES.weather}
-            comingSoon={!FEATURES.weather}
+            enabled={FEATURES.weatherAlerts}
+            comingSoon={!FEATURES.weatherAlerts}
           />
         </div>
       </section>

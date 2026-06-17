@@ -450,7 +450,7 @@ export default function FarmerMarketPage() {
       alert(`✅ Listing created successfully!\n\nProduct: ${sellForm.product}\nPrice: GHS ${sellForm.price}/${sellForm.unit}\nQuantity: ${sellForm.quantity} ${sellForm.unit}\n\nYour listing is now visible to buyers.`)
       
       // Reset form
-      setSellForm({ product: '', price: '', unit: 'kg', quantity: '', description: '', category: 'produce' })
+      setSellForm({ product: '', price: '', unit: 'kg', quantity: '', description: '', category: 'produce', images: [] })
     } catch (error) {
       console.error('Error creating listing:', error)
       alert('Failed to create listing. Please try again.')

@@ -218,7 +218,7 @@ export default function PlantingCalendarPage() {
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as 'calendar' | 'timeline' | 'crops')}
             className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
               activeTab === tab.id
                 ? 'bg-emerald-100 text-emerald-800'
@@ -472,7 +472,7 @@ export default function PlantingCalendarPage() {
                       </span>
                     </div>
                     <div className="space-y-2 mt-3">
-                      {Object.entries(regionData).map(([season, info]: any) => (
+                      {Object.entries(regionData).map(([season, info]) => (
                         <div key={season} className="space-y-1 pl-11">
                           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
                             <span
