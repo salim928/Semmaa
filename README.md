@@ -1,7 +1,7 @@
 # 🌾 SEMMA-AI: Ghana Agricultural Intelligence Platform
 
 > **Smarter Advice. Bigger Harvests.**  
-> AI-powered agricultural platform revolutionizing farming in Ghana with smart insights, digital marketplace, and community features.
+> AI-powered agricultural advisory platform focused on solving post-harvest losses, weather advisory, and market access for Ghanaian farmers.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -12,6 +12,8 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Revenue Model](#revenue-model)
+- [Technical Architecture](#technical-architecture)
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
 - [Features](#features)
@@ -24,7 +26,15 @@
 
 ## 🎯 Overview
 
-SEMMA-AI is a comprehensive agricultural advisory system designed specifically for Ghanaian smallholder farmers. The platform combines AI-powered advice, real-time market data, satellite imagery analysis, and community features to help farmers maximize their yields and income.
+SEMMA-AI is a focused agricultural advisory system designed specifically for Ghanaian smallholder farmers. The platform tackles critical challenges including post-harvest losses, weather uncertainty, and market access through AI-powered advice, real-time market data, and weather monitoring.
+
+**Note:** Financial features (wallet, loans, payments) have been extracted to a separate fintech project for future development. See `fintech-features/` folder.
+
+### 📊 Key Documents
+
+- **[REVENUE_AND_TECH.md](REVENUE_AND_TECH.md)** - Revenue models & production-grade technical architecture
+- **[MVP_FOCUS_GUIDE.md](MVP_FOCUS_GUIDE.md)** - Development roadmap & Ghana-specific features
+- **[fintech-features/README.md](fintech-features/README.md)** - Extracted fintech features for future development
 
 ### 🎨 Platform Components
 
@@ -40,8 +50,9 @@ SEMMA-AI is a comprehensive agricultural advisory system designed specifically f
 - **🆓 Cost-Effective**: Uses Groq free tier LLM and open data sources
 - **🇬🇭 Ghana-Specific**: Curated knowledge base for local farming conditions
 - **📱 Multi-Channel**: Telegram, mobile app, and web interface
-- **🛰️ Satellite Data**: Integration with weather and crop monitoring
-- **📊 Data-Driven**: Market prices, feedback loops, and analytics
+- **🛰️ Weather Data**: Real-time weather monitoring and alerts
+- **📊 Market Access**: Direct connection to buyers and current market prices
+- **🌾 Post-Harvest Focus**: Solutions for storage, processing, and distribution
 - **🌐 Offline-First**: Works with limited connectivity
 
 ---
@@ -440,3 +451,5 @@ Built with ❤️ for Ghanaian farmers
 ---
 
 **Made with 🌾 in Ghana** | **Empowering Farmers Through Technology**
+
+# Semmaa

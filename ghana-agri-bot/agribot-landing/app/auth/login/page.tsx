@@ -90,7 +90,7 @@ export default function LoginPage() {
   if (authLoading) {
     return (
       <div className="w-full max-w-md flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-lime-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
       </div>
     )
   }
@@ -148,7 +148,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -165,7 +165,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
               />
               <button
                 type="button"
@@ -181,7 +181,7 @@ export default function LoginPage() {
           <div className="text-right">
             <Link
               href="/auth/forgot-password"
-              className="text-sm text-lime-600 hover:text-lime-700 font-medium transition-colors"
+              className="inline-block py-2 text-sm text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
             >
               Forgot Password?
             </Link>
@@ -191,7 +191,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading || !email || !password}
-            className="w-full py-4 bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+            className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center justify-center"
           >
             {loading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -212,7 +212,7 @@ export default function LoginPage() {
         <button
           onClick={handleGoogleLogin}
           disabled={googleLoading}
-          className="w-full py-4 bg-white border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-4 bg-white border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-all duration-300 inline-flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {googleLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -234,7 +234,7 @@ export default function LoginPage() {
           Don&apos;t have an account?{' '}
           <Link
             href="/auth/signup"
-            className="text-lime-600 hover:text-lime-700 font-semibold transition-colors"
+            className="text-emerald-600 hover:text-emerald-700 font-semibold transition-colors"
           >
             Sign Up
           </Link>
@@ -244,9 +244,9 @@ export default function LoginPage() {
       {/* Footer Note */}
       <p className="text-center mt-6 text-sm text-gray-500">
         By logging in, you agree to our{' '}
-        <Link href="/terms" className="text-lime-600 hover:underline">Terms</Link>
+        <Link href="/terms" className="text-emerald-600 hover:underline">Terms</Link>
         {' '}and{' '}
-        <Link href="/privacy" className="text-lime-600 hover:underline">Privacy Policy</Link>
+        <Link href="/privacy" className="text-emerald-600 hover:underline">Privacy Policy</Link>
       </p>
     </motion.div>
   )

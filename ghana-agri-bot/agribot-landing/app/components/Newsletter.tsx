@@ -46,7 +46,7 @@ export default function Newsletter() {
             backgroundImage: 'url(https://images.unsplash.com/photo-1595272548310-0e0c5b688d76?w=1920&h=1080&fit=crop&q=80)',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-lime-50/96 to-yellow-50/96" />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/96 to-yellow-50/96" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -56,8 +56,8 @@ export default function Newsletter() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="w-20 h-20 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Mail className="w-10 h-10 text-lime-600" />
+          <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Mail className="w-10 h-10 text-emerald-600" />
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -84,7 +84,7 @@ export default function Newsletter() {
               </p>
               <button
                 onClick={() => setSubmitStatus('idle')}
-                className="text-lime-600 hover:text-lime-700 font-medium"
+                className="text-emerald-600 hover:text-emerald-700 font-medium"
               >
                 Subscribe Another Email
               </button>
@@ -106,12 +106,12 @@ export default function Newsletter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
                   required
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-lime-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-lime-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                  className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>

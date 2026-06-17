@@ -9,22 +9,22 @@ import { useState, useEffect } from 'react'
 import { useAuth, useApp } from '@/context'
 import { Loader2, LogOut, Bell, User } from 'lucide-react'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import { FEATURES } from '@/config/features'
 
 const NAV_ITEMS = [
-  { href: '/farmer', label: 'Home', icon: '🏠' },
-  { href: '/farmer/chat', label: 'AI Advisor', icon: '🤖' },
-  { href: '/farmer/market', label: 'Market', icon: '🛒' },
-  { href: '/farmer/insights', label: 'Insights', icon: '📊' },
-  { href: '/farmer/wallet', label: 'Wallet', icon: '💳' },
-]
+  { href: '/farmer', label: 'Home', icon: '🏠', enabled: true },
+  { href: '/farmer/chat', label: 'AI Advisor', icon: '🤖', enabled: FEATURES.aiAdvisor },
+  { href: '/farmer/market', label: 'Market', icon: '🛒', enabled: FEATURES.marketplace },
+  { href: '/farmer/insights', label: 'Insights', icon: '📊', enabled: FEATURES.analytics, comingSoon: !FEATURES.analytics },
+].filter(item => item.enabled || item.comingSoon)
 
 const MORE_ITEMS = [
-  { href: '/farmer/disease', label: 'Disease Detection', icon: '🔬' },
-  { href: '/farmer/community', label: 'Community', icon: '👥' },
-  { href: '/farmer/tools/planting-calendar', label: 'Planting Calendar', icon: '📅' },
-  { href: '/farmer/notifications', label: 'Notifications', icon: '🔔' },
-  { href: '/farmer/profile', label: 'Profile', icon: '👤' },
-]
+  { href: '/farmer/disease', label: 'Disease Detection', icon: '🔬', enabled: FEATURES.diseaseDetection, comingSoon: !FEATURES.diseaseDetection },
+  { href: '/farmer/community', label: 'Community', icon: '👥', enabled: FEATURES.community, comingSoon: !FEATURES.community },
+  { href: '/farmer/tools/planting-calendar', label: 'Planting Calendar', icon: '📅', enabled: true },
+  { href: '/farmer/notifications', label: 'Notifications', icon: '🔔', enabled: FEATURES.notifications },
+  { href: '/farmer/profile', label: 'Profile', icon: '👤', enabled: FEATURES.profile },
+].filter(item => item.enabled || item.comingSoon)
 
 export default function FarmerLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname()
@@ -100,15 +100,24 @@ export default function FarmerLayout({ children }: { children: ReactNode }) {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
-                className={`rounded-full px-3 py-1.5 transition-colors flex items-center gap-1.5 ${
+                href={item.comingSoon ? '#' : item.href}
+                onClick={(e) => item.comingSoon && e.preventDefault()}
+                className={`rounded-full px-3 py-1.5 transition-colors flex items-center gap-1.5 relative ${
                   isActive(item.href)
                     ? 'bg-emerald-100 text-emerald-800'
+                    : item.comingSoon
+                    ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-emerald-50'
                 }`}
+                title={item.comingSoon ? 'Coming Soon' : ''}
               >
                 <span>{item.icon}</span>
                 <span>{item.label}</span>
+                {item.comingSoon && (
+                  <span className="absolute -top-1 -right-1 bg-yellow-400 text-yellow-900 text-[9px] font-bold px-1 py-0.5 rounded">
+                    SOON
+                  </span>
+                )}
               </Link>
             ))}
 
@@ -133,17 +142,28 @@ export default function FarmerLayout({ children }: { children: ReactNode }) {
                     {MORE_ITEMS.map((item) => (
                       <Link
                         key={item.href}
-                        href={item.href}
-                        onClick={() => setMoreMenuOpen(false)}
-                        className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                        href={item.comingSoon ? '#' : item.href}
+                        onClick={(e) => {
+                          if (item.comingSoon) e.preventDefault()
+                          else setMoreMenuOpen(false)
+                        }}
+                        className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors relative ${
                           isActive(item.href)
                             ? 'bg-emerald-50 text-emerald-800'
+                            : item.comingSoon
+                            ? 'text-emerald-400 cursor-not-allowed'
                             : 'text-emerald-700 hover:bg-emerald-50'
                         }`}
+                        title={item.comingSoon ? 'Coming Soon' : ''}
                       >
                         <span className="text-lg">{item.icon}</span>
                         <span>{item.label}</span>
-                        {item.href === '/farmer/notifications' && unreadCount > 0 && (
+                        {item.comingSoon && (
+                          <span className="ml-auto bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full font-semibold">
+                            Soon
+                          </span>
+                        )}
+                        {!item.comingSoon && item.href === '/farmer/notifications' && unreadCount > 0 && (
                           <span className="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
                             {unreadCount}
                           </span>
@@ -268,16 +288,29 @@ export default function FarmerLayout({ children }: { children: ReactNode }) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    if (!item.enabled) {
+                      e.preventDefault();
+                      return;
+                    }
+                    setMobileMenuOpen(false);
+                  }}
                   className={`flex flex-col items-center gap-1 rounded-xl p-3 text-center transition-colors relative ${
-                    isActive(item.href)
-                      ? 'bg-emerald-100 text-emerald-800'
-                      : 'text-emerald-700 hover:bg-emerald-50'
+                    !item.enabled 
+                      ? 'opacity-50 cursor-not-allowed'
+                      : isActive(item.href)
+                        ? 'bg-emerald-100 text-emerald-800'
+                        : 'text-emerald-700 hover:bg-emerald-50'
                   }`}
                 >
                   <span className="text-2xl">{item.icon}</span>
                   <span className="text-xs font-medium">{item.label}</span>
-                  {item.href === '/farmer/notifications' && unreadCount > 0 && (
+                  {item.comingSoon && (
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-yellow-900 text-[9px] font-bold px-1 py-0.5 rounded">
+                      SOON
+                    </span>
+                  )}
+                  {item.href === '/farmer/notifications' && unreadCount > 0 && item.enabled && (
                     <span className="absolute top-1 right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                       {unreadCount > 9 ? '9+' : unreadCount}
                     </span>
@@ -309,15 +342,27 @@ export default function FarmerLayout({ children }: { children: ReactNode }) {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-colors ${
-                isActive(item.href)
-                  ? 'text-emerald-700'
-                  : 'text-emerald-500'
+              onClick={(e) => {
+                if (!item.enabled) {
+                  e.preventDefault();
+                }
+              }}
+              className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-colors relative ${
+                !item.enabled
+                  ? 'opacity-50 cursor-not-allowed text-emerald-400'
+                  : isActive(item.href)
+                    ? 'text-emerald-700'
+                    : 'text-emerald-500'
               }`}
             >
               <span className="text-xl">{item.icon}</span>
               <span className="text-[10px] font-medium">{item.label}</span>
-              {isActive(item.href) && (
+              {item.comingSoon && (
+                <span className="absolute -top-1 -right-1 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1 rounded">
+                  SOON
+                </span>
+              )}
+              {isActive(item.href) && item.enabled && (
                 <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-emerald-500" />
               )}
             </Link>

@@ -40,7 +40,7 @@ export default function Testimonials() {
             backgroundImage: 'url(https://images.unsplash.com/photo-1492496913980-501348b61469?w=1920&h=1080&fit=crop&q=80)',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/88 via-lime-50/88 to-white/88" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/88 via-emerald-50/88 to-white/88" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -105,7 +105,7 @@ export default function Testimonials() {
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, delay: index * 0.5 }}
               >
-                <Quote className="w-8 h-8 text-lime-500 mb-4" />
+                <Quote className="w-8 h-8 text-emerald-500 mb-4" />
               </motion.div>
               
               <p className="text-gray-700 mb-6 leading-relaxed">&ldquo;{testimonial.content}&rdquo;</p>

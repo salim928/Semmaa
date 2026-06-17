@@ -82,15 +82,6 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="wallet"
-        options={{
-          title: 'Wallet',
-          tabBarIcon: ({ color, focused }) => (
-            <TabIcon name="Wallet" iconName="wallet" color={color} focused={focused} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',

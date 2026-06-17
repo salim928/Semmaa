@@ -25,10 +25,10 @@ import logging
 import re
 
 # Import your existing modules
-from src.orchestrator import MultiAgentOrchestrator
-from src.weather_integration import get_weather
-from src.project_paths import data_dir
-from src.knowledge_base import KnowledgeBase
+from orchestrator import MultiAgentOrchestrator
+from weather_integration import get_weather
+from project_paths import data_dir
+from knowledge_base import KnowledgeBase
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -49,7 +49,7 @@ app.add_middleware(
 # Initialize core services
 orchestrator = MultiAgentOrchestrator()
 kb = getattr(orchestrator, "knowledge_base", None)
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)  # Make auth optional
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -161,6 +161,23 @@ def init_database():
         )
     """)
     
+    # Reviews table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS reviews (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            order_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            product_id INTEGER NOT NULL,
+            rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+            comment TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (order_id) REFERENCES orders(id),
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (product_id) REFERENCES products(id),
+            UNIQUE(order_id, user_id)
+        )
+    """)
+    
     # Disease detections table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS disease_detections (
@@ -254,6 +271,10 @@ class OrderCreate(BaseModel):
     delivery_address: Optional[str] = None
     payment_method: Optional[str] = "cash"
     notes: Optional[str] = None
+
+class ReviewCreate(BaseModel):
+    rating: int
+    comment: Optional[str] = None
 
 class FeedbackRequest(BaseModel):
     rating: int
@@ -827,10 +848,36 @@ async def create_order(
         ))
         
         order_id = cursor.lastrowid
-        conn.commit()
         
-        # Send notification to seller
-        send_order_notification(seller_id, buyer_id, product_name, order.quantity)
+        # Get buyer name for notification
+        cursor.execute("SELECT name FROM users WHERE id = ?", (buyer_id,))
+        buyer_name = cursor.fetchone()[0]
+        
+        # Notify seller about new order
+        create_notification(
+            cursor,
+            seller_id,
+            "order",
+            "New Order Received",
+            f"{buyer_name} ordered {order.quantity} units of {product_name}. Total: GHS {total_amount:.2f}",
+            "view_order",
+            str(order_id),
+            "high"
+        )
+        
+        # Notify buyer about order confirmation
+        create_notification(
+            cursor,
+            buyer_id,
+            "order",
+            "Order Placed Successfully",
+            f"Your order for {product_name} has been placed. Order #{order_id}",
+            "view_order",
+            str(order_id),
+            "medium"
+        )
+        
+        conn.commit()
         
         return {
             "success": True,
@@ -902,33 +949,90 @@ async def update_order_status(
     status: str,
     credentials: HTTPAuthorizationCredentials = Depends(security)
 ):
-    """Update order status"""
+    """Update order status with role-based workflow"""
     user_id = verify_token(credentials)
+    
+    valid_statuses = ['pending', 'confirmed', 'in_transit', 'delivered', 'cancelled']
+    if status not in valid_statuses:
+        raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {valid_statuses}")
     
     conn = sqlite3.connect(str(DB_PATH))
     cursor = conn.cursor()
     
     try:
-        # Verify ownership
+        # Get order details
         cursor.execute("""
-            SELECT buyer_id, seller_id FROM orders WHERE id = ?
+            SELECT buyer_id, seller_id, status, product_id FROM orders WHERE id = ?
         """, (order_id,))
         
         result = cursor.fetchone()
         if not result:
             raise HTTPException(status_code=404, detail="Order not found")
         
-        buyer_id, seller_id = result
+        buyer_id, seller_id, current_status, product_id = result
+        
+        # Verify authorization
         if user_id not in [buyer_id, seller_id]:
             raise HTTPException(status_code=403, detail="Not authorized")
         
+        # Role-based status update validation
+        is_seller = user_id == seller_id
+        is_buyer = user_id == buyer_id
+        
+        # Seller can: confirm, mark in_transit
+        # Buyer can: confirm delivery, cancel
+        if status == 'confirmed' and not is_seller:
+            raise HTTPException(status_code=403, detail="Only seller can confirm orders")
+        if status == 'in_transit' and not is_seller:
+            raise HTTPException(status_code=403, detail="Only seller can mark order as shipped")
+        if status == 'delivered' and not is_buyer:
+            raise HTTPException(status_code=403, detail="Only buyer can confirm delivery")
+        
+        # Update status
         cursor.execute("""
             UPDATE orders SET status = ?, updated_at = CURRENT_TIMESTAMP
             WHERE id = ?
         """, (status, order_id))
         
+        # Get product name for notifications
+        cursor.execute("SELECT name FROM products WHERE id = ?", (product_id,))
+        product_name = cursor.fetchone()[0] if cursor.fetchone() else "Product"
+        
+        # Send notifications based on status change
+        if status == 'confirmed':
+            create_notification(
+                cursor, buyer_id, "order", "Order Confirmed",
+                f"Your order #{order_id} for {product_name} has been confirmed by the seller",
+                "view_order", str(order_id), "high"
+            )
+        elif status == 'in_transit':
+            create_notification(
+                cursor, buyer_id, "order", "Order Shipped",
+                f"Your order #{order_id} for {product_name} is on the way",
+                "view_order", str(order_id), "high"
+            )
+        elif status == 'delivered':
+            create_notification(
+                cursor, seller_id, "order", "Order Delivered",
+                f"Order #{order_id} has been confirmed as delivered",
+                "view_order", str(order_id), "medium"
+            )
+            # Remind buyer to leave a review
+            create_notification(
+                cursor, buyer_id, "review", "Leave a Review",
+                f"How was your experience with {product_name}? Leave a review!",
+                "review_order", str(order_id), "low"
+            )
+        elif status == 'cancelled':
+            other_party = seller_id if is_buyer else buyer_id
+            create_notification(
+                cursor, other_party, "order", "Order Cancelled",
+                f"Order #{order_id} has been cancelled",
+                "view_order", str(order_id), "medium"
+            )
+        
         conn.commit()
-        return {"success": True, "message": f"Order {status}"}
+        return {"success": True, "message": f"Order status updated to {status}"}
     finally:
         conn.close()
 
@@ -967,6 +1071,258 @@ async def cancel_order(
         
         conn.commit()
         return {"success": True, "message": "Order cancelled"}
+    finally:
+        conn.close()
+
+# Helper function for creating notifications
+def create_notification(cursor, user_id: int, notification_type: str, title: str, message: str, 
+                       action_type: Optional[str] = None, action_data: Optional[str] = None, priority: str = "medium"):
+    """Create a notification for a user"""
+    cursor.execute("""
+        INSERT INTO notifications (user_id, type, title, message, priority, action_type, action_data)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (user_id, notification_type, title, message, priority, action_type, action_data))
+
+@app.post("/orders/{order_id}/review")
+async def create_review(
+    order_id: int,
+    review_data: ReviewCreate,
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    """Create a review for a completed order"""
+    user_id = verify_token(credentials)
+    
+    if review_data.rating < 1 or review_data.rating > 5:
+        raise HTTPException(status_code=400, detail="Rating must be between 1 and 5")
+    
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+    
+    try:
+        # Check if order exists and is delivered
+        cursor.execute("""
+            SELECT buyer_id, seller_id, product_id, status FROM orders WHERE id = ?
+        """, (order_id,))
+        
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=404, detail="Order not found")
+        
+        buyer_id, seller_id, product_id, status = result
+        
+        # Only buyer can review
+        if user_id != buyer_id:
+            raise HTTPException(status_code=403, detail="Only buyers can review orders")
+        
+        # Order must be delivered
+        if status != 'delivered':
+            raise HTTPException(status_code=400, detail="Can only review delivered orders")
+        
+        # Check for duplicate review
+        cursor.execute("""
+            SELECT id FROM reviews WHERE order_id = ? AND user_id = ?
+        """, (order_id, user_id))
+        
+        if cursor.fetchone():
+            raise HTTPException(status_code=400, detail="You have already reviewed this order")
+        
+        # Create review
+        cursor.execute("""
+            INSERT INTO reviews (order_id, user_id, product_id, rating, comment)
+            VALUES (?, ?, ?, ?, ?)
+        """, (order_id, user_id, product_id, review_data.rating, review_data.comment))
+        
+        # Notify seller
+        create_notification(
+            cursor, 
+            seller_id, 
+            "review", 
+            "New Review Received",
+            f"You received a {review_data.rating}-star review on your product",
+            "view_review",
+            str(order_id),
+            "medium"
+        )
+        
+        conn.commit()
+        return {"success": True, "message": "Review submitted successfully"}
+    finally:
+        conn.close()
+
+@app.get("/products/{product_id}/reviews")
+async def get_product_reviews(product_id: int):
+    """Get all reviews for a product with rating statistics"""
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+    
+    try:
+        # Get reviews
+        cursor.execute("""
+            SELECT r.id, r.rating, r.comment, r.created_at,
+                   u.name, u.phone
+            FROM reviews r
+            JOIN users u ON r.user_id = u.id
+            WHERE r.product_id = ?
+            ORDER BY r.created_at DESC
+        """, (product_id,))
+        
+        reviews = []
+        for row in cursor.fetchall():
+            reviews.append({
+                "id": row[0],
+                "rating": row[1],
+                "comment": row[2],
+                "created_at": row[3],
+                "reviewer_name": row[4],
+                "reviewer_phone": row[5]
+            })
+        
+        # Get rating statistics
+        cursor.execute("""
+            SELECT 
+                COUNT(*) as total_reviews,
+                AVG(rating) as average_rating,
+                SUM(CASE WHEN rating = 5 THEN 1 ELSE 0 END) as five_star,
+                SUM(CASE WHEN rating = 4 THEN 1 ELSE 0 END) as four_star,
+                SUM(CASE WHEN rating = 3 THEN 1 ELSE 0 END) as three_star,
+                SUM(CASE WHEN rating = 2 THEN 1 ELSE 0 END) as two_star,
+                SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END) as one_star
+            FROM reviews
+            WHERE product_id = ?
+        """, (product_id,))
+        
+        stats_row = cursor.fetchone()
+        stats = {
+            "total_reviews": stats_row[0],
+            "average_rating": round(stats_row[1], 2) if stats_row[1] else 0,
+            "rating_distribution": {
+                "5": stats_row[2],
+                "4": stats_row[3],
+                "3": stats_row[4],
+                "2": stats_row[5],
+                "1": stats_row[6]
+            }
+        }
+        
+        return {
+            "reviews": reviews,
+            "statistics": stats
+        }
+    finally:
+        conn.close()
+
+@app.put("/orders/{order_id}/payment")
+async def update_payment_status(
+    order_id: int,
+    payment_status: str,
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    """Update payment status of an order"""
+    user_id = verify_token(credentials)
+    
+    valid_statuses = ['pending', 'paid', 'refunded']
+    if payment_status not in valid_statuses:
+        raise HTTPException(status_code=400, detail=f"Invalid payment status. Must be one of: {valid_statuses}")
+    
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+    
+    try:
+        # Get order details
+        cursor.execute("""
+            SELECT buyer_id, seller_id, payment_status FROM orders WHERE id = ?
+        """, (order_id,))
+        
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=404, detail="Order not found")
+        
+        buyer_id, seller_id, current_payment_status = result
+        
+        # Both buyer and seller can update payment status
+        if user_id not in [buyer_id, seller_id]:
+            raise HTTPException(status_code=403, detail="Not authorized")
+        
+        # Update payment status
+        cursor.execute("""
+            UPDATE orders SET payment_status = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        """, (payment_status, order_id))
+        
+        # Notify both parties
+        if payment_status == 'paid':
+            create_notification(cursor, buyer_id, "payment", "Payment Confirmed", 
+                              f"Your payment for order #{order_id} has been confirmed", 
+                              "view_order", str(order_id))
+            create_notification(cursor, seller_id, "payment", "Payment Received", 
+                              f"Payment received for order #{order_id}", 
+                              "view_order", str(order_id))
+        elif payment_status == 'refunded':
+            create_notification(cursor, buyer_id, "payment", "Payment Refunded", 
+                              f"Your payment for order #{order_id} has been refunded", 
+                              "view_order", str(order_id))
+        
+        conn.commit()
+        return {"success": True, "message": f"Payment status updated to {payment_status}"}
+    finally:
+        conn.close()
+
+@app.get("/notifications")
+async def get_notifications(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    """Get user notifications"""
+    user_id = verify_token(credentials)
+    
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            SELECT id, type, title, message, read, priority, action_type, action_data, created_at
+            FROM notifications
+            WHERE user_id = ?
+            ORDER BY created_at DESC
+            LIMIT 50
+        """, (user_id,))
+        
+        notifications = []
+        for row in cursor.fetchall():
+            notifications.append({
+                "id": row[0],
+                "type": row[1],
+                "title": row[2],
+                "message": row[3],
+                "read": bool(row[4]),
+                "priority": row[5],
+                "action_type": row[6],
+                "action_data": row[7],
+                "created_at": row[8]
+            })
+        
+        return notifications
+    finally:
+        conn.close()
+
+@app.put("/notifications/{notification_id}/read")
+async def mark_notification_read(
+    notification_id: int,
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    """Mark a notification as read"""
+    user_id = verify_token(credentials)
+    
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("""
+            UPDATE notifications SET read = 1
+            WHERE id = ? AND user_id = ?
+        """, (notification_id, user_id))
+        
+        conn.commit()
+        return {"success": True}
     finally:
         conn.close()
 

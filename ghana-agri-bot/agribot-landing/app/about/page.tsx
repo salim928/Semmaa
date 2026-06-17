@@ -118,7 +118,7 @@ export default function AboutPage() {
                 fill
                 className="rounded-2xl shadow-2xl object-cover"
               />
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-lime-500 rounded-full flex items-center justify-center z-10">
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-emerald-500 rounded-full flex items-center justify-center z-10">
                 <Award className="w-12 h-12 text-white" />
               </div>
             </motion.div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="bg-white p-8 rounded-2xl shadow-lg"
             >
-              <Target className="w-12 h-12 text-lime-500 mb-6" />
+              <Target className="w-12 h-12 text-emerald-500 mb-6" />
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
               <p className="text-gray-600 leading-relaxed">
                 To empower Ghanaian farmers with AI-driven insights, digital marketplace access, 
@@ -175,7 +175,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-gradient-to-br from-lime-50 via-white to-yellow-50">
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-white to-yellow-50">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -199,7 +199,7 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-lime-500 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">{value.title}</h3>
@@ -255,7 +255,7 @@ export default function AboutPage() {
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <p className="text-lime-600 font-semibold mb-3">{member.role}</p>
+                  <p className="text-emerald-600 font-semibold mb-3">{member.role}</p>
                   <p className="text-gray-600 text-sm">{member.bio}</p>
                 </div>
               </motion.div>
@@ -277,7 +277,7 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-lime-100 text-lg">{stat.label}</div>
+                <div className="text-emerald-100 text-lg">{stat.label}</div>
               </motion.div>
             ))}
           </div>

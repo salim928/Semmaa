@@ -41,7 +41,7 @@ export default function Stats() {
             backgroundImage: 'url(https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1920&h=1080&fit=crop&q=80)',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-lime-700/95 to-lime-600/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-700/95 to-emerald-600/95" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">

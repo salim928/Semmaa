@@ -27,7 +27,7 @@ const supportChannels = [
     description: "Chat with our support team in real-time",
     availability: "Available 24/7",
     action: "Start Chat",
-    color: "from-lime-500 to-green-600"
+    color: "from-emerald-500 to-green-600"
   },
   {
     icon: Phone,
@@ -218,7 +218,7 @@ export default function SupportPage() {
                   <Clock className="w-4 h-4" />
                   <span>{channel.availability}</span>
                 </div>
-                <button className="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-lime-500 hover:text-white transition-colors">
+                <button className="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-emerald-500 hover:text-white transition-colors">
                   {channel.action}
                 </button>
               </motion.div>
@@ -264,7 +264,7 @@ export default function SupportPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-lime-500 focus:ring-2 focus:ring-lime-200 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -281,7 +281,7 @@ export default function SupportPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-lime-500 focus:ring-2 focus:ring-lime-200 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -296,7 +296,7 @@ export default function SupportPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-lime-500 focus:ring-2 focus:ring-lime-200 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
                       placeholder="+233 XX XXX XXXX"
                     />
                   </div>
@@ -312,7 +312,7 @@ export default function SupportPage() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-lime-500 focus:ring-2 focus:ring-lime-200 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
                   >
                     <option value="">Select a subject</option>
                     <option value="technical">Technical Support</option>
@@ -334,14 +334,14 @@ export default function SupportPage() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-lime-500 focus:ring-2 focus:ring-lime-200 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all resize-none"
                     placeholder="Tell us how we can help..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-lime-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-lime-600 transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-emerald-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-emerald-600 transition-colors flex items-center justify-center gap-2"
                 >
                   <Send className="w-5 h-5" />
                   Send Message
@@ -362,8 +362,8 @@ export default function SupportPage() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-lime-600" />
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-emerald-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Office Address</h3>
@@ -376,8 +376,8 @@ export default function SupportPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-lime-600" />
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-emerald-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
@@ -389,8 +389,8 @@ export default function SupportPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-lime-600" />
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-emerald-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
@@ -403,8 +403,8 @@ export default function SupportPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-lime-600" />
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-emerald-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Business Hours</h3>
@@ -417,7 +417,7 @@ export default function SupportPage() {
               </div>
 
               {/* Quick Resources */}
-              <div className="mt-12 bg-gradient-to-r from-lime-500 to-yellow-500 rounded-2xl p-6 text-white">
+              <div className="mt-12 bg-gradient-to-r from-emerald-500 to-yellow-500 rounded-2xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-4">Quick Resources</h3>
                 <div className="space-y-3">
                   <a href="#" className="flex items-center gap-3 hover:gap-4 transition-all">
@@ -465,7 +465,7 @@ export default function SupportPage() {
           <div className="space-y-8">
             {faqs.map((category, categoryIndex) => (
               <div key={categoryIndex}>
-                <h3 className="text-2xl font-bold mb-4 text-lime-600">{category.category}</h3>
+                <h3 className="text-2xl font-bold mb-4 text-emerald-600">{category.category}</h3>
                 <div className="space-y-4">
                   {category.questions.map((faq, faqIndex) => {
                     const faqId = `${categoryIndex}-${faqIndex}`
@@ -486,7 +486,7 @@ export default function SupportPage() {
                         >
                           <span className="font-semibold text-gray-900">{faq.question}</span>
                           <ChevronDown
-                            className={`w-5 h-5 text-lime-600 transition-transform ${
+                            className={`w-5 h-5 text-emerald-600 transition-transform ${
                               isOpen ? 'rotate-180' : ''
                             }`}
                           />

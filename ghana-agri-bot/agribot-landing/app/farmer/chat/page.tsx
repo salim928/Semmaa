@@ -211,7 +211,7 @@ function MessageBubble({ message }: { message: Message }) {
       <div
         className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm sm:px-4 sm:py-2.5 sm:text-base ${
           isAI
-            ? 'bg-gradient-to-br from-emerald-50 to-lime-50 text-emerald-900 border border-emerald-100'
+            ? 'bg-gradient-to-br from-emerald-50 to-emerald-50 text-emerald-900 border border-emerald-100'
             : 'bg-emerald-600 text-white'
         }`}
       >

@@ -94,7 +94,7 @@ export default function DemoRequest() {
         </p>
         <button
           onClick={() => setSubmitStatus('idle')}
-          className="bg-lime-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-lime-700 transition-colors"
+          className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
         >
           Request Another Demo
         </button>
@@ -114,22 +114,22 @@ export default function DemoRequest() {
       {/* Demo Benefits */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <div className="text-center">
-          <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Calendar className="w-6 h-6 text-lime-600" />
+          <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <Calendar className="w-6 h-6 text-emerald-600" />
           </div>
           <h3 className="font-semibold text-gray-900 mb-2">Flexible Scheduling</h3>
           <p className="text-sm text-gray-600">Choose a time that works for you</p>
         </div>
         <div className="text-center">
-          <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Users className="w-6 h-6 text-lime-600" />
+          <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <Users className="w-6 h-6 text-emerald-600" />
           </div>
           <h3 className="font-semibold text-gray-900 mb-2">Expert Guidance</h3>
           <p className="text-sm text-gray-600">Agricultural specialists will guide you</p>
         </div>
         <div className="text-center">
-          <div className="w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Zap className="w-6 h-6 text-lime-600" />
+          <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <Zap className="w-6 h-6 text-emerald-600" />
           </div>
           <h3 className="font-semibold text-gray-900 mb-2">Live Features</h3>
           <p className="text-sm text-gray-600">See real AI recommendations</p>
@@ -155,7 +155,7 @@ export default function DemoRequest() {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="Your full name"
             />
           </div>
@@ -170,7 +170,7 @@ export default function DemoRequest() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="your@email.com"
             />
           </div>
@@ -188,7 +188,7 @@ export default function DemoRequest() {
               required
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="+233 24 123 4567"
             />
           </div>
@@ -202,7 +202,7 @@ export default function DemoRequest() {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="Your farm or organization"
             />
           </div>
@@ -219,7 +219,7 @@ export default function DemoRequest() {
               required
               value={formData.farmSize}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             >
               <option value="">Select farm size</option>
               <option value="small">Small (0-5 acres)</option>
@@ -238,7 +238,7 @@ export default function DemoRequest() {
               required
               value={formData.interest}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             >
               <option value="">Select primary interest</option>
               <option value="ai-insights">AI Crop Insights</option>
@@ -262,7 +262,7 @@ export default function DemoRequest() {
               value={formData.preferredDate}
               onChange={handleChange}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             />
           </div>
           <div>
@@ -274,7 +274,7 @@ export default function DemoRequest() {
               name="preferredTime"
               value={formData.preferredTime}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             >
               <option value="">Select preferred time</option>
               <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
@@ -294,7 +294,7 @@ export default function DemoRequest() {
             rows={4}
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             placeholder="Tell us about your specific needs or questions..."
           />
         </div>
@@ -302,7 +302,7 @@ export default function DemoRequest() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-lime-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-lime-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+          className="w-full bg-emerald-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
         >
           {isSubmitting ? (
             <>

@@ -80,6 +80,8 @@ export default function FarmerWalletPage() {
   const [formPhone, setFormPhone] = useState('')
   const [loanPurpose, setLoanPurpose] = useState('')
   const [processing, setProcessing] = useState(false)
+  const [transactionSuccess, setTransactionSuccess] = useState(false)
+  const [transactionError, setTransactionError] = useState('')
 
   // Sync wallet data from context and localStorage
   useEffect(() => {
@@ -150,38 +152,49 @@ export default function FarmerWalletPage() {
     if (isNaN(amount) || amount <= 0) return
     
     setProcessing(true)
+    setTransactionError('')
     
-    const newTransaction: Transaction = {
-      id: Date.now().toString(),
-      type: 'credit',
-      amount,
-      description: 'Mobile Money Deposit',
-      date: new Date().toISOString().split('T')[0],
-      status: 'completed',
-      category: 'deposit',
-    }
-    
-    // Update local state
-    setBalance(prev => prev + amount)
-    setTransactions(prev => [newTransaction, ...prev])
-    
-    // Try to save to Supabase
     try {
-      await createWalletTransaction({
-        user_id: user?.id || 'guest',
+      const newTransaction: Transaction = {
+        id: Date.now().toString(),
         type: 'credit',
         amount,
         description: 'Mobile Money Deposit',
-        reference: `DEP${Date.now()}`,
+        date: new Date().toISOString().split('T')[0],
         status: 'completed',
-      })
-    } catch (error) {
-      console.error('Error saving transaction:', error)
+        category: 'deposit',
+      }
+      
+      // Update local state
+      setBalance(prev => prev + amount)
+      setTransactions(prev => [newTransaction, ...prev])
+      
+      // Try to save to Supabase
+      try {
+        await createWalletTransaction({
+          user_id: user?.id || 'guest',
+          type: 'credit',
+          amount,
+          description: 'Mobile Money Deposit',
+          reference: `DEP${Date.now()}`,
+          status: 'completed',
+        })
+      } catch (error) {
+        console.error('Error saving transaction:', error)
+      }
+      
+      // Show success feedback
+      setTransactionSuccess(true)
+      setTimeout(() => {
+        setTransactionSuccess(false)
+        setFormAmount('')
+        setShowModal(null)
+      }, 2000)
+    } catch {
+      setTransactionError('Transaction failed. Please try again.')
+    } finally {
+      setProcessing(false)
     }
-    
-    setFormAmount('')
-    setShowModal(null)
-    setProcessing(false)
   }
 
   const handleSendMoney = async () => {
@@ -362,7 +375,7 @@ export default function FarmerWalletPage() {
         <>
           {/* Quick stats */}
           <section className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl bg-gradient-to-br from-emerald-50 to-lime-50 p-4 shadow-sm">
+            <div className="rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 p-4 shadow-sm">
               <div className="flex items-center justify-between">
                 <p className="text-xs font-semibold text-emerald-700">This month income</p>
                 <span className="text-lg">📈</span>
@@ -462,7 +475,7 @@ export default function FarmerWalletPage() {
           <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
             <h3 className="text-sm font-semibold text-emerald-900">Available Loan Products</h3>
             <div className="mt-3 space-y-3">
-              <div className="rounded-xl bg-gradient-to-r from-emerald-50 to-lime-50 p-3">
+              <div className="rounded-xl bg-gradient-to-r from-emerald-50 to-green-50 p-3">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold text-emerald-900">Farm Input Loan</p>
@@ -513,7 +526,7 @@ export default function FarmerWalletPage() {
             <div className="mt-3 rounded-xl bg-emerald-50 p-3 text-center">
               <p className="text-2xl">🎉</p>
               <p className="mt-2 text-sm font-medium text-emerald-900">No active loans</p>
-              <p className="text-xs text-emerald-600">You're debt-free! Apply when you need funds.</p>
+              <p className="text-xs text-emerald-600">You&apos;re debt-free! Apply when you need funds.</p>
             </div>
           </div>
         </section>
@@ -539,16 +552,34 @@ export default function FarmerWalletPage() {
             </div>
 
             <div className="mt-4 space-y-3">
-              <div>
-                <label className="text-xs font-medium text-emerald-700">Amount (GHS)</label>
-                <input
-                  type="number"
-                  value={formAmount}
-                  onChange={(e) => setFormAmount(e.target.value)}
-                  placeholder="Enter amount"
-                  className="mt-1 w-full rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
-                />
-              </div>
+              {/* Success Message */}
+              {transactionSuccess && (
+                <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-center">
+                  <div className="text-4xl mb-2">✅</div>
+                  <p className="text-sm font-semibold text-emerald-900">Transaction Successful!</p>
+                  <p className="text-xs text-emerald-600 mt-1">Your wallet has been updated</p>
+                </div>
+              )}
+              
+              {/* Error Message */}
+              {transactionError && (
+                <div className="rounded-xl bg-red-50 border border-red-200 p-3 text-center">
+                  <p className="text-sm font-medium text-red-900">{transactionError}</p>
+                </div>
+              )}
+              
+              {!transactionSuccess && (
+                <>
+                  <div>
+                    <label className="text-xs font-medium text-emerald-700">Amount (GHS)</label>
+                    <input
+                      type="number"
+                      value={formAmount}
+                      onChange={(e) => setFormAmount(e.target.value)}
+                      placeholder="Enter amount"
+                      className="mt-1 w-full min-h-[44px] rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
+                    />
+                  </div>
 
               {showModal === 'send' && (
                 <div>
@@ -558,7 +589,7 @@ export default function FarmerWalletPage() {
                     value={formRecipient}
                     onChange={(e) => setFormRecipient(e.target.value)}
                     placeholder="Enter recipient's user ID"
-                    className="mt-1 w-full rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
+                    className="mt-1 w-full min-h-[44px] rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
                   />
                 </div>
               )}
@@ -571,7 +602,7 @@ export default function FarmerWalletPage() {
                     value={formPhone}
                     onChange={(e) => setFormPhone(e.target.value)}
                     placeholder="e.g., 0241234567"
-                    className="mt-1 w-full rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
+                    className="mt-1 w-full min-h-[44px] rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
                   />
                 </div>
               )}
@@ -582,7 +613,7 @@ export default function FarmerWalletPage() {
                   <select
                     value={loanPurpose}
                     onChange={(e) => setLoanPurpose(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
+                    className="mt-1 w-full min-h-[44px] rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
                   >
                     <option value="">Select purpose</option>
                     <option value="seeds">Seeds & Seedlings</option>
@@ -603,9 +634,17 @@ export default function FarmerWalletPage() {
                   if (showModal === 'loan') handleLoanApplication()
                 }}
                 disabled={processing}
-                className="w-full rounded-xl bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 disabled:bg-emerald-300"
+                className="w-full min-h-[56px] rounded-xl bg-emerald-600 py-3 text-sm font-semibold text-white hover:bg-emerald-700 disabled:bg-emerald-300 transition-all"
               >
-                {processing ? '⏳ Processing...' : (
+                {processing ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Processing...
+                  </span>
+                ) : (
                   <>
                     {showModal === 'add' && '💰 Add Money'}
                     {showModal === 'send' && '📤 Send Money'}
@@ -614,6 +653,8 @@ export default function FarmerWalletPage() {
                   </>
                 )}
               </button>
+                </>
+              )}
             </div>
           </div>
         </div>

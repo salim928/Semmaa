@@ -131,8 +131,8 @@ export default function BlogPage() {
                 key={index}
                 className={`px-6 py-2 rounded-full transition-all ${
                   index === 0
-                    ? 'bg-lime-500 text-white'
-                    : 'bg-white text-gray-700 hover:bg-lime-50 hover:text-lime-600'
+                    ? 'bg-emerald-500 text-white'
+                    : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'
                 }`}
               >
                 {category}
@@ -151,7 +151,7 @@ export default function BlogPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="bg-gradient-to-r from-lime-500 to-yellow-500 text-white rounded-3xl overflow-hidden shadow-2xl">
+              <div className="bg-gradient-to-r from-emerald-500 to-amber-500 text-white rounded-3xl overflow-hidden shadow-2xl">
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div className="p-12 flex flex-col justify-center">
                     <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 w-fit">
@@ -174,7 +174,7 @@ export default function BlogPage() {
 
                     <Link 
                       href={`/blog/${featuredPost.slug}`}
-                      className="inline-flex items-center gap-2 bg-white text-lime-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-fit"
+                      className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-fit"
                     >
                       Read Article
                       <ArrowRight className="w-5 h-5" />
@@ -218,14 +218,14 @@ export default function BlogPage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-lime-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                       {post.category}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-lime-600 transition-colors">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-emerald-600 transition-colors">
                     {post.title}
                   </h3>
                   <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
@@ -240,7 +240,7 @@ export default function BlogPage() {
 
                   <Link 
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-lime-600 font-semibold hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:gap-3 transition-all"
                   >
                     Read More
                     <ArrowRight className="w-5 h-5" />
@@ -259,7 +259,7 @@ export default function BlogPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-lime-500 to-yellow-500 rounded-3xl p-12 text-center text-white"
+            className="bg-gradient-to-r from-emerald-500 to-amber-500 rounded-3xl p-12 text-center text-white"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to Our Newsletter</h2>
             <p className="text-white/90 text-lg mb-8">
@@ -279,7 +279,7 @@ export default function BlogPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-white text-lime-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50"
+                className="bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50"
               >
                 {isSubmitting ? 'Subscribing...' : 'Subscribe'}
               </button>

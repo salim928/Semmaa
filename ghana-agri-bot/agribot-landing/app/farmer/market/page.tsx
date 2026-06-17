@@ -21,6 +21,7 @@ interface MarketProduct {
   isNew?: boolean
   isBestPrice?: boolean
   stock?: number
+  images?: string[]
 }
 
 interface CartItem extends MarketProduct {
@@ -50,6 +51,7 @@ const MOCK_PRODUCTS: MarketProduct[] = [
     reviews: 124,
     isNew: true,
     stock: 200,
+    images: ['https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop'],
   },
   {
     id: '2',
@@ -64,6 +66,7 @@ const MOCK_PRODUCTS: MarketProduct[] = [
     reviews: 89,
     isBestPrice: true,
     stock: 500,
+    images: ['https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=400&fit=crop'],
   },
   {
     id: '3',
@@ -77,6 +80,7 @@ const MOCK_PRODUCTS: MarketProduct[] = [
     rating: 4.6,
     reviews: 56,
     stock: 50,
+    images: ['https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop'],
   },
   {
     id: '4',
@@ -90,6 +94,7 @@ const MOCK_PRODUCTS: MarketProduct[] = [
     rating: 4.7,
     reviews: 34,
     stock: 12,
+    images: ['https://images.unsplash.com/photo-1625246287831-073f61c18c43?w=400&h=400&fit=crop'],
   },
   {
     id: '5',
@@ -103,6 +108,7 @@ const MOCK_PRODUCTS: MarketProduct[] = [
     rating: 4.3,
     reviews: 67,
     stock: 300,
+    images: ['https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&h=400&fit=crop'],
   },
   {
     id: '6',
@@ -117,6 +123,7 @@ const MOCK_PRODUCTS: MarketProduct[] = [
     reviews: 45,
     isNew: true,
     stock: 80,
+    images: ['https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=400&fit=crop'],
   },
 ]
 
@@ -150,7 +157,34 @@ export default function FarmerMarketPage() {
     quantity: '',
     description: '',
     category: 'produce' as 'produce' | 'inputs' | 'tools',
+    images: [] as string[],
   })
+  const [imageFiles, setImageFiles] = useState<File[]>([])
+  const [imagePreviewUrls, setImagePreviewUrls] = useState<string[]>([])
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    if (files.length + imageFiles.length > 5) {
+      alert('Maximum 5 images allowed')
+      return
+    }
+    
+    setImageFiles(prev => [...prev, ...files])
+    
+    // Create preview URLs
+    files.forEach(file => {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreviewUrls(prev => [...prev, reader.result as string])
+      }
+      reader.readAsDataURL(file)
+    })
+  }
+
+  const removeImage = (index: number) => {
+    setImageFiles(prev => prev.filter((_, i) => i !== index))
+    setImagePreviewUrls(prev => prev.filter((_, i) => i !== index))
+  }
 
   // Set initial selected crop from context
   useEffect(() => {
@@ -227,6 +261,7 @@ export default function FarmerMarketPage() {
       category: (p.category || 'produce') as 'produce' | 'inputs' | 'tools',
       rating: 4.5,
       stock: p.quantity_available || p.quantity,
+      images: p.images && p.images.length > 0 ? p.images : undefined,
     })),
     // Add mock products if no real products
     ...(products.length === 0 ? MOCK_PRODUCTS : []),
@@ -386,7 +421,7 @@ export default function FarmerMarketPage() {
         unit: sellForm.unit,
         quantity_available: parseInt(sellForm.quantity),
         location: userLocation || 'Ghana',
-        images: [],
+        images: imagePreviewUrls,
         is_organic: false,
         status: 'active' as const,
       }
@@ -542,54 +577,91 @@ export default function FarmerMarketPage() {
           </div>
 
           {/* Products Grid */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="relative rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm transition hover:shadow-md"
+                className="group relative rounded-2xl border-2 border-emerald-100 bg-white p-5 shadow-sm transition-all hover:shadow-xl hover:border-emerald-300 hover:-translate-y-1"
               >
                 {/* Badges */}
-                <div className="absolute right-2 top-2 flex gap-1">
+                <div className="absolute right-3 top-3 flex gap-1.5 z-10">
                   {product.isNew && (
-                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-700">NEW</span>
+                    <span className="rounded-full bg-blue-500 px-2.5 py-1 text-xs font-bold text-white shadow-md">NEW</span>
                   )}
                   {product.isBestPrice && (
-                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">BEST PRICE</span>
+                    <span className="rounded-full bg-emerald-500 px-2.5 py-1 text-xs font-bold text-white shadow-md">BEST</span>
                   )}
                 </div>
 
                 {/* Wishlist */}
                 <button
                   onClick={() => toggleWishlist(product.id)}
-                  className="absolute left-2 top-2 text-lg"
+                  className="absolute left-3 top-3 text-2xl z-10 min-w-[44px] min-h-[44px] flex items-center justify-center hover:scale-110 transition-transform"
+                  aria-label="Add to wishlist"
                 >
                   {wishlist.includes(product.id) ? '❤️' : '🤍'}
                 </button>
 
-                <div className="mt-4 text-center">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-3xl">
-                    {product.category === 'produce' ? '🥬' : product.category === 'inputs' ? '💧' : '🔧'}
-                  </div>
-                  <h3 className="mt-3 font-semibold text-emerald-900">{product.name}</h3>
-                  <p className="text-xs text-emerald-500">{product.seller} • {product.location}</p>
-                  
-                  {product.rating && (
-                    <div className="mt-1 flex items-center justify-center gap-1 text-xs text-amber-500">
-                      ⭐ {product.rating.toFixed(1)} ({product.reviews})
+                <div className="mt-8">
+                  {product.images && product.images.length > 0 ? (
+                    <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-emerald-100 mb-4">
+                      <img 
+                        src={product.images[0]} 
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to emoji if image fails to load
+                          (e.target as HTMLImageElement).style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.className = 'flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 text-6xl';
+                          fallback.textContent = product.category === 'produce' ? '🥬' : product.category === 'inputs' ? '💧' : '🔧';
+                          (e.target as HTMLImageElement).parentElement?.appendChild(fallback);
+                        }}
+                      />
+                      {product.images.length > 1 && (
+                        <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                          +{product.images.length - 1} more
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="mx-auto flex h-32 w-32 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100 text-6xl shadow-inner mb-4">
+                      {product.category === 'produce' ? '🥬' : product.category === 'inputs' ? '💧' : '🔧'}
                     </div>
                   )}
+                  
+                  <div className="text-center">
+                    <h3 className="mt-4 text-base font-bold text-emerald-900 line-clamp-2">{product.name}</h3>
+                    <p className="mt-1 text-xs text-emerald-600">📍 {product.location}</p>
+                    <p className="text-xs text-gray-500">{product.seller}</p>
+                    
+                    {product.rating && (
+                      <div className="mt-2 flex items-center justify-center gap-1 text-sm">
+                        <span className="text-amber-400">⭐</span>
+                        <span className="font-semibold text-gray-700">{product.rating.toFixed(1)}</span>
+                        <span className="text-xs text-gray-400">({product.reviews})</span>
+                      </div>
+                    )}
+                    
+                    {product.stock !== undefined && (
+                      <p className="mt-1 text-xs text-gray-500">Stock: {product.stock} {product.unit}</p>
+                    )}
+                  </div>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between">
-                  <div>
-                    <p className="text-lg font-bold text-emerald-700">GHS {product.price}</p>
-                    <p className="text-xs text-emerald-500">per {product.unit}</p>
+                <div className="mt-5 space-y-3">
+                  {/* Price - Most Prominent */}
+                  <div className="rounded-xl bg-emerald-50 p-3 text-center border border-emerald-200">
+                    <p className="text-2xl font-extrabold text-emerald-700">GHS {product.price}</p>
+                    <p className="text-xs font-medium text-emerald-600">per {product.unit}</p>
                   </div>
+                  
+                  {/* Add to Cart Button */}
                   <button
                     onClick={() => addToCart(product)}
-                    className="rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
+                    className="w-full min-h-[48px] rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 px-4 py-3 text-sm font-bold text-white hover:from-emerald-700 hover:to-emerald-800 transition-all shadow-lg hover:shadow-xl active:scale-95"
                   >
-                    Add to Cart
+                    🛒 Add to Cart
                   </button>
                 </div>
               </div>
@@ -597,10 +669,16 @@ export default function FarmerMarketPage() {
           </div>
 
           {filteredProducts.length === 0 && (
-            <div className="rounded-2xl border border-emerald-100 bg-white p-8 text-center">
-              <p className="text-3xl">🔍</p>
-              <p className="mt-2 font-medium text-emerald-900">No products found</p>
-              <p className="text-sm text-emerald-500">Try a different search or category</p>
+            <div className="rounded-2xl border-2 border-emerald-100 bg-gradient-to-br from-emerald-50 to-white p-12 text-center">
+              <p className="text-6xl mb-4">🔍</p>
+              <p className="text-xl font-bold text-emerald-900 mb-2">No products found</p>
+              <p className="text-sm text-emerald-600 mb-6">Try adjusting your search or browse different categories</p>
+              <button
+                onClick={() => { setSearch(''); setSelectedCategory('all'); }}
+                className="min-h-[48px] px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all"
+              >
+                Clear Filters
+              </button>
             </div>
           )}
         </>
@@ -674,6 +752,44 @@ export default function FarmerMarketPage() {
                   placeholder="e.g., 100"
                   className="mt-1 w-full rounded-xl border border-emerald-200 px-3 py-2 text-sm focus:border-emerald-400 focus:outline-none"
                 />
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-emerald-700">Product Images</label>
+                <div className="mt-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="product-images"
+                  />
+                  <label
+                    htmlFor="product-images"
+                    className="inline-flex items-center gap-2 rounded-xl border-2 border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 hover:border-emerald-400 hover:bg-emerald-100 cursor-pointer transition-all"
+                  >
+                    📸 Upload Images (Max 5)
+                  </label>
+                  <p className="mt-1 text-xs text-emerald-600">Add photos of your product to attract more buyers</p>
+                </div>
+                
+                {imagePreviewUrls.length > 0 && (
+                  <div className="mt-3 grid grid-cols-3 gap-2">
+                    {imagePreviewUrls.map((url, index) => (
+                      <div key={index} className="relative aspect-square rounded-lg overflow-hidden border-2 border-emerald-200">
+                        <img src={url} alt={`Preview ${index + 1}`} className="w-full h-full object-cover" />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(index)}
+                          className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-600"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div>

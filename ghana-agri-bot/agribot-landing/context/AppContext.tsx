@@ -3,7 +3,7 @@
 
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react'
 import { useAuth } from './AuthContext'
-import { supabaseHelpers, Order, Product, CommunityPost, Notification, WalletTransaction } from '@/lib/supabase'
+import { supabaseHelpers, Order, Product, CommunityPost, Notification } from '@/lib/supabase'
 import { api, WeatherResponse, MarketPricesRow } from '@/lib/api'
 
 interface AppContextType {
@@ -44,13 +44,6 @@ interface AppContextType {
   notificationsLoading: boolean
   refreshNotifications: () => Promise<void>
   markAsRead: (id: string) => Promise<void>
-  
-  // Wallet
-  walletBalance: number
-  transactions: WalletTransaction[]
-  walletLoading: boolean
-  refreshWallet: () => Promise<void>
-  createWalletTransaction: (transaction: Omit<WalletTransaction, 'id' | 'created_at'>) => Promise<WalletTransaction | null>
   
   // Global state
   userLocation: string
@@ -95,11 +88,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Notifications state
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [notificationsLoading, setNotificationsLoading] = useState(false)
-  
-  // Wallet state
-  const [walletBalance, setWalletBalance] = useState(0)
-  const [transactions, setTransactions] = useState<WalletTransaction[]>([])
-  const [walletLoading, setWalletLoading] = useState(false)
   
   // Global state
   const [userLocation, setUserLocation] = useState<string>('Accra')
@@ -260,33 +248,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     )
   }
 
-  // Wallet functions
-  const refreshWallet = useCallback(async () => {
-    if (!user?.id) return
-    setWalletLoading(true)
-    try {
-      const data = await supabaseHelpers.getWalletData(user.id)
-      setWalletBalance(data.balance)
-      setTransactions(data.transactions)
-    } catch (error) {
-      console.error('Error fetching wallet:', error)
-    } finally {
-      setWalletLoading(false)
-    }
-  }, [user?.id])
-
-  const createWalletTransaction = async (transaction: Omit<WalletTransaction, 'id' | 'created_at'>): Promise<WalletTransaction | null> => {
-    const result = await supabaseHelpers.createWalletTransaction(transaction)
-    if (result) {
-      setTransactions(prev => [result, ...prev])
-      // Update balance
-      if (result.status === 'completed') {
-        setWalletBalance(prev => result.type === 'credit' ? prev + result.amount : prev - result.amount)
-      }
-    }
-    return result
-  }
-
   // Initialize data when user logs in
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -300,11 +261,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       refreshMarketData()
       refreshOrders()
       refreshNotifications()
-      refreshWallet()
       refreshProducts()
       refreshPosts()
     }
-  }, [isAuthenticated, user, refreshWeather, refreshMarketData, refreshOrders, refreshNotifications, refreshWallet, refreshProducts, refreshPosts])
+  }, [isAuthenticated, user, refreshWeather, refreshMarketData, refreshOrders, refreshNotifications, refreshProducts, refreshPosts])
 
   const unreadCount = notifications.filter(n => !n.is_read).length
 
@@ -342,12 +302,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         notificationsLoading,
         refreshNotifications,
         markAsRead,
-        
-        walletBalance,
-        transactions,
-        walletLoading,
-        refreshWallet,
-        createWalletTransaction,
         
         userLocation,
         setUserLocation,

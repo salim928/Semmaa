@@ -186,7 +186,6 @@ export default function FarmerProfilePage() {
     { icon: '🔔', label: 'Notifications', href: '/farmer/notifications', color: 'text-blue-600' },
     { icon: '🔒', label: 'Privacy & Security', href: '#privacy', color: 'text-purple-600' },
     { icon: '📊', label: 'Farm Analytics', href: '/farmer/insights', color: 'text-amber-600' },
-    { icon: '💳', label: 'Payment Methods', href: '/farmer/wallet', color: 'text-rose-600' },
     { icon: '❓', label: 'Help & Support', href: '#help', color: 'text-cyan-600' },
     { icon: '📜', label: 'Terms of Service', href: '#terms', color: 'text-gray-600' },
   ]

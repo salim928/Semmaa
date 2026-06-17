@@ -101,7 +101,7 @@ export default function FAQPage() {
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2 rounded-full transition-colors ${
                 activeCategory === category
-                  ? 'bg-lime-600 text-white'
+                  ? 'bg-emerald-600 text-white'
                   : 'bg-white text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -119,7 +119,7 @@ export default function FAQPage() {
                 className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
                 <div>
-                  <span className="inline-block px-3 py-1 bg-lime-100 text-lime-700 text-sm rounded-full mb-2">
+                  <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-sm rounded-full mb-2">
                     {item.category}
                   </span>
                   <h3 className="text-lg font-semibold text-gray-900">
@@ -145,7 +145,7 @@ export default function FAQPage() {
         </div>
 
         {/* Contact CTA */}
-        <div className="bg-gradient-to-br from-lime-50 to-yellow-50 rounded-2xl p-8 mt-16 text-center">
+        <div className="bg-gradient-to-br from-emerald-50 to-yellow-50 rounded-2xl p-8 mt-16 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Still have questions?
           </h2>
@@ -155,13 +155,13 @@ export default function FAQPage() {
           <div className="space-x-4">
             <a
               href="/contact"
-              className="inline-block bg-lime-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-lime-700 transition-colors"
+              className="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
             >
               Contact Us
             </a>
             <a
               href="/support"
-              className="inline-block border-2 border-lime-600 text-lime-600 px-6 py-3 rounded-lg font-semibold hover:bg-lime-50 transition-colors"
+              className="inline-block border-2 border-emerald-600 text-emerald-600 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-colors"
             >
               Get Support
             </a>

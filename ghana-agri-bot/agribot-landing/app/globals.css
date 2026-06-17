@@ -29,12 +29,12 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-lime-600 to-yellow-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-emerald-600 to-green-500 bg-clip-text text-transparent;
   }
   
   /* Animated gradient text */
   .gradient-text-animated {
-    background: linear-gradient(90deg, #65a30d, #eab308, #16a34a, #65a30d);
+    background: linear-gradient(90deg, #10b981, #22c55e, #16a34a, #10b981);
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -44,7 +44,7 @@
   
   /* Shimmer text effect */
   .shimmer-text {
-    background: linear-gradient(90deg, #374151, #65a30d, #374151);
+    background: linear-gradient(90deg, #374151, #10b981, #374151);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -54,7 +54,7 @@
   
   /* Glow text effect */
   .glow-text {
-    text-shadow: 0 0 20px rgba(101, 163, 13, 0.5), 0 0 40px rgba(101, 163, 13, 0.3);
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.3);
     animation: glow 2s ease-in-out infinite alternate;
   }
   
@@ -63,11 +63,11 @@
   }
   
   .btn-primary {
-    @apply bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
   }
   
   .btn-secondary {
-    @apply border-2 border-lime-600 text-lime-600 hover:bg-lime-600 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300;
+    @apply border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300;
   }
   
   /* Floating animation */
@@ -93,8 +93,8 @@
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 10px rgba(101, 163, 13, 0.4), 0 0 20px rgba(101, 163, 13, 0.2); }
-  to { text-shadow: 0 0 20px rgba(101, 163, 13, 0.6), 0 0 40px rgba(101, 163, 13, 0.4); }
+  from { text-shadow: 0 0 10px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2); }
+  to { text-shadow: 0 0 20px rgba(16, 185, 129, 0.6), 0 0 40px rgba(16, 185, 129, 0.4); }
 }
 
 @keyframes float {
@@ -103,6 +103,6 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(101, 163, 13, 0.4); }
-  50% { box-shadow: 0 0 40px rgba(101, 163, 13, 0.8); }
+  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.8); }
 }

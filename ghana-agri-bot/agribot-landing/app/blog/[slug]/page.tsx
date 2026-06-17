@@ -107,7 +107,7 @@ export default function BlogPost() {
           {/* Back Link */}
           <Link 
             href="/blog"
-            className="inline-flex items-center gap-2 text-lime-600 font-semibold hover:gap-3 transition-all mb-8"
+            className="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:gap-3 transition-all mb-8 min-h-[44px]"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Blog
@@ -115,7 +115,7 @@ export default function BlogPost() {
 
           {/* Category */}
           <div className="mb-6">
-            <span className="bg-lime-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+            <span className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
               {sampleArticle.category}
             </span>
           </div>
@@ -128,7 +128,7 @@ export default function BlogPost() {
           {/* Meta Info */}
           <div className="flex flex-wrap items-center gap-6 pb-8 mb-8 border-b border-gray-200">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-lime-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold">
+              <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold">
                 {sampleArticle.author.charAt(0)}
               </div>
               <div>
@@ -151,16 +151,16 @@ export default function BlogPost() {
           {/* Share Buttons */}
           <div className="flex items-center gap-4 mb-8">
             <span className="text-gray-600 font-semibold">Share:</span>
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-lime-500 hover:text-white transition-colors">
+            <button className="p-2 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-colors min-h-[44px] min-w-[44px]">
               <Facebook className="w-5 h-5" />
             </button>
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-lime-500 hover:text-white transition-colors">
+            <button className="p-2 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-colors min-h-[44px] min-w-[44px]">
               <Twitter className="w-5 h-5" />
             </button>
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-lime-500 hover:text-white transition-colors">
+            <button className="p-2 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-colors min-h-[44px] min-w-[44px]">
               <Linkedin className="w-5 h-5" />
             </button>
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-lime-500 hover:text-white transition-colors">
+            <button className="p-2 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-colors min-h-[44px] min-w-[44px]">
               <Share2 className="w-5 h-5" />
             </button>
           </div>
@@ -173,7 +173,7 @@ export default function BlogPost() {
               prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
               prose-ul:my-6 prose-li:text-gray-700
               prose-strong:text-gray-900 prose-strong:font-semibold
-              prose-a:text-lime-600 prose-a:no-underline hover:prose-a:underline"
+              prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: sampleArticle.content }}
           />
 
@@ -184,7 +184,7 @@ export default function BlogPost() {
               {sampleArticle.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-lime-500 hover:text-white transition-colors cursor-pointer"
+                  className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-emerald-500 hover:text-white transition-colors cursor-pointer min-h-[44px] inline-flex items-center"
                 >
                   {tag}
                 </span>
@@ -201,7 +201,7 @@ export default function BlogPost() {
           className="bg-gray-50 rounded-3xl p-8 mt-12"
         >
           <div className="flex items-start gap-6">
-            <div className="w-20 h-20 bg-gradient-to-r from-lime-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+            <div className="w-20 h-20 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
               {sampleArticle.author.charAt(0)}
             </div>
             <div>
@@ -221,13 +221,13 @@ export default function BlogPost() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-lime-500 to-yellow-500 rounded-3xl p-12 text-center text-white mt-12 mb-20"
+          className="bg-gradient-to-r from-emerald-500 to-amber-500 rounded-3xl p-12 text-center text-white mt-12 mb-20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Farm?</h2>
           <p className="text-white/90 text-lg mb-8">
             Join over 15,000 farmers already using SEMMA-AI to increase yields and profits.
           </p>
-          <button className="bg-white text-lime-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg">
+          <button className="bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg min-h-[56px]">
             Get Started Free
           </button>
         </motion.div>

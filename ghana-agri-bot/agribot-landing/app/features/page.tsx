@@ -164,7 +164,7 @@ export default function FeaturesPage() {
                   transition={{ delay: index * 0.1 }}
                   className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-lime-500 to-yellow-500 rounded-2xl flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-2xl flex items-center justify-center mb-6">
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
                   
@@ -174,7 +174,7 @@ export default function FeaturesPage() {
                   <ul className="space-y-2">
                     {feature.benefits.map((benefit, benefitIndex) => (
                       <li key={benefitIndex} className="flex items-center text-sm text-gray-600">
-                        <div className="w-2 h-2 bg-lime-500 rounded-full mr-3"></div>
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
                         {benefit}
                       </li>
                     ))}
@@ -195,7 +195,7 @@ export default function FeaturesPage() {
               backgroundImage: 'url(https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1920&h=1080&fit=crop&q=80)',
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-lime-700/95 to-lime-600/95" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/95 to-emerald-600/95" />
         </div>
         
         <div className="relative z-10 max-w-6xl mx-auto px-6">
@@ -209,7 +209,7 @@ export default function FeaturesPage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Designed for Mobile-First Experience
               </h2>
-              <p className="text-xl text-lime-100 mb-8">
+              <p className="text-xl text-emerald-100 mb-8">
                 Our app is specifically designed for farmers who rely on mobile devices, 
                 with offline capabilities and low-bandwidth optimization.
               </p>
@@ -223,7 +223,7 @@ export default function FeaturesPage() {
                 ].map((item, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <item.icon className="w-6 h-6 text-yellow-300" />
-                    <span className="text-lime-100">{item.text}</span>
+                    <span className="text-emerald-100">{item.text}</span>
                   </div>
                 ))}
               </div>

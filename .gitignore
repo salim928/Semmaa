@@ -1,0 +1,42 @@
+# ----- Node -----
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# ----- Environment & secrets -----
+.env
+.env.*
+!.env.example
+# Google Cloud service-account keys
+google-credentials.json
+*-service-account*.json
+speedy-valor-*.json
+# Vercel env helper (contains live API keys)
+**/set-vercel-env.ps1
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.so
+venv/
+.venv/
+env/
+agri/
+.pytest_cache/
+
+# ----- Tooling / editor -----
+.expo/
+.cursor/
+.vscode/
+.idea/
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+
+# ----- Logs / temp -----
+*.log
+*.tmp

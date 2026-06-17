@@ -35,7 +35,7 @@ const plans = [
     period: "per month",
     description: "Ideal for growing farms and commercial farmers",
     icon: Zap,
-    color: "from-lime-500 to-lime-600",
+    color: "from-emerald-500 to-emerald-600",
     popular: true,
     features: [
       "Unlimited AI farming assistant",
@@ -134,12 +134,12 @@ export default function PricingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 ${
-                  plan.popular ? 'ring-2 ring-lime-500 scale-105' : ''
+                  plan.popular ? 'ring-2 ring-emerald-500 scale-105' : ''
                 }`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-lime-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
                       Most Popular
                     </span>
                   </div>
@@ -162,8 +162,8 @@ export default function PricingPage() {
 
                   <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
                     plan.popular
-                      ? 'bg-lime-500 text-white hover:bg-lime-600'
-                      : 'border-2 border-gray-300 text-gray-700 hover:border-lime-500 hover:text-lime-500'
+                      ? 'bg-emerald-500 text-white hover:bg-emerald-600'
+                      : 'border-2 border-gray-300 text-gray-700 hover:border-emerald-500 hover:text-emerald-500'
                   }`}>
                     {plan.price === "Free" ? "Get Started" : "Start Free Trial"}
                   </button>
@@ -186,8 +186,8 @@ export default function PricingPage() {
       {/* Comparison Table */}
       <section className="py-20 relative overflow-hidden">
         {/* Background Decoration */}
-        <div className="absolute inset-0 bg-gradient-to-br from-lime-50 via-white to-yellow-50"></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-lime-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-yellow-50"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-200/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
         
         <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -198,7 +198,7 @@ export default function PricingPage() {
             className="text-center mb-16"
           >
             <div className="inline-block mb-4">
-              <span className="bg-lime-100 text-lime-700 px-4 py-2 rounded-full text-sm font-semibold">
+              <span className="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold">
                 Detailed Breakdown
               </span>
             </div>
@@ -217,7 +217,7 @@ export default function PricingPage() {
             transition={{ delay: 0.2 }}
             className="overflow-x-auto"
           >
-            <table className="w-full bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-lime-100">
+            <table className="w-full bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-emerald-100">
               <thead>
                 <tr className="bg-gradient-to-r from-gray-50 to-gray-100">
                   <th className="text-left p-6 font-bold text-gray-900 text-lg">Features</th>
@@ -227,11 +227,11 @@ export default function PricingPage() {
                       <span>Basic</span>
                     </div>
                   </th>
-                  <th className="text-center p-6 font-bold text-lime-700 text-lg bg-lime-50/50">
+                  <th className="text-center p-6 font-bold text-emerald-700 text-lg bg-emerald-50/50">
                     <div className="flex flex-col items-center">
-                      <Zap className="w-6 h-6 text-lime-600 mb-2" />
+                      <Zap className="w-6 h-6 text-emerald-600 mb-2" />
                       <span>Professional</span>
-                      <span className="text-xs font-normal text-lime-600 mt-1">Most Popular</span>
+                      <span className="text-xs font-normal text-emerald-600 mt-1">Most Popular</span>
                     </div>
                   </th>
                   <th className="text-center p-6 font-bold text-gray-900 text-lg">
@@ -253,7 +253,7 @@ export default function PricingPage() {
                 ].map((row, index) => (
                   <tr 
                     key={index} 
-                    className={`border-t border-gray-100 hover:bg-lime-50/30 transition-colors ${
+                    className={`border-t border-gray-100 hover:bg-emerald-50/30 transition-colors ${
                       index % 2 === 0 ? 'bg-white/50' : 'bg-gray-50/30'
                     }`}
                   >
@@ -268,8 +268,8 @@ export default function PricingPage() {
                         {row.basic}
                       </span>
                     </td>
-                    <td className="text-center p-6 bg-lime-50/50 text-lime-900 font-medium">
-                      <span className="inline-block px-3 py-1 bg-lime-100 rounded-lg">
+                    <td className="text-center p-6 bg-emerald-50/50 text-emerald-900 font-medium">
+                      <span className="inline-block px-3 py-1 bg-emerald-100 rounded-lg">
                         {row.pro}
                       </span>
                     </td>
@@ -293,7 +293,7 @@ export default function PricingPage() {
             className="text-center mt-12"
           >
             <p className="text-gray-600 mb-6">Still not sure which plan is right for you?</p>
-            <button className="bg-lime-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-lime-600 transition-colors shadow-lg hover:shadow-xl">
+            <button className="bg-emerald-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-lg hover:shadow-xl">
               Talk to Our Team
             </button>
           </motion.div>

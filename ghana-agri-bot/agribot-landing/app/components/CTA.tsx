@@ -15,7 +15,7 @@ export default function CTA() {
             backgroundImage: 'url(https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&h=1080&fit=crop&q=80)',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-lime-700/90 via-lime-600/90 to-yellow-600/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/90 via-emerald-600/90 to-green-600/90" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -73,7 +73,7 @@ export default function CTA() {
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-primary-700 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 flex items-center group shadow-lg"
+              className="bg-white text-primary-700 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-lg inline-flex items-center group"
             >
               <Download className="mr-2 w-5 h-5" />
               <span>Download for Android</span>

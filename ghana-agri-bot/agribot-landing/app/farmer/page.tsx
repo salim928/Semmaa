@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { useApp } from '@/context/AppContext'
+import { FEATURES } from '@/config/features'
 
 export default function FarmerHome() {
   const { user } = useAuth()
@@ -133,39 +134,39 @@ export default function FarmerHome() {
         </div>
       </section>
 
-      {/* Quick Actions Grid */}
+      {/* Quick Actions Grid - MVP Focus */}
       <section>
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-900">
-          Quick Actions
+          Your Tools
         </h2>
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+          {/* Active Features - Larger, prominent */}
           <QuickActionCard
             href="/farmer/chat"
             title="AI Advisor"
-            subtitle="Get farming help"
+            subtitle="Get instant help"
             icon="💬"
             gradient="from-violet-500 to-violet-600"
+            enabled={FEATURES.aiAdvisor}
           />
           <QuickActionCard
             href="/farmer/market"
-            title="Market"
-            subtitle="View prices"
-            icon="📈"
+            title="Marketplace"
+            subtitle="Buy & sell"
+            icon="🛒"
             gradient="from-rose-500 to-rose-600"
+            enabled={FEATURES.marketplace}
           />
-          <QuickActionCard
-            href="/farmer/wallet"
-            title="Wallet"
-            subtitle="Track money"
-            icon="💳"
-            gradient="from-blue-500 to-blue-600"
-          />
+          
+          {/* Coming Soon Features - Muted */}
           <QuickActionCard
             href="/farmer/disease"
             title="Crop Doctor"
-            subtitle="Detect diseases"
+            subtitle="Coming Soon"
             icon="🔬"
-            gradient="from-emerald-500 to-emerald-600"
+            gradient="from-gray-400 to-gray-500"
+            enabled={FEATURES.diseaseDetection}
+            comingSoon={!FEATURES.diseaseDetection}
           />
         </div>
       </section>
@@ -211,33 +212,32 @@ export default function FarmerHome() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Services Grid - Show Coming Soon badges */}
       <section>
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-900">
-          Farm Services
+          All Features
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <ServiceCard
-            href="/farmer/tools/planting-calendar"
-            icon="📅"
-            title="Planting Calendar"
-            description="Best times to plant & harvest"
-            badge="Updated"
-            badgeColor="bg-emerald-100 text-emerald-700"
+            href="/farmer/chat"
+            icon="💬"
+            title="AI Advisor"
+            description="Ask farming questions anytime"
+            enabled={FEATURES.aiAdvisor}
           />
           <ServiceCard
-            href="/farmer/insights"
-            icon="📊"
-            title="Farm Insights"
-            description="Weather, prices & alerts"
+            href="/farmer/market"
+            icon="🛒"
+            title="Marketplace"
+            description="Buy seeds, fertilizer & tools"
+            enabled={FEATURES.marketplace}
           />
           <ServiceCard
-            href="/farmer/community"
-            icon="👥"
-            title="Community"
-            description="Connect with farmers"
-            badge="Active"
-            badgeColor="bg-amber-100 text-amber-700"
+            href="/farmer/profile"
+            icon="👤"
+            title="My Profile"
+            description="Account & settings"
+            enabled={true}
           />
           <ServiceCard
             href="/farmer/notifications"
@@ -246,18 +246,39 @@ export default function FarmerHome() {
             description="Alerts & advisories"
             badge={unreadNotifications > 0 ? `${unreadNotifications} unread` : undefined}
             badgeColor="bg-red-100 text-red-700"
+            enabled={true}
+          />
+          <ServiceCard
+            href="/farmer/community"
+            icon="👥"
+            title="Community"
+            description="Connect with farmers"
+            enabled={FEATURES.community}
+            comingSoon={!FEATURES.community}
           />
           <ServiceCard
             href="/farmer/disease"
             icon="🔬"
             title="Disease Detection"
             description="AI-powered crop diagnosis"
+            enabled={FEATURES.diseaseDetection}
+            comingSoon={!FEATURES.diseaseDetection}
           />
           <ServiceCard
-            href="/farmer/profile"
-            icon="👤"
-            title="My Profile"
-            description="Account & settings"
+            href="/farmer/insights"
+            icon="📊"
+            title="Analytics"
+            description="Farm insights & reports"
+            enabled={FEATURES.analytics}
+            comingSoon={!FEATURES.analytics}
+          />
+          <ServiceCard
+            href="/farmer/tools/planting-calendar"
+            icon="📅"
+            title="Planting Calendar"
+            description="Best planting times"
+            enabled={FEATURES.weather}
+            comingSoon={!FEATURES.weather}
           />
         </div>
       </section>
@@ -327,13 +348,32 @@ function QuickActionCard(props: {
   subtitle: string
   icon: string
   gradient: string
+  enabled?: boolean
+  comingSoon?: boolean
 }) {
-  const { href, title, subtitle, icon, gradient } = props
+  const { href, title, subtitle, icon, gradient, enabled = true, comingSoon = false } = props
+  
+  const handleClick = (e: React.MouseEvent) => {
+    if (!enabled || comingSoon) {
+      e.preventDefault();
+    }
+  };
+  
   return (
     <Link
       href={href}
-      className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${gradient} p-4 text-white shadow-md transition-all hover:-translate-y-1 hover:shadow-lg`}
+      onClick={handleClick}
+      className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${gradient} p-4 text-white shadow-md transition-all ${
+        enabled && !comingSoon 
+          ? 'hover:-translate-y-1 hover:shadow-lg cursor-pointer' 
+          : 'opacity-60 cursor-not-allowed'
+      }`}
     >
+      {comingSoon && (
+        <div className="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-[9px] font-bold px-2 py-1 rounded-full z-10">
+          SOON
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-white/80">
@@ -341,7 +381,9 @@ function QuickActionCard(props: {
           </p>
           <p className="text-base font-bold">{title}</p>
         </div>
-        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-xl group-hover:scale-110 transition-transform">
+        <div className={`flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-xl transition-transform ${
+          enabled && !comingSoon ? 'group-hover:scale-110' : ''
+        }`}>
           {icon}
         </div>
       </div>
@@ -380,20 +422,41 @@ function ServiceCard(props: {
   description: string
   badge?: string
   badgeColor?: string
+  enabled?: boolean
+  comingSoon?: boolean
 }) {
-  const { href, icon, title, description, badge, badgeColor } = props
+  const { href, icon, title, description, badge, badgeColor, enabled = true, comingSoon = false } = props
+  
+  const handleClick = (e: React.MouseEvent) => {
+    if (!enabled || comingSoon) {
+      e.preventDefault();
+    }
+  };
+  
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm transition-all hover:shadow-md hover:border-emerald-300"
+      onClick={handleClick}
+      className={`group flex items-center gap-4 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm transition-all ${
+        enabled && !comingSoon
+          ? 'hover:shadow-md hover:border-emerald-300 cursor-pointer'
+          : 'opacity-50 cursor-not-allowed'
+      }`}
     >
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-2xl group-hover:scale-105 transition-transform">
+      <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-2xl transition-transform ${
+        enabled && !comingSoon ? 'group-hover:scale-105' : ''
+      }`}>
         {icon}
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <p className="font-semibold text-emerald-950">{title}</p>
-          {badge && (
+          {comingSoon && (
+            <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold bg-yellow-100 text-yellow-700">
+              Coming Soon
+            </span>
+          )}
+          {badge && !comingSoon && (
             <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${badgeColor || 'bg-emerald-100 text-emerald-700'}`}>
               {badge}
             </span>
@@ -401,7 +464,9 @@ function ServiceCard(props: {
         </div>
         <p className="text-sm text-emerald-600 truncate">{description}</p>
       </div>
-      <span className="text-emerald-400 group-hover:text-emerald-600 transition-colors">→</span>
+      <span className={`transition-colors ${
+        enabled && !comingSoon ? 'text-emerald-400 group-hover:text-emerald-600' : 'text-gray-300'
+      }`}>→</span>
     </Link>
   )
 }

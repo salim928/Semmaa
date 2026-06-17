@@ -144,7 +144,7 @@ const getPriorityBadge = (priority: string) => {
   switch (priority) {
     case 'urgent': return { label: '🔴 Urgent', class: 'bg-red-500 text-white' }
     case 'high': return { label: '🟠 High', class: 'bg-orange-500 text-white' }
-    case 'medium': return { label: '🟡 Medium', class: 'bg-yellow-500 text-white' }
+    case 'medium': return { label: '🟡 Medium', class: 'bg-amber-500 text-white' }
     case 'low': return { label: '🟢 Low', class: 'bg-gray-400 text-white' }
     default: return { label: '', class: '' }
   }

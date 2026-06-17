@@ -60,8 +60,8 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-14">
       {/* Background with Gradient */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#c8e6c9] via-white to-[#fff9c4]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-lime-100/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 via-white to-amber-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-100/50 via-transparent to-transparent" />
       </div>
 
       {/* Three.js Background */}
@@ -130,7 +130,7 @@ export default function Hero() {
                   initial={{ opacity: 0, rotateX: -90 }}
                   animate={{ opacity: 1, rotateX: 0 }}
                   transition={{ delay: 1.1, duration: 0.6 }}
-                  className="inline-block glow-text text-lime-600"
+                  className="inline-block glow-text text-emerald-600"
                 >
                   Harvests.
                 </motion.span>
@@ -198,7 +198,7 @@ export default function Hero() {
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
                   >
-                    <item.icon className="w-4 h-4 text-lime-600" />
+                    <item.icon className="w-4 h-4 text-emerald-600" />
                   </motion.div>
                   <span className="text-sm text-gray-700">{item.text}</span>
                 </motion.div>
@@ -216,7 +216,7 @@ export default function Hero() {
             <div className="relative float">
               {/* Glow Effect */}
               <motion.div 
-                className="absolute -inset-4 bg-gradient-to-r from-lime-400 to-green-400 rounded-[3rem] blur-2xl opacity-30"
+                className="absolute -inset-4 bg-gradient-to-r from-emerald-400 to-green-400 rounded-[3rem] blur-2xl opacity-30"
                 animate={{ opacity: [0.2, 0.4, 0.2] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
@@ -232,7 +232,7 @@ export default function Hero() {
                   initial={{ scale: 0.8, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
+                  whileHover={{ rotate: 5 }}
                   className="w-40 h-40 mx-auto rounded-3xl overflow-hidden shadow-xl mb-6"
                 >
                   <Image
@@ -276,7 +276,7 @@ export default function Hero() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.0 + i * 0.1 }}
                       whileHover={{ scale: 1.05, backgroundColor: '#ecfccb' }}
-                      className="flex items-center space-x-2 bg-lime-50 rounded-xl px-3 py-2 cursor-pointer transition-colors"
+                      className="flex items-center space-x-2 bg-emerald-50 rounded-xl px-3 py-2 cursor-pointer transition-colors"
                     >
                       <motion.span 
                         className="text-lg"
@@ -298,7 +298,7 @@ export default function Hero() {
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
               <motion.div 
-                className="absolute -bottom-4 -left-4 w-12 h-12 bg-lime-300 rounded-full opacity-60"
+                className="absolute -bottom-4 -left-4 w-12 h-12 bg-emerald-300 rounded-full opacity-60"
                 animate={{ y: [0, 10, 0], x: [0, 5, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               />

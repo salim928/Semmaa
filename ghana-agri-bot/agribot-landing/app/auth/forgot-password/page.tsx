@@ -77,8 +77,8 @@ export default function ForgotPasswordPage() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center"
           >
-            <div className="w-20 h-20 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-lime-600" />
+            <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-10 h-10 text-emerald-600" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-3">Check Your Email</h1>
             <p className="text-gray-600 mb-6">
@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
                   setSent(false)
                   setEmail('')
                 }}
-                className="w-full py-4 bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
               >
                 Try Different Email
               </button>
@@ -145,7 +145,7 @@ export default function ForgotPasswordPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                    className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading || !email}
-                className="w-full py-4 bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+                className="w-full min-h-[56px] py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -167,7 +167,7 @@ export default function ForgotPasswordPage() {
             {/* Back to Login */}
             <Link
               href="/auth/login"
-              className="flex items-center justify-center mt-6 text-gray-600 hover:text-lime-600 transition-colors"
+              className="flex items-center justify-center mt-6 min-h-[44px] text-gray-600 hover:text-emerald-600 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Login
@@ -179,7 +179,7 @@ export default function ForgotPasswordPage() {
       {/* Help Text */}
       <p className="text-center mt-6 text-sm text-gray-500">
         Need help?{' '}
-        <Link href="/support" className="text-lime-600 hover:underline">
+        <Link href="/support" className="text-emerald-600 hover:underline">
           Contact Support
         </Link>
       </p>

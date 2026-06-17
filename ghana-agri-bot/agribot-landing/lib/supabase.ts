@@ -103,17 +103,6 @@ export interface Notification {
   created_at: string
 }
 
-export interface WalletTransaction {
-  id: string
-  user_id: string
-  type: 'credit' | 'debit'
-  amount: number
-  description: string
-  reference?: string
-  status: 'pending' | 'completed' | 'failed'
-  created_at: string
-}
-
 // Helper functions for common operations
 export const supabaseHelpers = {
   // Get user profile
@@ -272,42 +261,5 @@ export const supabaseHelpers = {
       .from('notifications')
       .update({ is_read: true })
       .eq('id', notificationId)
-  },
-
-  // Get wallet balance and transactions
-  async getWalletData(userId: string): Promise<{ balance: number; transactions: WalletTransaction[] }> {
-    const { data: transactions, error } = await supabase
-      .from('wallet_transactions')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
-    
-    if (error) {
-      // Table may not exist yet - silently return empty
-      return { balance: 0, transactions: [] }
-    }
-
-    // Calculate balance from transactions
-    const balance = (transactions || []).reduce((sum, t) => {
-      if (t.status !== 'completed') return sum
-      return t.type === 'credit' ? sum + t.amount : sum - t.amount
-    }, 0)
-
-    return { balance, transactions: transactions || [] }
-  },
-
-  // Create wallet transaction
-  async createWalletTransaction(transaction: Omit<WalletTransaction, 'id' | 'created_at'>): Promise<WalletTransaction | null> {
-    const { data, error } = await supabase
-      .from('wallet_transactions')
-      .insert(transaction)
-      .select()
-      .single()
-    
-    if (error) {
-      console.error('Error creating transaction:', error)
-      return null
-    }
-    return data
   },
 }

@@ -142,7 +142,7 @@ export default function SignUpPage() {
   if (authLoading) {
     return (
       <div className="w-full max-w-md flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-lime-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
       </div>
     )
   }
@@ -157,8 +157,8 @@ export default function SignUpPage() {
         className="w-full max-w-md"
       >
         <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/50 p-8 md:p-10 text-center">
-          <div className="w-20 h-20 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Check className="w-10 h-10 text-lime-600" />
+          <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Check className="w-10 h-10 text-emerald-600" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Account Created!</h2>
           <p className="text-gray-600 mb-6">
@@ -166,7 +166,7 @@ export default function SignUpPage() {
           </p>
           <Link
             href="/auth/login"
-            className="inline-block w-full py-4 bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white font-semibold rounded-xl transition-all duration-300"
+            className="inline-block w-full py-4 text-center bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300"
           >
             Go to Login
           </Link>
@@ -228,7 +228,7 @@ export default function SignUpPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your name"
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -245,7 +245,7 @@ export default function SignUpPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -262,7 +262,7 @@ export default function SignUpPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a password (min 6 characters)"
-                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
               />
               <button
                 type="button"
@@ -292,7 +292,7 @@ export default function SignUpPage() {
                   onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 9))}
                   placeholder="24 123 4567"
                   maxLength={9}
-                  className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-r-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                  className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-r-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -311,14 +311,14 @@ export default function SignUpPage() {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="Enter your city/town"
-                  className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
+                  className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder:text-gray-400"
                 />
               </div>
               <button
                 type="button"
                 onClick={getGPSLocation}
                 disabled={gpsLoading}
-                className="px-4 bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white rounded-xl transition-all duration-300 flex items-center justify-center disabled:opacity-50"
+                className="px-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl transition-all duration-300 flex items-center justify-center disabled:opacity-50"
                 title="Use GPS to get your location"
               >
                 {gpsLoading ? (
@@ -337,19 +337,19 @@ export default function SignUpPage() {
               onClick={() => setAgreed(!agreed)}
               className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all flex-shrink-0 mt-0.5 ${
                 agreed
-                  ? 'bg-lime-600 border-lime-600'
-                  : 'bg-white border-gray-300 hover:border-lime-500'
+                  ? 'bg-emerald-600 border-emerald-600'
+                  : 'bg-white border-gray-300 hover:border-emerald-500'
               }`}
             >
               {agreed && <Check className="w-4 h-4 text-white" />}
             </button>
             <label className="text-sm text-gray-600 cursor-pointer" onClick={() => setAgreed(!agreed)}>
               I agree to the{' '}
-              <Link href="/privacy" className="text-lime-600 hover:underline">
+              <Link href="/privacy" className="text-emerald-600 hover:underline">
                 Data Policy
               </Link>
               {' '}and{' '}
-              <Link href="/terms" className="text-lime-600 hover:underline">
+              <Link href="/terms" className="text-emerald-600 hover:underline">
                 Terms of Service
               </Link>
             </label>
@@ -359,7 +359,7 @@ export default function SignUpPage() {
           <button
             type="submit"
             disabled={loading || !isFormValid}
-            className="w-full py-4 bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+            className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center justify-center"
           >
             {loading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -380,7 +380,7 @@ export default function SignUpPage() {
         <button
           onClick={handleGoogleSignUp}
           disabled={googleLoading}
-          className="w-full py-4 bg-white border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-4 bg-white border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-all duration-300 inline-flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {googleLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -402,7 +402,7 @@ export default function SignUpPage() {
           Already have an account?{' '}
           <Link
             href="/auth/login"
-            className="text-lime-600 hover:text-lime-700 font-semibold transition-colors"
+            className="text-emerald-600 hover:text-emerald-700 font-semibold transition-colors"
           >
             Log In
           </Link>

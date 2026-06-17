@@ -89,27 +89,6 @@ export interface WeatherAlert {
   endDate?: Date;
 }
 
-// Wallet/Finance Types
-export interface Transaction {
-  id: string;
-  type: 'credit' | 'debit' | 'transfer';
-  amount: number;
-  currency: 'GHS' | 'USD';
-  description: string;
-  date: Date;
-  status: 'completed' | 'pending' | 'failed';
-  category?: 'sale' | 'purchase' | 'loan' | 'transfer' | 'other';
-  relatedId?: string; // Product ID or User ID
-}
-
-export interface Wallet {
-  balance: number;
-  currency: 'GHS' | 'USD';
-  transactions: Transaction[];
-  creditLimit?: number;
-  loanEligible?: boolean;
-}
-
 // Advisory Types
 export interface AdvisoryQuery {
   question: string;

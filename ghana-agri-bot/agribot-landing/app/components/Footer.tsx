@@ -29,13 +29,15 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-4">
-              <Image
-                src="/semma-logo.svg"
-                alt="SEMMA-AI Logo"
-                width={32}
-                height={32}
-                className="w-8 h-8"
-              />
+              <div className="w-8 h-8 rounded-lg overflow-hidden">
+                <Image
+                  src="/logo.jpg"
+                  alt="SEMMA-AI Logo"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <span className="text-2xl font-bold">SEMMA-AI</span>
             </div>
             <p className="text-gray-400 mb-4">
@@ -43,7 +45,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
-                <Icon key={index} className="w-5 h-5 text-gray-400 hover:text-lime-500 cursor-pointer transition-colors" />
+                <Icon key={index} className="w-5 h-5 text-gray-400 hover:text-emerald-500 cursor-pointer transition-colors" />
               ))}
             </div>
           </motion.div>
@@ -105,15 +107,15 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4 text-lime-500" />
+                <Mail className="w-4 h-4 text-emerald-500" />
                 <span className="text-gray-400">info@semma-ai.com</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4 text-lime-500" />
+                <Phone className="w-4 h-4 text-emerald-500" />
                 <span className="text-gray-400">+233 557 553 975</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-lime-500" />
+                <MapPin className="w-4 h-4 text-emerald-500" />
                 <span className="text-gray-400">Accra, Ghana</span>
               </div>
             </div>

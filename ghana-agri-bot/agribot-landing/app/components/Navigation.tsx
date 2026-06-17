@@ -51,10 +51,10 @@ export default function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   pathname === item.href
-                    ? 'text-lime-700 bg-lime-50'
-                    : 'text-gray-600 hover:text-lime-600 hover:bg-lime-50/50'
+                    ? 'text-emerald-700 bg-emerald-50'
+                    : 'text-gray-600 hover:text-emerald-600 hover:bg-emerald-50/50'
                 }`}
               >
                 {item.name}
@@ -66,7 +66,7 @@ export default function Navigation() {
               <button
                 onClick={() => setShowMore(!showMore)}
                 onBlur={() => setTimeout(() => setShowMore(false), 150)}
-                className="flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 hover:text-lime-600 hover:bg-lime-50/50 transition-all"
+                className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50/50 transition-all"
               >
                 More
                 <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${showMore ? 'rotate-180' : ''}`} />
@@ -85,10 +85,10 @@ export default function Navigation() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`block px-4 py-2 text-sm transition-colors ${
+                        className={`block px-4 py-3 text-sm transition-colors ${
                           pathname === item.href
-                            ? 'text-lime-700 bg-lime-50'
-                            : 'text-gray-600 hover:text-lime-600 hover:bg-lime-50/50'
+                            ? 'text-emerald-700 bg-emerald-50'
+                            : 'text-gray-600 hover:text-emerald-600 hover:bg-emerald-50/50'
                         }`}
                       >
                         {item.name}
@@ -104,13 +104,13 @@ export default function Navigation() {
           <div className="hidden lg:flex items-center space-x-2">
             <Link
               href="/auth/login"
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-lime-600 transition-colors"
+              className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-emerald-600 transition-colors"
             >
               Log In
             </Link>
             <Link
               href="/auth/signup"
-              className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-lime-600 to-green-600 hover:from-lime-700 hover:to-green-700 rounded-full shadow-md hover:shadow-lg transition-all"
+              className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 rounded-full shadow-md hover:shadow-lg transition-all"
             >
               Get Started
             </Link>
@@ -141,8 +141,8 @@ export default function Navigation() {
                     href={item.href}
                     className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       pathname === item.href
-                        ? 'text-lime-700 bg-lime-50'
-                        : 'text-gray-600 hover:text-lime-600 hover:bg-lime-50/50'
+                        ? 'text-emerald-700 bg-emerald-50'
+                        : 'text-gray-600 hover:text-emerald-600 hover:bg-emerald-50/50'
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -154,14 +154,14 @@ export default function Navigation() {
                 <div className="flex flex-col space-y-2 pt-4 mt-4 border-t border-gray-100">
                   <Link
                     href="/auth/login"
-                    className="w-full py-2.5 text-center text-sm font-semibold text-lime-600 border-2 border-lime-600 rounded-full hover:bg-lime-50 transition-colors"
+                    className="w-full py-2.5 text-center text-sm font-semibold text-emerald-600 border-2 border-emerald-600 rounded-full hover:bg-emerald-50 transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Log In
                   </Link>
                   <Link
                     href="/auth/signup"
-                    className="w-full py-2.5 text-center text-sm font-semibold text-white bg-gradient-to-r from-lime-600 to-green-600 rounded-full shadow-md"
+                    className="w-full py-2.5 text-center text-sm font-semibold text-white bg-gradient-to-r from-emerald-600 to-green-600 rounded-full shadow-md"
                     onClick={() => setIsOpen(false)}
                   >
                     Get Started

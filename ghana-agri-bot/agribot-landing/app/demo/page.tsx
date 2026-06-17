@@ -34,7 +34,7 @@ export default function DemoPage() {
         <DemoRequest />
         
         {/* What to Expect */}
-        <div className="mt-16 bg-gradient-to-br from-lime-50 to-yellow-50 rounded-2xl p-8">
+        <div className="mt-16 bg-gradient-to-br from-emerald-50 to-amber-50 rounded-2xl p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             What to Expect in Your Demo
           </h2>
@@ -43,19 +43,19 @@ export default function DemoPage() {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Live AI Demonstrations</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Crop health analysis using your photos</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Personalized planting recommendations</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Weather-based farming insights</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Pest identification and treatment</span>
                 </li>
               </ul>
@@ -64,19 +64,19 @@ export default function DemoPage() {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Platform Features</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Digital marketplace integration</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Community features and networking</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Real-time market prices</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="w-2 h-2 bg-lime-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></span>
                   <span>Custom farming dashboard</span>
                 </li>
               </ul>

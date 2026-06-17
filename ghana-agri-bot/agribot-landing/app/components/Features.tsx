@@ -45,26 +45,19 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-20 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1920&h=1080&fit=crop&q=80)',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-lime-50/85 to-white/85" />
-      </div>
+    <section id="features" className="relative py-24 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-emerald-50">
+      {/* Animated background elements */}
+      <div className="absolute top-0 -left-4 w-72 h-72 bg-gradient-to-r from-emerald-300 to-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+      <div className="absolute -bottom-8 right-20 w-72 h-72 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">
             <motion.span 
               className="gradient-text-animated inline-block"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -85,7 +78,7 @@ export default function Features() {
             </motion.span>
           </h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -97,7 +90,7 @@ export default function Features() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => {
-            const bgColors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-orange-500', 'bg-indigo-500', 'bg-pink-500'];
+            const bgColors = ['from-blue-500 to-cyan-500', 'from-green-500 to-emerald-500', 'from-purple-500 to-pink-500', 'from-orange-500 to-red-500', 'from-indigo-500 to-blue-500', 'from-teal-500 to-green-500'];
             return (
               <motion.div
                 key={index}
@@ -106,15 +99,18 @@ export default function Features() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, type: 'spring', stiffness: 200 }}
                 whileHover={{ 
-                  scale: 1.03, 
-                  y: -5,
+                  scale: 1.05, 
+                  y: -8,
                   transition: { type: 'spring', stiffness: 400 }
                 }}
-                className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-lime-200 cursor-pointer"
+                className="group relative p-8 bg-white/40 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/60 hover:border-emerald-300/60 cursor-pointer overflow-hidden"
               >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/0 to-emerald-400/0 group-hover:from-emerald-400/10 group-hover:to-emerald-400/5 transition-all duration-300 pointer-events-none" />
+                
                 <motion.div 
-                  className={`w-16 h-16 ${bgColors[index]} rounded-2xl flex items-center justify-center mb-6`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className={`w-16 h-16 bg-gradient-to-br ${bgColors[index]} rounded-2xl flex items-center justify-center mb-6 shadow-lg relative`}
+                  whileHover={{ scale: 1.15, rotate: 8 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <motion.div
@@ -126,7 +122,7 @@ export default function Features() {
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-xl font-bold mb-4 text-gray-900"
+                  className="text-xl font-bold mb-3 text-gray-900"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
