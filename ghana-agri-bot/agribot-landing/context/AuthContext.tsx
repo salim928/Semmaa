@@ -137,7 +137,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     location?: string
   ): Promise<{ error: AuthError | Error | null }> => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -151,22 +151,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) return { error }
 
-      // Create profile in database
-      if (data.user) {
-        const { error: profileError } = await supabase.from('profiles').insert({
-          id: data.user.id,
-          phone: phone || null,
-          full_name: name,
-          location: location || null,
-          preferred_language: 'en',
-        })
-
-        if (profileError) {
-          console.error('Error creating profile:', profileError)
-          // Don't fail signup if profile creation fails - user can update later
-          console.warn('Profile will be created on first login')
-        }
-      }
+      // The profile row is created automatically by the handle_new_user()
+      // trigger on auth.users (see supabase/fix-signup-trigger.sql), using
+      // the name/phone/location passed in options.data above. We deliberately
+      // do NOT insert it here — that races the trigger (duplicate key) and
+      // fails RLS when email confirmation is on (no session yet at signup).
 
       return { error: null }
     } catch (e) {

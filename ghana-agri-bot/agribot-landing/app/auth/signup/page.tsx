@@ -136,8 +136,6 @@ export default function SignUpPage() {
     }
   }
 
-  const isFormValid = name.trim() && email.includes('@') && password.length >= 6 && agreed
-
   // Show loading while checking auth state
   if (authLoading) {
     return (
@@ -358,7 +356,7 @@ export default function SignUpPage() {
           {/* Sign Up Button */}
           <button
             type="submit"
-            disabled={loading || !isFormValid}
+            disabled={loading}
             className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center justify-center"
           >
             {loading ? (

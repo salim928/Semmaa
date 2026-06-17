@@ -37,16 +37,35 @@ async function request<T>(
     baseHeaders['x-api-key'] = API_KEY
   }
 
-  const res = await fetch(url.toString(), {
-    ...options,
-    headers: baseHeaders,
-  })
+  let res: Response
+  try {
+    res = await fetch(url.toString(), {
+      ...options,
+      headers: baseHeaders,
+    })
+  } catch {
+    // Network-level failure (backend not running / unreachable).
+    throw new ApiError(`Backend unreachable at ${API_BASE_URL}`, 0, true)
+  }
 
   if (!res.ok) {
-    throw new Error(`API error ${res.status}`)
+    throw new ApiError(`API error ${res.status}`, res.status)
   }
 
   return res.json()
+}
+
+/** Error thrown by the API client. `offline` means the backend could not be
+ *  reached at all (vs. an HTTP error response), so callers can degrade quietly. */
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public status: number,
+    public offline = false,
+  ) {
+    super(message)
+    this.name = 'ApiError'
+  }
 }
 
 export interface AskResponse {

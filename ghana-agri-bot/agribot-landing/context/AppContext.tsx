@@ -4,7 +4,17 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react'
 import { useAuth } from './AuthContext'
 import { supabaseHelpers, Order, Product, CommunityPost, Notification } from '@/lib/supabase'
-import { api, WeatherResponse, MarketPricesRow } from '@/lib/api'
+import { api, ApiError, WeatherResponse, MarketPricesRow } from '@/lib/api'
+
+// Backend (FastAPI) is optional for browsing. When it's simply offline,
+// log a quiet warning instead of a console error that floods the dev overlay.
+function logApiError(label: string, error: unknown) {
+  if (error instanceof ApiError && error.offline) {
+    console.warn(`${label}: backend offline (${error.message})`)
+  } else {
+    console.error(label, error)
+  }
+}
 
 interface AppContextType {
   // Weather
@@ -100,7 +110,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const data = await api.weather(loc)
       setWeather(data)
     } catch (error) {
-      console.error('Error fetching weather:', error)
+      logApiError('Error fetching weather:', error)
     } finally {
       setWeatherLoading(false)
     }
@@ -125,7 +135,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setMarketPrices(pricesData.rows || [])
       }
     } catch (error) {
-      console.error('Error fetching market data:', error)
+      logApiError('Error fetching market data:', error)
     } finally {
       setMarketLoading(false)
     }
@@ -140,7 +150,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           const pricesData = await api.marketPrices(selectedCrop)
           setMarketPrices(pricesData.rows || [])
         } catch (error) {
-          console.error('Error fetching prices:', error)
+          logApiError('Error fetching prices:', error)
         } finally {
           setMarketLoading(false)
         }
