@@ -20,9 +20,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://semma-ai.vercel.app'),
-  title: 'SEMMA-AI - Smarter Advice. Bigger Harvests.',
+  title: {
+    default: 'SEMMA-AI — Smarter Advice. Bigger Harvests.',
+    template: '%s | SEMMA-AI',
+  },
   description: 'AI-powered agricultural platform revolutionizing farming in Ghana with smart insights, digital marketplace, and community features.',
   keywords: 'agriculture, AI, farming, Ghana, marketplace, agritech, SEMMA-AI',
+  formatDetection: { telephone: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,

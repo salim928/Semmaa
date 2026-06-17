@@ -3,10 +3,14 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Play, Smartphone, Users, TrendingUp, MessageCircle } from 'lucide-react'
-import ThreeScene from './ThreeScene'
+
+// Decorative 3D background: heavy (three.js). Load it lazily and client-only
+// so it never blocks first paint or server rendering.
+const ThreeScene = dynamic(() => import('./ThreeScene'), { ssr: false })
 
 // Animated word component
 const AnimatedWord = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
@@ -59,13 +63,13 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-14">
       {/* Background with Gradient */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 via-white to-amber-50" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-100/50 via-transparent to-transparent" />
       </div>
 
-      {/* Three.js Background */}
-      <div className="absolute inset-0 z-0 opacity-20">
+      {/* Three.js Background (decorative, lazy-loaded client-side) */}
+      <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
         <ThreeScene />
       </div>
 
