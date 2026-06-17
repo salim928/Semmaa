@@ -5,7 +5,6 @@
 import { useEffect, useState } from 'react'
 import { useApp } from '@/context/AppContext'
 import { useAuth } from '@/context/AuthContext'
-import { api, MarketCropsResponse, MarketPricesResponse, MarketPricesRow } from '@/lib/api'
 
 interface MarketProduct {
   id: string

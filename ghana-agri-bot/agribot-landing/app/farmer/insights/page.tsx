@@ -105,7 +105,7 @@ export default function FarmerInsightsPage() {
         if (i.status === 'fulfilled') {
           setImpact(i.value)
         }
-      } catch (e) {
+      } catch {
         setError('Could not load insights. Is the API and impact endpoint running?')
       } finally {
         setLoading(false)

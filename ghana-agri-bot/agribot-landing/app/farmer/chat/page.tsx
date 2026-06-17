@@ -84,7 +84,7 @@ export default function FarmerChatPage() {
           .filter((m) => !m.loading)
           .concat(aiMessage),
       )
-    } catch (e) {
+    } catch {
       setMessages((prev) =>
         prev
           .filter((m) => !m.loading)

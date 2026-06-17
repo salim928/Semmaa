@@ -99,7 +99,7 @@ export default function DiseaseDetectionPage() {
         imageUrl: preview || undefined,
       }
       setHistory(prev => [newHistoryItem, ...prev])
-    } catch (e) {
+    } catch {
       setError('Could not analyze the image. Please check your connection and try again.')
     } finally {
       setLoading(false)
